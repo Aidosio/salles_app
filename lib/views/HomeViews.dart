@@ -10,6 +10,9 @@ class HomeViews extends StatefulWidget {
 class _HomeViewsState extends State<HomeViews> {
   @override
   Widget build(BuildContext context) {
-    return Text('HomeViews');
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Text('data'),
+    );
   }
 }

@@ -15,6 +15,16 @@ class MainViews extends StatefulWidget {
 
 class _MainViewsState extends State<MainViews> {
   int currentPageIndex = 0;
+  List<String> pageNames = [
+    'Главная',
+    'Категория',
+    'Оформить',
+    'Сотрудники',
+    'Продажи',
+  ];
+
+  GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>(); // Добавленный ключ Scaffold
 
   @override
   Widget build(BuildContext context) {
@@ -29,70 +39,102 @@ class _MainViewsState extends State<MainViews> {
     ];
 
     return Scaffold(
+      key: _scaffoldKey, // Добавление ключа Scaffold
       resizeToAvoidBottomInset: false,
-      body: PageView(
-        controller: _pageController,
-        children: _pages,
-        onPageChanged: (index) {
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          pageNames[currentPageIndex],
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+            fontSize: typography.headlineSmall?.fontSize,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: IconButton.filledTonal(
+              onPressed: () {
+                _scaffoldKey.currentState!.openEndDrawer(); // Открытие Drawer
+              },
+              icon: Icon(
+                Icons.account_circle_outlined,
+                color: Color.fromARGB(255, 75, 161, 207),
+                size: 30,
+              ),
+            ),
+          ),
+        ],
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Messages'),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+            ),
+          ],
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 8),
+        child: _pages[currentPageIndex],
+      ),
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
           });
         },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.amber,
-        unselectedItemColor: Colors.black87,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.explore),
             label: 'Главная',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+          NavigationDestination(
+            icon: Icon(Icons.commute),
             label: 'Категория',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Оформление',
+          NavigationDestination(
+            selectedIcon: Icon(Icons.bookmark),
+            icon: Icon(Icons.bookmark_border),
+            label: 'Оформить',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.bookmark),
+            icon: Icon(Icons.bookmark_border),
             label: 'Сотрудники',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.bookmark),
+            icon: Icon(Icons.bookmark_border),
             label: 'Продажи',
           ),
         ],
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        currentIndex: currentPageIndex,
-        onTap: (index) {
-          setState(() {
-            currentPageIndex = index;
-            _pageController.animateToPage(index,
-                duration: Duration(microseconds: 500), curve: Curves.easeInOut);
-          });
-        },
       ),
     );
-  }
-}
-
-class Page_HomePage extends StatelessWidget {
-  const Page_HomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Home");
-  }
-}
-
-class Account_Page extends StatelessWidget {
-  const Account_Page({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Account");
   }
 }
