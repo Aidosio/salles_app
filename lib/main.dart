@@ -77,12 +77,10 @@ class _MyAppState extends State<MyApp> {
         '/examlpe': (context) => ExampleViews(
               changeLanguage: _changeLanguage,
             ),
-        '/mainhome': (context) => MainViews(
+        '/': (context) => MainViews(
               changeLanguage: _changeLanguage,
             ),
-        '/': (context) => EmployeesView(
-              changeLanguage: _changeLanguage,
-            ),
+        // '/mainhome': (context) => EmployeesView(),
         // '/sing': (context) => const SingIn(),
         // '/choise': (context) => const ChoicePage(),
         // '/com': (context) => const CompanyCreateStep(),
