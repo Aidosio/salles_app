@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       //   changeLanguage: _changeLanguage,
       // ),
       routes: {
-        '/login': (context) => LoginViews(
+        '/': (context) => LoginViews(
               changeLanguage: _changeLanguage,
             ),
         '/choise': (context) => ChoiseViews(
@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
         '/examlpe': (context) => ExampleViews(
               changeLanguage: _changeLanguage,
             ),
-        '/': (context) => MainViews(
+        '/main': (context) => MainViews(
               changeLanguage: _changeLanguage,
             ),
         // '/mainhome': (context) => EmployeesView(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:salles_app/views/MainViews.dart';
 
 import '../locale/AppLocalizations.dart';
 
@@ -37,7 +38,7 @@ class _LoginViewsState extends State<LoginViews> {
                       localizations?.enter ?? '',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 81, 86, 88),
+                        color: Color.fromARGB(255, 81, 86, 88),
                         fontSize: typography.headlineMedium?.fontSize,
                       ),
                     ),
@@ -63,7 +64,15 @@ class _LoginViewsState extends State<LoginViews> {
                     ),
                     SizedBox(height: 30),
                     FilledButton.tonal(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainViews(
+                                    changeLanguage: (Locale) {},
+                                  )),
+                        );
+                      },
                       child: Text("Войти"),
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all(
