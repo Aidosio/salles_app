@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:salles_app/views/ChoiseViews.dart';
+import 'package:salles_app/views/EmployeesView.dart';
 import 'package:salles_app/views/ExampleViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
+import 'package:salles_app/views/MainViews.dart';
 
 import 'locale/AppLocalizationsDelegate.dart';
 import 'views/ChoiseCompanyViews.dart';
@@ -57,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       //   changeLanguage: _changeLanguage,
       // ),
       routes: {
-        '/example': (context) => LoginViews(
+        '/login': (context) => LoginViews(
               changeLanguage: _changeLanguage,
             ),
         '/choise': (context) => ChoiseViews(
@@ -72,7 +74,13 @@ class _MyAppState extends State<MyApp> {
         '/choiseCompany': (context) => ChoiseCompanyViews(
               changeLanguage: _changeLanguage,
             ),
-        '/': (context) => ExampleViews(
+        '/examlpe': (context) => ExampleViews(
+              changeLanguage: _changeLanguage,
+            ),
+        '/mainhome': (context) => MainViews(
+              changeLanguage: _changeLanguage,
+            ),
+        '/': (context) => EmployeesView(
               changeLanguage: _changeLanguage,
             ),
         // '/sing': (context) => const SingIn(),
