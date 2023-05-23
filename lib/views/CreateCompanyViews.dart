@@ -31,7 +31,7 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
                 'Регистрация компаний',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 81, 86, 88),
+                  color: Color.fromARGB(255, 81, 86, 88),
                   fontSize: typography.headlineMedium?.fontSize,
                 ),
               ),
