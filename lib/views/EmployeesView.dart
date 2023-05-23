@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import '../locale/AppLocalizations.dart';
 
 class EmployeesView extends StatefulWidget {
-  final Function(Locale) changeLanguage;
-  const EmployeesView({Key? key, required this.changeLanguage})
-      : super(key: key);
+  const EmployeesView({Key? key}) : super(key: key);
 
   @override
   State<EmployeesView> createState() => _EmployeesViewState();

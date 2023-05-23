@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/views/CategoryViews.dart';
+import 'package:salles_app/views/EmployeesView.dart';
+import 'package:salles_app/views/HomeViews.dart';
+import 'package:salles_app/views/RecordViews.dart';
+import 'package:salles_app/views/SalesViews.dart';
 
 class MainViews extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -15,28 +20,16 @@ class _MainViewsState extends State<MainViews> {
   Widget build(BuildContext context) {
     TextTheme typography = Theme.of(context).textTheme;
     PageController _pageController = PageController(initialPage: 0);
-    List<Widget> _pages = [Page_HomePage(), Account_Page()];
+    List<Widget> _pages = [
+      HomeViews(),
+      CategoryViews(),
+      RecordViews(),
+      EmployeesView(),
+      SalesViews(),
+    ];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          'категория',
-          style: TextStyle(fontSize: typography.headlineMedium?.fontSize),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: IconButton(
-              icon: Icon(Icons.account_circle_sharp),
-              onPressed: () {
-                //кнопка на app bar место для действия
-              },
-            ),
-          )
-        ],
-      ),
       body: PageView(
         controller: _pageController,
         children: _pages,
@@ -47,27 +40,29 @@ class _MainViewsState extends State<MainViews> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Colors.amber,
+        unselectedItemColor: Colors.black87,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Page 1',
+            label: 'Главная',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Page 2',
+            label: 'Категория',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.home),
-          //   label: 'Page 3',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.home),
-          //   label: 'Page 4',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.home),
-          //   label: 'Page 5',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Оформление',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Сотрудники',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Продажи',
+          ),
         ],
         showSelectedLabels: true,
         showUnselectedLabels: true,
