@@ -51,7 +51,62 @@ class _EmployeesViewState extends State<EmployeesView> {
               ),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Фамиля Имя Очество',
+                    style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: typography.bodyMedium?.fontSize,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Row(children: [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.green.shade100,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.done,
+                            size: 23,
+                          )),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.red.shade100,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.delete_outline,
+                            size: 23,
+                          )),
+                    )
+                  ]),
+                ],
+              ),
+            ),
+          ),
+
+          SizedBox(height: 20),
+
+          Card(
+            margin: EdgeInsets.zero,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Theme.of(context).colorScheme.outline),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(5),
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -116,7 +171,7 @@ class _EmployeesViewState extends State<EmployeesView> {
             color: Colors.black,
           ),
 
-          SizedBox(height: 10),
+          SizedBox(height: 15),
 
           Card(
             margin: EdgeInsets.zero,
@@ -128,7 +183,7 @@ class _EmployeesViewState extends State<EmployeesView> {
               ),
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -139,21 +194,17 @@ class _EmployeesViewState extends State<EmployeesView> {
                           fontSize: typography.bodyMedium?.fontSize,
                           fontWeight: FontWeight.w700),
                     ),
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 20,
-                          backgroundColor: Colors.red.shade100,
-                          child: IconButton(
-                              padding: EdgeInsets.zero,
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.delete_outline,
-                                size: 23,
-                              )),
-                        )
-                      ],
-                    ),
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.red.shade100,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.delete_outline,
+                            size: 23,
+                          )),
+                    )
                   ]),
             ),
           )
