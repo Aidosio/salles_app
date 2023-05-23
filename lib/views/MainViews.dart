@@ -111,26 +111,28 @@ class _MainViewsState extends State<MainViews> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.explore),
+            selectedIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
             label: 'Главная',
           ),
           NavigationDestination(
-            icon: Icon(Icons.commute),
+            selectedIcon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.shopping_cart_outlined),
             label: 'Категория',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.bookmark),
-            icon: Icon(Icons.bookmark_border),
+            selectedIcon: Icon(Icons.document_scanner),
+            icon: Icon(Icons.document_scanner_outlined),
             label: 'Оформить',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.bookmark),
-            icon: Icon(Icons.bookmark_border),
+            selectedIcon: Icon(Icons.people_alt),
+            icon: Icon(Icons.people_alt_outlined),
             label: 'Сотрудники',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.bookmark),
-            icon: Icon(Icons.bookmark_border),
+            selectedIcon: Icon(Icons.fact_check),
+            icon: Icon(Icons.fact_check_outlined),
             label: 'Продажи',
           ),
         ],
