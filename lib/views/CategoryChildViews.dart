@@ -32,102 +32,99 @@ class _CategoryChildViewsState extends State<CategoryChildViews> {
         child: Column(
           children: [
             SizedBox(height: 10),
-            Expanded(
-              child: Container(
-                constraints: BoxConstraints(minWidth: 40),
-                width: double.infinity,
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Theme.of(context).colorScheme.onSurface,
+            Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Название продукта',
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: typography.bodyText1?.fontSize,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    SizedBox(height: 5),
+                    Row(
                       children: [
-                        Text(
-                          'Название продукта',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: typography.bodyText1?.fontSize,
-                            fontWeight: FontWeight.w700,
+                        Text('Цена: 1000тг'),
+                        SizedBox(width: 5),
+                        Text('Штрихкод: 100000'),
+                      ],
+                    ),
+                    SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            'Категория: Молоко и другое и мб яйца',
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Text('Цена: 1000тг'),
-                            SizedBox(width: 5),
-                            Text('Штрихкод: 100000'),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                'Категория: Молоко и другое и мб яйца',
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            SizedBox(width: 5),
-                            Flexible(
-                              child: Text(
-                                'Количество: 100 шт',
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            FilledButton(
-                              onPressed: () {},
-                              child: Text("Удалить"),
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(5),
-                                    ),
-                                  ),
-                                ),
-                                minimumSize: MaterialStateProperty.all(
-                                  Size(double.infinity, 40),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            FilledButton(
-                              onPressed: () {},
-                              child: Text("Удалить"),
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(5),
-                                    ),
-                                  ),
-                                ),
-                                minimumSize: MaterialStateProperty.all(
-                                  Size(double.infinity, 40),
-                                ),
-                              ),
-                            ),
-                          ],
+                        SizedBox(width: 5),
+                        Flexible(
+                          child: Text(
+                            'Количество: 100 шт',
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: () {},
+                            child: Text("Удалить"),
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                              ),
+                              minimumSize: MaterialStateProperty.all(
+                                Size(0, 40),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: () {},
+                            child: Text("Удалить"),
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(5),
+                                  ),
+                                ),
+                              ),
+                              minimumSize: MaterialStateProperty.all(
+                                Size(0, 40),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),
