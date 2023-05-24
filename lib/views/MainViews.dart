@@ -31,8 +31,8 @@ class _MainViewsState extends State<MainViews> {
     TextTheme typography = Theme.of(context).textTheme;
     PageController _pageController = PageController(initialPage: 0);
     List<Widget> _pages = [
-      HomeViews(),
       CategoryViews(),
+      HomeViews(),
       RecordViews(),
       EmployeesView(),
       SalesViews(),
