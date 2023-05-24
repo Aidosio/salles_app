@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:salles_app/views/CategoryChildViews.dart';
 import 'package:salles_app/views/ChoiseViews.dart';
 import 'package:salles_app/views/EmployeesView.dart';
 import 'package:salles_app/views/ExampleViews.dart';
@@ -80,6 +81,7 @@ class _MyAppState extends State<MyApp> {
         '/main': (context) => MainViews(
               changeLanguage: _changeLanguage,
             ),
+
         // '/mainhome': (context) => EmployeesView(),
         // '/sing': (context) => const SingIn(),
         // '/choise': (context) => const ChoicePage(),
