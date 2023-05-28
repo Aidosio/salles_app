@@ -55,7 +55,8 @@ class _CategoryViewsState extends State<CategoryViews> {
                         TextSpan(text: ' '),
                         TextSpan(
                             text: 'Овощи и фрукты',
-                            style: TextStyle(color: Colors.lightBlueAccent)),
+                            style: TextStyle(
+                                color: Colors.lightBlueAccent.shade700)),
                       ],
                     ),
                   ),
@@ -99,7 +100,8 @@ class _CategoryViewsState extends State<CategoryViews> {
                         TextSpan(text: ' '),
                         TextSpan(
                             text: 'Молочные продукты и яйца',
-                            style: TextStyle(color: Colors.lightBlueAccent)),
+                            style: TextStyle(
+                                color: Colors.lightBlueAccent.shade700)),
                       ],
                     ),
                   ),
@@ -143,7 +145,8 @@ class _CategoryViewsState extends State<CategoryViews> {
                         TextSpan(text: ' '),
                         TextSpan(
                             text: 'Колбасы и сосиски',
-                            style: TextStyle(color: Colors.lightBlueAccent)),
+                            style: TextStyle(
+                                color: Colors.lightBlueAccent.shade700)),
                       ],
                     ),
                   ),
@@ -187,7 +190,8 @@ class _CategoryViewsState extends State<CategoryViews> {
                         TextSpan(text: ' '),
                         TextSpan(
                             text: 'Мясо и птица',
-                            style: TextStyle(color: Colors.lightBlueAccent)),
+                            style: TextStyle(
+                                color: Colors.lightBlueAccent.shade700)),
                       ],
                     ),
                   ),
@@ -231,7 +235,8 @@ class _CategoryViewsState extends State<CategoryViews> {
                         TextSpan(text: ' '),
                         TextSpan(
                             text: 'Рыба и морепродукты',
-                            style: TextStyle(color: Colors.lightBlueAccent)),
+                            style: TextStyle(
+                                color: Colors.lightBlueAccent.shade700)),
                       ],
                     ),
                   ),
@@ -240,6 +245,25 @@ class _CategoryViewsState extends State<CategoryViews> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: Container(
+        height: 50.0,
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
+        child: FloatingActionButton.extended(
+          onPressed: () {
+            // Действие
+          },
+          label: const Text('Добавить товар'),
+          icon: const Icon(Icons.add),
+          backgroundColor: Colors.lightBlueAccent,
+          foregroundColor: Colors.white,
+          tooltip: "Добавить новый товар",
+          extendedTextStyle: TextStyle(
+              fontSize: typography.bodyMedium?.fontSize,
+              fontWeight: FontWeight.w400),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        ),
       ),
     );
   }

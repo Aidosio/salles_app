@@ -38,7 +38,7 @@ class _EmployeesViewState extends State<EmployeesView> {
             color: Colors.black,
           ),
 
-          SizedBox(height: 10),
+          SizedBox(height: 15),
 
           //компонент
           Card(

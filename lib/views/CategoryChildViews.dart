@@ -51,38 +51,39 @@ class _CategoryChildViewsState extends State<CategoryChildViews> {
                     Text(
                       'Название продукта',
                       style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: typography.bodyText1?.fontSize,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Text('Цена: 1000тг'),
-                        SizedBox(width: 5),
-                        Text('Штрихкод: 100000'),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            'Категория: Молоко и другое и мб яйца',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Flexible(
-                          child: Text(
-                            'Количество: 100 шт',
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+                          color: Colors.black87,
+                          fontSize: typography.bodyText1?.fontSize,
+                          fontWeight: FontWeight.w700),
                     ),
                     SizedBox(height: 10),
+                    Text(
+                      'Цена: 1000 тг',
+                      style: TextStyle(
+                          fontSize: typography.bodyMedium?.fontSize,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Количество: 30 шт',
+                      style: TextStyle(
+                          fontSize: typography.bodyMedium?.fontSize,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Штрихкод: 10000000',
+                      style: TextStyle(
+                          fontSize: typography.bodyMedium?.fontSize,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      'Категория: мясо и другое и мб яйца',
+                      style: TextStyle(
+                          fontSize: typography.bodyMedium?.fontSize,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(height: 15),
                     Row(
                       children: [
                         Expanded(
@@ -90,6 +91,8 @@ class _CategoryChildViewsState extends State<CategoryChildViews> {
                             onPressed: () {},
                             child: Text("Удалить"),
                             style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll<Color>(Colors.red),
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
@@ -107,7 +110,7 @@ class _CategoryChildViewsState extends State<CategoryChildViews> {
                         Expanded(
                           child: FilledButton(
                             onPressed: () {},
-                            child: Text("Удалить"),
+                            child: Text("Изменить"),
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
