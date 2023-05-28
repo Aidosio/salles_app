@@ -28,7 +28,7 @@ class _CategoryChildViewsState extends State<CategoryChildViews> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.only(left: 15, right: 15, top: 8),
         child: Column(
           children: [
             SizedBox(height: 10),
