@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => MainViews(
               changeLanguage: _changeLanguage,
             ),
-
+        '/category-views': (context) => CategoryChildViews(),
         // '/mainhome': (context) => EmployeesView(),
         // '/sing': (context) => const SingIn(),
         // '/choise': (context) => const ChoicePage(),
