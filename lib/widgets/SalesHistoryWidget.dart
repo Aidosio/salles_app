@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../locale/AppLocalizations.dart';
 
-class SalesCodeWidget extends StatelessWidget {
+class SalesHistoryWidget extends StatelessWidget {
   final String checkNum;
   final String price;
-  const SalesCodeWidget({
+  const SalesHistoryWidget({
     Key? key,
     required this.checkNum,
     required this.price,
@@ -31,9 +31,9 @@ class SalesCodeWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('№ Чека',
                       style: TextStyle(
@@ -46,6 +46,7 @@ class SalesCodeWidget extends StatelessWidget {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Сумма',
                       style: TextStyle(

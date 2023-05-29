@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salles_app/widgets/SalesCodeWidget.dart';
+import 'package:salles_app/widgets/SalesHistoryWidget.dart';
 
 import '../locale/AppLocalizations.dart';
 
@@ -15,39 +15,61 @@ class _SalesViewsState extends State<SalesViews> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
-    return Container(
-      alignment: Alignment.topCenter,
-      padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-      child: Column(
-        children: [
-          ExpansionTile(
-            title: Text('Today'),
-            trailing: Icon(Icons.arrow_drop_down_rounded),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+          child: const Column(
+            // УБЕРИ ЭТОТ КОНСТ
             children: [
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
+              Column(
+                children: [
+                  Column(children: [
+                    ExpansionTile(
+                      title: Text('Today'),
+                      trailing: Icon(Icons.arrow_drop_down_rounded),
+                      children: [
+                        Column(children: [
+                          SalesHistoryWidget(
+                              checkNum: '11122332123', price: '100'),
+                          SalesHistoryWidget(checkNum: 'asd', price: 'price'),
+                          SalesHistoryWidget(
+                              checkNum: '11122332123', price: '100'),
+                        ])
+                      ],
+                    ),
+                    ExpansionTile(
+                      title: Text('Today'),
+                      trailing: Icon(Icons.arrow_drop_down_rounded),
+                      children: [
+                        Column(children: [
+                          SalesHistoryWidget(
+                              checkNum: '11122332123', price: '100'),
+                          SalesHistoryWidget(checkNum: 'asd', price: 'price'),
+                          SalesHistoryWidget(
+                              checkNum: '11122332123', price: '100'),
+                        ])
+                      ],
+                    ),
+                    ExpansionTile(
+                      title: Text('Today'),
+                      trailing: Icon(Icons.arrow_drop_down_rounded),
+                      children: [
+                        Column(children: [
+                          SalesHistoryWidget(
+                              checkNum: '11122332123', price: '100'),
+                          SalesHistoryWidget(checkNum: 'asd', price: 'price'),
+                          SalesHistoryWidget(
+                              checkNum: '11122332123', price: '100'),
+                        ])
+                      ],
+                    ),
+                  ])
+                ],
+              )
             ],
           ),
-          ExpansionTile(
-            title: Text('Today'),
-            trailing: Icon(Icons.arrow_drop_down_rounded),
-            children: [
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-            ],
-          ),
-          ExpansionTile(
-            title: Text('Today'),
-            trailing: Icon(Icons.arrow_drop_down_rounded),
-            children: [
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-              SalesCodeWidget(checkNum: 'asd', price: 'price'),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
