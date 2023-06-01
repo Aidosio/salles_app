@@ -7,6 +7,7 @@ import 'package:salles_app/views/EmployeesView.dart';
 import 'package:salles_app/views/ExampleViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/MainViews.dart';
+import 'package:salles_app/views/SalesRefundViews.dart';
 
 import 'locale/AppLocalizationsDelegate.dart';
 import 'views/ChoiseCompanyViews.dart';
@@ -82,6 +83,7 @@ class _MyAppState extends State<MyApp> {
               changeLanguage: _changeLanguage,
             ),
         '/category-views': (context) => CategoryChildViews(),
+        '/sales-refund': (context) => SalesRefundViews(),
         // '/mainhome': (context) => EmployeesView(),
         // '/sing': (context) => const SingIn(),
         // '/choise': (context) => const ChoicePage(),
