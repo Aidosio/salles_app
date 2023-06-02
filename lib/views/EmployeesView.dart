@@ -71,7 +71,8 @@ class _EmployeesViewState extends State<EmployeesView> {
 
             SizedBox(height: 15),
 
-            EmployeesAcceptedWidget(fullName: 'ФИО', id: '3')
+            EmployeesAcceptedWidget(
+                fullName: 'Арман Газис', phoneNubmer: '877056544', id: '3')
           ],
         ),
       ),

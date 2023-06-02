@@ -18,56 +18,61 @@ class SalesHistoryWidget extends StatelessWidget {
     return Container(
         margin: EdgeInsets.only(bottom: 15),
         child: TextButton(
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, '/sales-refund',
-                arguments: 'Возврат и просмотр');
-          },
-          child: Card(
-            margin: EdgeInsets.zero,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                side: BorderSide(color: Theme.of(context).colorScheme.outline),
+                borderRadius: BorderRadius.circular(5),
               ),
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('№ Чека:',
-                          style: TextStyle(
-                              fontWeight: typography.bodyMedium?.fontWeight)),
-                      Text(
-                        checkNum,
-                        style: TextStyle(
-                            fontWeight: typography.bodyMedium?.fontWeight),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/sales-refund', arguments: '');
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 15),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '№ Чека:',
+                      style: TextStyle(
+                        fontSize: typography.bodyMedium?.fontSize,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Сумма:',
-                          style: TextStyle(
-                              fontWeight: typography.bodyMedium?.fontWeight)),
-                      Text(
-                        price + ' тг',
-                        style: TextStyle(
-                            fontWeight: typography.bodyMedium?.fontWeight),
+                    ),
+                    Text(
+                      checkNum,
+                      style: TextStyle(
+                        fontSize: typography.bodyMedium?.fontSize,
                       ),
-                    ],
-                  )
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Сумма:',
+                      style: TextStyle(
+                        fontSize: typography.bodyMedium?.fontSize,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      price + ' тг',
+                      style: TextStyle(
+                        fontSize: typography.bodyMedium?.fontSize,
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ));

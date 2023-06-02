@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../locale/AppLocalizations.dart';
+import '../widgets/MyBarWidget.dart';
 import '../widgets/SalesRefundAcceptionCardWidgets.dart';
 
 class SalesRefundAcceptionViews extends StatefulWidget {
@@ -18,15 +19,30 @@ class _SalesRefundAcceptionViewsState extends State<SalesRefundAcceptionViews> {
     TextTheme typography = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-        child: Column(
-          children: [
-            SalesRefundAcceptionCardWidgets(),
-            SalesRefundAcceptionCardWidgets(),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: Column(
+                  children: [
+                    SalesRefundAcceptionCardWidgets(),
+                    SalesRefundAcceptionCardWidgets(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          MyBarWidget(
+              totalPrice: '7000',
+              buttonTitle: 'Закончить',
+              id: '2',
+              routeWay: '/sales-refund',
+              totalRefund: '5000',
+              isVisible: false),
+        ],
       ),
     );
   }

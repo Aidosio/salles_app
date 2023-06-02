@@ -12,60 +12,66 @@ class SalesRefundWidgets extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 20),
       width: double.infinity,
-      child: TextButton(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-              borderRadius: BorderRadius.circular(5),
-            ),
+      child: Card(
+        margin: EdgeInsets.zero,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.onSurface,
           ),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(5),
+          ),
         ),
-        onPressed: () {
-          Navigator.pushNamed(context, '/category-views',
-              arguments: 'Овощи и фрукты');
-        },
         child: Container(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Название товара:',
-                      style: TextStyle(
-                          fontWeight: typography.bodyMedium?.fontWeight)),
+                  Text(
+                    'Название товара:',
+                    style: TextStyle(
+                        fontSize: typography.bodyMedium?.fontSize,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
                   Text(
                     'Яблоки',
-                    style: TextStyle(
-                        fontWeight: typography.bodyMedium?.fontWeight),
+                    style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Цена:',
-                      style: TextStyle(
-                          fontWeight: typography.bodyMedium?.fontWeight)),
+                  Text(
+                    'Цена:',
+                    style: TextStyle(
+                        fontSize: typography.bodyMedium?.fontSize,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
                   Text(
                     '10000' + ' тг',
-                    style: TextStyle(
-                        fontWeight: typography.bodyMedium?.fontWeight),
+                    style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Кол-во:',
-                      style: TextStyle(
-                          fontWeight: typography.bodyMedium?.fontWeight)),
+                  Text(
+                    'Кол-во:',
+                    style: TextStyle(
+                        fontSize: typography.bodyMedium?.fontSize,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
                   Text(
                     '10' + ' шт',
-                    style: TextStyle(
-                        fontWeight: typography.bodyMedium?.fontWeight),
+                    style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],
               ),

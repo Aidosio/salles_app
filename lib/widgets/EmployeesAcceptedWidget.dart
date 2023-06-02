@@ -5,11 +5,13 @@ import '../locale/AppLocalizations.dart';
 class EmployeesAcceptedWidget extends StatelessWidget {
   final String fullName;
   final String id;
-  const EmployeesAcceptedWidget({
-    Key? key,
-    required this.fullName,
-    required this.id,
-  }) : super(key: key);
+  final String phoneNubmer;
+  const EmployeesAcceptedWidget(
+      {Key? key,
+      required this.fullName,
+      required this.id,
+      required this.phoneNubmer})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +30,50 @@ class EmployeesAcceptedWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(
-            fullName,
-            style: TextStyle(
-                color: Colors.black87,
-                fontSize: typography.bodyMedium?.fontSize,
-                fontWeight: FontWeight.w700),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                fullName,
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: typography.bodyMedium?.fontSize,
+                    fontWeight: FontWeight.w600),
+              ),
+              Text(
+                phoneNubmer,
+                style: TextStyle(
+                    color: Colors.black45,
+                    fontSize: typography.bodyMedium?.fontSize),
+              ),
+            ],
           ),
-          CircleAvatar(
-            radius: 20,
-            backgroundColor: Colors.red.shade100,
-            child: IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {
-                  print(id);
-                },
-                icon: Icon(
-                  Icons.delete_outline,
-                  size: 23,
-                )),
-          )
+          Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.red.shade200,
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      print(id);
+                    },
+                    icon: Icon(
+                      Icons.delete_outline,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ]),
       ),
     );

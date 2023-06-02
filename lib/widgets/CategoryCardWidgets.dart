@@ -42,11 +42,13 @@ class CategoryCardWidgets extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.black87,
                     fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w700),
+                    fontWeight: FontWeight.w600),
                 children: <TextSpan>[
                   TextSpan(
                       text: categoryName,
-                      style: TextStyle(color: Colors.lightBlueAccent.shade700)),
+                      style: TextStyle(
+                          color: Colors.lightBlueAccent.shade700,
+                          fontWeight: FontWeight.w600)),
                 ],
               ),
             ),

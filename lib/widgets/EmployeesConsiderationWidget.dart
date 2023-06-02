@@ -34,38 +34,56 @@ class EmployeesConsiderationWidget extends StatelessWidget {
               style: TextStyle(
                   color: Colors.black87,
                   fontSize: typography.bodyMedium?.fontSize,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w600),
             ),
             Row(children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.green.shade100,
-                child: IconButton(
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.green.shade200,
+                  ),
+                  child: IconButton(
                     padding: EdgeInsets.zero,
                     onPressed: () {
                       print(id);
                     },
                     icon: Icon(
                       Icons.done,
-                      size: 23,
-                    )),
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
               SizedBox(
                 width: 10,
               ),
-              CircleAvatar(
-                radius: 20,
-                backgroundColor: Colors.red.shade100,
-                child: IconButton(
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.red.shade200,
+                  ),
+                  child: IconButton(
                     padding: EdgeInsets.zero,
                     onPressed: () {
                       print(id);
                     },
                     icon: Icon(
                       Icons.delete_outline,
-                      size: 23,
-                    )),
-              )
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
             ]),
           ],
         ),

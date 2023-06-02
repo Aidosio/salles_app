@@ -48,35 +48,27 @@ class CategoryChildCardWidgets extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.black87,
                     fontSize: typography.bodyText1?.fontSize,
-                    fontWeight: FontWeight.w700),
+                    fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 10),
               Text(
                 'Цена: ' + cost + ' тг',
-                style: TextStyle(
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
               ),
               SizedBox(height: 5),
               Text(
                 'Количество: ' + quantity + ' шт',
-                style: TextStyle(
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
               ),
               SizedBox(height: 5),
               Text(
                 'Штрихкод: ' + barcode,
-                style: TextStyle(
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
               ),
               SizedBox(height: 5),
               Text(
                 'Категория: ' + categoryName,
-                style: TextStyle(
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
               ),
               SizedBox(height: 15),
               Row(

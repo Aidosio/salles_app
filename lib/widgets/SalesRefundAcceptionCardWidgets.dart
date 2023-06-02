@@ -30,14 +30,14 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
                     'Название',
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 5),
                   Text(
                     'Цена',
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -63,8 +63,28 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(children: [
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.wrap_text_rounded)),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Colors.blue.shade100,
+                        ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            print('id');
+                          },
+                          icon: Icon(
+                            Icons.wrap_text_rounded,
+                            size: 20,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
                   ])
                 ],
               ),

@@ -43,7 +43,7 @@ class _SalesRefundViewsState extends State<SalesRefundViews> {
                             'Возврат',
                             style: TextStyle(
                                 fontSize: typography.bodyMedium?.fontSize,
-                                fontWeight: FontWeight.w700),
+                                fontWeight: FontWeight.w600),
                           ),
                           Divider(),
                           SizedBox(height: 15),
@@ -60,7 +60,13 @@ class _SalesRefundViewsState extends State<SalesRefundViews> {
               ),
             ),
           ),
-          MyBarWidget(),
+          MyBarWidget(
+              totalPrice: '6666',
+              buttonTitle: 'Возврат',
+              id: '1',
+              routeWay: '/sales-refund-Accept',
+              totalRefund: '6000',
+              isVisible: true),
         ],
       ),
     );
