@@ -20,9 +20,9 @@ class _RecordViewsState extends State<RecordViews> {
         padding: EdgeInsets.only(left: 15, right: 15, top: 8),
         child: Column(
           children: [
-            RecordSalesCardWidgets()
+            RecordSalesCardWidgets() != null
                 ? Text('У вас пока нет продаж')
-                : Text('data')
+                : Text('data'),
           ],
         ),
       ),
