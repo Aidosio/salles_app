@@ -29,8 +29,11 @@ class CategoryCardWidgets extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, '/category-views',
-              arguments: 'Овощи и фрукты');
+          Navigator.pushNamed(
+            context,
+            '/category-views',
+            arguments: 'Овощи и фрукты',
+          );
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

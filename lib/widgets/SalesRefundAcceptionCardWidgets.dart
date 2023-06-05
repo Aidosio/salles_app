@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../locale/AppLocalizations.dart';
@@ -75,7 +77,26 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
                         child: IconButton(
                           padding: EdgeInsets.zero,
                           onPressed: () {
-                            print('id');
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(
+                                  SnackBar(
+                                    duration: Duration(seconds: 5),
+                                    content: Text('Вы сделали возврат'),
+                                    action: SnackBarAction(
+                                        label: 'Отменить',
+                                        onPressed: () {
+                                          print('object');
+                                        }),
+                                  ),
+                                )
+                                .closed
+                                .then((SnackBarClosedReason reason) {
+                              if (reason != SnackBarClosedReason.action) {
+                                // Кнопка 'Отменить' не была нажата
+                                print('id');
+                              }
+                            });
+                            ;
                           },
                           icon: Icon(
                             Icons.wrap_text_rounded,
@@ -91,8 +112,8 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
             ]),
             SizedBox(height: 10),
             Container(
-              height: 45,
               child: TextField(
+                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Количество',

@@ -64,6 +64,7 @@ class _SalesRefundViewsState extends State<SalesRefundViews> {
               totalPrice: '6666',
               buttonTitle: 'Возврат',
               id: '1',
+              popBack: true,
               routeWay: '/sales-refund-Accept',
               totalRefund: '6000',
               isVisible: true),

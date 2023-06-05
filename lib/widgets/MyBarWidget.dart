@@ -6,22 +6,26 @@ class MyBarWidget extends StatelessWidget {
   final String totalPrice;
   final String buttonTitle;
   final String id;
-  final String routeWay;
+  final String? routeWay;
   final String totalRefund;
   final bool isVisible;
-  const MyBarWidget(
-      {Key? key,
-      required this.totalPrice,
-      required this.buttonTitle,
-      required this.id,
-      required this.routeWay,
-      required this.totalRefund,
-      required this.isVisible})
-      : super(key: key);
+  final bool popBack;
+
+  const MyBarWidget({
+    Key? key,
+    required this.totalPrice,
+    required this.buttonTitle,
+    required this.id,
+    this.routeWay,
+    required this.totalRefund,
+    required this.isVisible,
+    required this.popBack,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+
     TextTheme typography = Theme.of(context).textTheme;
     return Container(
       padding: EdgeInsets.only(right: 22, left: 22, bottom: 20),
@@ -42,7 +46,7 @@ class MyBarWidget extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Text(totalPrice + ' тг')
+              Text(totalPrice + ' тг'),
             ],
           ),
           SizedBox(height: 10),
@@ -70,7 +74,11 @@ class MyBarWidget extends StatelessWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: () {
-                Navigator.pushNamed(context, routeWay);
+                if (popBack && routeWay != null) {
+                  Navigator.pushNamed(context, routeWay!);
+                } else {
+                  Navigator.pop(context);
+                }
                 print(id);
               },
               child: Text(buttonTitle),

@@ -36,6 +36,7 @@ class _CategoryViewsState extends State<CategoryViews> {
         margin: EdgeInsets.zero,
         child: FloatingActionButton.extended(
           onPressed: () {
+            Navigator.pushNamed(context, '/Product');
             print('1');
           },
           label: const Text('Добавить товар'),
