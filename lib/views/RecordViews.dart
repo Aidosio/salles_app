@@ -1,47 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:salles_app/widgets/RecordSalesCardWidgets.dart';
+
+import '../locale/AppLocalizations.dart';
 
 class RecordViews extends StatefulWidget {
-  const RecordViews({Key? key}) : super(key: key);
+  const RecordViews({super.key});
 
   @override
   State<RecordViews> createState() => _RecordViewsState();
 }
 
 class _RecordViewsState extends State<RecordViews> {
-  String barcode = '';
-
-  @override
-  void initState() {
-    super.initState();
-    initCamera();
-  }
-
-  Future<void> initCamera() async {
-    String cameraScanResult = await FlutterBarcodeScanner.scanBarcode(
-      '#ff6666',
-      'Отмена',
-      false,
-      ScanMode.BARCODE,
-    );
-
-    setState(() {
-      barcode = cameraScanResult;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments as String?;
+    final localizations = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Назад', textAlign: TextAlign.left),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('RecordViews'),
-          Text('Штрихкод: $barcode'),
-        ],
+      body: Container(
+        padding: EdgeInsets.only(left: 15, right: 15, top: 8),
+        child: Column(
+          children: [
+            RecordSalesCardWidgets()
+                ? Text('У вас пока нет продаж')
+                : Text('data')
+          ],
+        ),
       ),
     );
   }
