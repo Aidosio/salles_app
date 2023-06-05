@@ -19,6 +19,7 @@ class _SalesViewsState extends State<SalesViews> {
     bool _isOpened = true;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),

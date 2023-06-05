@@ -8,6 +8,7 @@ import 'package:salles_app/views/ExampleViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/MainViews.dart';
 import 'package:salles_app/views/ProductViews.dart';
+import 'package:salles_app/views/RecordPurchaseViews.dart';
 import 'package:salles_app/views/SalesRefundAcceptionViews.dart';
 import 'package:salles_app/views/SalesRefundViews.dart';
 
@@ -88,6 +89,7 @@ class _MyAppState extends State<MyApp> {
         '/sales-refund': (context) => SalesRefundViews(),
         '/sales-refund-Accept': (context) => SalesRefundAcceptionViews(),
         '/Product': (context) => ProductViews(),
+        '/Record-Purchase': (context) => RecordPurchaseViews(),
         // '/mainhome': (context) => EmployeesView(),
         // '/sing': (context) => const SingIn(),
         // '/choise': (context) => const ChoicePage(),

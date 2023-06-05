@@ -16,6 +16,7 @@ class _SalesRefundViewsState extends State<SalesRefundViews> {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Align(
           alignment: Alignment.centerRight,
