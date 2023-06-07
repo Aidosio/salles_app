@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:salles_app/widgets/RecordPurchaseCardWidgets.dart';
 
 import '../locale/AppLocalizations.dart';
@@ -54,9 +55,17 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
               height: 45,
               width: double.infinity,
               child: FloatingActionButton.extended(
-                onPressed: () {
-                  print('next');
-                  Navigator.pop(context);
+                onPressed: () async {
+                  String barcodeScanRes =
+                      await FlutterBarcodeScanner.scanBarcode(
+                    '#ff6666', // Цвет кнопки сканирования
+                    'Отмена', // Текст кнопки отмены
+                    true, // Показывать ли стрелку навигации назад на iOS
+                    ScanMode.BARCODE, // Режим сканирования (штрих-код)
+                  );
+
+                  // Здесь вы можете обрабатывать полученные результаты сканирования штрих-кода
+                  print('Результат сканирования: $barcodeScanRes');
                 },
                 label: Text(
                   'Добавить товар',
