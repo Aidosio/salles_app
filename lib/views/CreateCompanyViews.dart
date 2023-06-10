@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/service/CompanyService.dart';
+import 'package:salles_app/service/RegService.dart';
 import '../locale/AppLocalizations.dart';
 
 class CreateCompanyViews extends StatefulWidget {
@@ -11,6 +13,36 @@ class CreateCompanyViews extends StatefulWidget {
 }
 
 class _CreateCompanyViewsState extends State<CreateCompanyViews> {
+  String _ids = '';
+  String name = '';
+  String errorName = '';
+
+  void getIdUser() async {
+    String? userId = await RegService.getUserId();
+    if (userId != null) {
+      setState(() {
+        _ids = userId;
+      });
+      print('User ID: $userId');
+    } else {
+      print('User is not authenticated');
+    }
+  }
+
+  void createCompany() async {
+    await CompanyService().createCompany(name, _ids);
+  }
+
+  // void _postCompany() async{
+
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    getIdUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -43,10 +75,15 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
                   hintText: 'Название компаний',
                   prefixIcon: Icon(Icons.business),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    name = value;
+                  });
+                },
               ),
               SizedBox(height: 30),
               FilledButton.tonal(
-                onPressed: () {},
+                onPressed: createCompany,
                 child: Text("Зарегистрироваться"),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(

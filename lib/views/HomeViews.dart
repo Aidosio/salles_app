@@ -11,6 +11,8 @@ class HomeViews extends StatefulWidget {
 }
 
 class _HomeViewsState extends State<HomeViews> {
+  bool isTrue = false;
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -46,9 +48,15 @@ class _HomeViewsState extends State<HomeViews> {
               Column(
                 children: [
                   SizedBox(height: 15),
-                  SalesHistoryWidget(checkNum: '4564644', price: '4500'),
-                  SalesHistoryWidget(checkNum: '4564644', price: '4500'),
-                  SalesHistoryWidget(checkNum: '4564644', price: '4500'),
+                  if (isTrue)
+                    SalesHistoryWidget(checkNum: '4564644', price: '4500')
+                  else
+                    Text(
+                      'У вас пока нету продаж',
+                      style: TextStyle(
+                          fontSize: typography.bodyLarge?.fontSize,
+                          fontWeight: FontWeight.w500),
+                    ),
                 ],
               ),
               Column(
@@ -79,20 +87,21 @@ class _HomeViewsState extends State<HomeViews> {
               Container(
                 child: Column(
                   children: [
-                    CategoryChildCardWidgets(
-                        titleName: 'titleName',
-                        cost: '4555',
-                        quantity: 'quantity',
-                        barcode: 'barcode',
-                        categoryName: 'categoryName',
-                        id: 'id'),
-                    CategoryChildCardWidgets(
-                        titleName: 'titleName',
-                        cost: '4555',
-                        quantity: 'quantity',
-                        barcode: 'barcode',
-                        categoryName: 'categoryName',
-                        id: 'id')
+                    if (isTrue)
+                      CategoryChildCardWidgets(
+                          titleName: 'titleName',
+                          cost: '4555',
+                          quantity: 'quantity',
+                          barcode: 'barcode',
+                          categoryName: 'categoryName',
+                          id: 'id')
+                    else
+                      Text(
+                        'У вас пока нету товаров',
+                        style: TextStyle(
+                            fontSize: typography.bodyLarge?.fontSize,
+                            fontWeight: FontWeight.w500),
+                      ),
                   ],
                 ),
               )

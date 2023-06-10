@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:salles_app/service/Auth.dart';
 import 'package:salles_app/views/MainViews.dart';
 
 import '../locale/AppLocalizations.dart';
@@ -14,6 +15,12 @@ class LoginViews extends StatefulWidget {
 }
 
 class _LoginViewsState extends State<LoginViews> {
+  String phoneNumber = '';
+  String password = '';
+
+  String errorPhone = '';
+  String errorPassword = '';
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -51,7 +58,13 @@ class _LoginViewsState extends State<LoginViews> {
                         hintText: '+777-777-77-77',
                         labelText: 'Номер телефона',
                         prefixIcon: Icon(Icons.phone_android_sharp),
+                        errorText: errorPhone.isEmpty ? null : errorPhone,
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          phoneNumber = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 24),
                     TextField(
@@ -60,18 +73,81 @@ class _LoginViewsState extends State<LoginViews> {
                         border: OutlineInputBorder(),
                         labelText: 'Пароль',
                         prefixIcon: Icon(Icons.lock),
+                        errorText: errorPassword.isEmpty ? null : errorPassword,
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          password = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 30),
                     FilledButton.tonal(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainViews(
-                                    changeLanguage: (Locale) {},
-                                  )),
-                        );
+                      onPressed: () async {
+                        if (phoneNumber.isEmpty && password.isEmpty) {
+                          print('Ошибка: Введите номер телефона и пароль');
+                          setState(() {
+                            errorPassword = 'Ошибка: Введите пароль';
+                            errorPhone = 'Ошибка: Введите номер телефона';
+                          });
+                          return;
+                        }
+                        if (password.isEmpty) {
+                          print('Ошибка: Введите пароль');
+                          setState(() {
+                            errorPhone = '';
+                            errorPassword = 'Ошибка: Введите пароль';
+                          });
+                          return;
+                        }
+
+                        if (password.isEmpty) {
+                          print('Ошибка: Введите пароль');
+                          setState(() {
+                            errorPhone = '';
+                            errorPassword = 'Ошибка: Введите пароль';
+                          });
+                          return;
+                        }
+
+                        if (phoneNumber.isEmpty) {
+                          print('Ошибка: Введите номер телефона');
+                          setState(() {
+                            errorPhone = 'Ошибка: Введите номер телефона';
+                            errorPassword = '';
+                          });
+                          return;
+                        }
+
+                        setState(() {
+                          errorPhone = '';
+                          errorPassword = '';
+                        });
+
+                        final phoneNumberWithoutDashes =
+                            phoneNumber.replaceAll('-', '');
+                        print('Номер телефона: $phoneNumberWithoutDashes');
+                        print('Пароль: $password');
+                        print(await Auth.isLoggedIn());
+
+                        Auth.authenticate(phoneNumberWithoutDashes, password)
+                            .then((_) {
+                          // Проверяем, была ли успешная авторизация
+                          if (Auth.token != null) {
+                            // Авторизация успешна, переходим на главный экран
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MainViews(
+                                  changeLanguage: (Locale) {},
+                                ),
+                              ),
+                            );
+                          } else {
+                            // Ошибка авторизации, выводим сообщение об ошибке
+                            print('Ошибка авторизации');
+                          }
+                        });
                       },
                       child: Text("Войти"),
                       style: ButtonStyle(
