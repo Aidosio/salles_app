@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:salles_app/service/Auth.dart';
 import 'package:salles_app/views/CategoryChildViews.dart';
 import 'package:salles_app/views/ChoiseViews.dart';
 import 'package:salles_app/views/EmployeesView.dart';
@@ -27,10 +28,24 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _currentLocale = const Locale('ru', '');
   AppLocalizationsDelegate _localizationsDelegate = AppLocalizationsDelegate();
+  bool _isLoggedIn = false;
 
   void _changeLanguage(Locale locale) {
     setState(() {
       _currentLocale = locale;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeAuth();
+  }
+
+  Future<void> _initializeAuth() async {
+    bool isLoggedIn = await Auth.isLoggedIn();
+    setState(() {
+      _isLoggedIn = isLoggedIn;
     });
   }
 
@@ -56,13 +71,32 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         colorSchemeSeed: Colors.lightBlueAccent,
       ),
+<<<<<<< Updated upstream
       // home: LoginViews(
       //   changeLanguage: _changeLanguage,
       // ),
       routes: {
         '/': (context) => LoginViews(
+=======
+      // home: _isLoggedIn
+      //     ? MainViews(
+      //         changeLanguage: _changeLanguage,
+      //       )
+      //     : LoginViews(
+      //         changeLanguage: _changeLanguage,
+      //       ),
+      home: _isLoggedIn
+          ? MainViews(
+              changeLanguage: _changeLanguage,
+            )
+          : LoginViews(
+>>>>>>> Stashed changes
               changeLanguage: _changeLanguage,
             ),
+      routes: {
+        // '/': (context) => LoginViews(
+        //       changeLanguage: _changeLanguage,
+        //     ),
         '/choise': (context) => ChoiseViews(
               changeLanguage: _changeLanguage,
             ),
@@ -78,12 +112,23 @@ class _MyAppState extends State<MyApp> {
         '/examlpe': (context) => ExampleViews(
               changeLanguage: _changeLanguage,
             ),
+<<<<<<< Updated upstream
         '/main': (context) => MainViews(
               changeLanguage: _changeLanguage,
             ),
+=======
+        // '/main': (context) => MainViews(
+        //       changeLanguage: _changeLanguage,
+        //     ),
+        '/category-views': (context) => CategoryChildViews(),
+        '/sales-refund': (context) => SalesRefundViews(),
+        '/sales-refund-Accept': (context) => SalesRefundAcceptionViews(),
+        '/Product': (context) => ProductViews(),
+        '/Record-Purchase': (context) => RecordPurchaseViews(),
+>>>>>>> Stashed changes
 
         // '/mainhome': (context) => EmployeesView(),
-        // '/sing': (context) => const SingIn(),
+        // '/': (context) => const SingIn(),
         // '/choise': (context) => const ChoicePage(),
         // '/com': (context) => const CompanyCreateStep(),
         // '/reg': (context) => const Register(),
