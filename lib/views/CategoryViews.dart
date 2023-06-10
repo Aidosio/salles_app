@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salles_app/widgets/CategoryCardWidgets.dart';
+import 'package:salles_app/widgets/SwipeRefresh.dart';
 import '../locale/AppLocalizations.dart';
 import 'CategoryChildViews.dart';
 
@@ -18,16 +19,21 @@ class _CategoryViewsState extends State<CategoryViews> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.only(left: 15, right: 15, top: 8),
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
-            CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
-            CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
-            CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
-          ],
+      body: SwipeRefresh(
+        onRefresh: () {
+          return Future.delayed(Duration(seconds: 2));
+        },
+        child: Container(
+          padding: EdgeInsets.only(left: 15, right: 15, top: 8),
+          child: Column(
+            children: [
+              SizedBox(height: 10),
+              CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
+              CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
+              CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
+              CategoryCardWidgets(categoryName: 'Овощи и Фрукты'),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Container(
