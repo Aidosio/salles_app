@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/locale/AppLocalizations.dart';
+import 'package:salles_app/widgets/CategoryChildCardWidgets.dart';
+import 'package:salles_app/widgets/SalesHistoryWidget.dart';
 
 class HomeViews extends StatefulWidget {
   const HomeViews({super.key});
@@ -12,11 +15,10 @@ class _HomeViewsState extends State<HomeViews> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    TextTheme typography = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-<<<<<<< Updated upstream
-      body: Text('data'),
-=======
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(left: 15, right: 15, top: 8),
@@ -107,7 +109,6 @@ class _HomeViewsState extends State<HomeViews> {
           ),
         ),
       ),
->>>>>>> Stashed changes
     );
   }
 }

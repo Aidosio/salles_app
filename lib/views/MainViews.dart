@@ -203,7 +203,7 @@ class _MainViewsState extends State<MainViews> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 8),
+        // padding: EdgeInsets.only(left: 15, right: 15, bottom: 0, top: 8),
         child: _pages[currentPageIndex],
       ),
       bottomNavigationBar: NavigationBar(

@@ -110,6 +110,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_barcode_scanner:
+    dependency: "direct main"
+    description:
+      name: flutter_barcode_scanner
+      sha256: a4ba37daf9933f451a5e812c753ddd045d6354e4a3280342d895b07fecaab3fa
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -130,9 +138,6 @@ packages:
       sha256: "9ca354ca115c07991874688b28022464db2fcbd4141e008c9eb418bd4251f19c"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< Updated upstream
-    version: "2.11.0"
-=======
     version: "2.11.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
@@ -142,7 +147,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.15"
->>>>>>> Stashed changes
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -423,10 +427,5 @@ packages:
     source: hosted
     version: "1.0.0"
 sdks:
-<<<<<<< Updated upstream
-  dart: ">=3.0.0-0 <4.0.0"
-  flutter: ">=2.0.0"
-=======
   dart: ">=3.0.0 <4.0.0"
   flutter: ">=3.3.0"
->>>>>>> Stashed changes

@@ -8,6 +8,10 @@ import 'package:salles_app/views/EmployeesView.dart';
 import 'package:salles_app/views/ExampleViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/MainViews.dart';
+import 'package:salles_app/views/ProductViews.dart';
+import 'package:salles_app/views/RecordPurchaseViews.dart';
+import 'package:salles_app/views/SalesRefundAcceptionViews.dart';
+import 'package:salles_app/views/SalesRefundViews.dart';
 
 import 'locale/AppLocalizationsDelegate.dart';
 import 'views/ChoiseCompanyViews.dart';
@@ -71,13 +75,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         colorSchemeSeed: Colors.lightBlueAccent,
       ),
-<<<<<<< Updated upstream
-      // home: LoginViews(
-      //   changeLanguage: _changeLanguage,
-      // ),
-      routes: {
         '/': (context) => LoginViews(
-=======
       // home: _isLoggedIn
       //     ? MainViews(
       //         changeLanguage: _changeLanguage,
@@ -90,7 +88,6 @@ class _MyAppState extends State<MyApp> {
               changeLanguage: _changeLanguage,
             )
           : LoginViews(
->>>>>>> Stashed changes
               changeLanguage: _changeLanguage,
             ),
       routes: {
@@ -112,20 +109,20 @@ class _MyAppState extends State<MyApp> {
         '/examlpe': (context) => ExampleViews(
               changeLanguage: _changeLanguage,
             ),
-<<<<<<< Updated upstream
+
         '/main': (context) => MainViews(
               changeLanguage: _changeLanguage,
             ),
-=======
+
         // '/main': (context) => MainViews(
         //       changeLanguage: _changeLanguage,
         //     ),
+
         '/category-views': (context) => CategoryChildViews(),
         '/sales-refund': (context) => SalesRefundViews(),
         '/sales-refund-Accept': (context) => SalesRefundAcceptionViews(),
         '/Product': (context) => ProductViews(),
         '/Record-Purchase': (context) => RecordPurchaseViews(),
->>>>>>> Stashed changes
 
         // '/mainhome': (context) => EmployeesView(),
         // '/': (context) => const SingIn(),

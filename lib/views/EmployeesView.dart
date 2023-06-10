@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/widgets/EmployeesAcceptedWidget.dart';
+import 'package:salles_app/widgets/EmployeesConsiderationWidget.dart';
 import '../locale/AppLocalizations.dart';
 
 class EmployeesView extends StatefulWidget {
@@ -16,199 +18,63 @@ class _EmployeesViewState extends State<EmployeesView> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'На рассмотрений',
-              style: TextStyle(
-                  fontSize: typography.bodyMedium?.fontSize,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-
-          SizedBox(height: 5),
-
-          Divider(
-            height: 1,
-            thickness: 2,
-            indent: 0,
-            endIndent: 0,
-            color: Colors.black,
-          ),
-
-          SizedBox(height: 10),
-
-          //компонент
-          Card(
-            margin: EdgeInsets.zero,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5),
+      body: Container(
+        padding: EdgeInsets.only(left: 15, right: 15, top: 8),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'На рассмотрений',
+                style: TextStyle(
+                    fontSize: typography.bodyMedium?.fontSize,
+                    fontWeight: FontWeight.w700),
               ),
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Фамиля Имя Очество',
-                    style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  Row(children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.green.shade100,
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.done,
-                            size: 23,
-                          )),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.red.shade100,
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.delete_outline,
-                            size: 23,
-                          )),
-                    )
-                  ]),
-                ],
+
+            SizedBox(height: 5),
+
+            Divider(
+              height: 1,
+              thickness: 2,
+              indent: 0,
+              endIndent: 0,
+              color: Colors.black,
+            ),
+
+            SizedBox(height: 15),
+
+            //компонент
+
+            EmployeesConsiderationWidget(fullName: 'ФИО', id: '2'),
+            EmployeesConsiderationWidget(fullName: 'ФИО', id: '2'),
+
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Сотрудники',
+                style: TextStyle(
+                    fontSize: typography.bodyMedium?.fontSize,
+                    fontWeight: FontWeight.w700),
               ),
             ),
-          ),
 
-          SizedBox(height: 20),
+            SizedBox(height: 5),
 
-          Card(
-            margin: EdgeInsets.zero,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5),
-              ),
+            Divider(
+              height: 1,
+              thickness: 2,
+              indent: 0,
+              endIndent: 0,
+              color: Colors.black,
             ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Фамиля Имя Очество',
-                    style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  Row(children: [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.green.shade100,
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.done,
-                            size: 23,
-                          )),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.red.shade100,
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.delete_outline,
-                            size: 23,
-                          )),
-                    )
-                  ]),
-                ],
-              ),
-            ),
-          ),
 
-          SizedBox(height: 20),
+            SizedBox(height: 15),
 
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'Сотрудники',
-              style: TextStyle(
-                  fontSize: typography.bodyMedium?.fontSize,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-
-          SizedBox(height: 5),
-
-          Divider(
-            height: 1,
-            thickness: 2,
-            indent: 0,
-            endIndent: 0,
-            color: Colors.black,
-          ),
-
-          SizedBox(height: 15),
-
-          Card(
-            margin: EdgeInsets.zero,
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5),
-              ),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Фамиля Имя Очество',
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: typography.bodyMedium?.fontSize,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.red.shade100,
-                      child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.delete_outline,
-                            size: 23,
-                          )),
-                    )
-                  ]),
-            ),
-          )
-        ],
+            EmployeesAcceptedWidget(
+                fullName: 'Арман Газис', phoneNubmer: '877056544', id: '3')
+          ],
+        ),
       ),
     );
   }
