@@ -38,21 +38,25 @@ class CategoryCardWidgets extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            RichText(
-              textAlign: TextAlign.left,
-              text: TextSpan(
-                text: 'Категория: ',
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w600),
-                children: <TextSpan>[
-                  TextSpan(
+            Expanded(
+              // Добавляем Expanded вокруг RichText
+              child: RichText(
+                textAlign: TextAlign.left,
+                text: TextSpan(
+                  text: 'Категория: ',
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w600),
+                  children: <TextSpan>[
+                    TextSpan(
                       text: categoryName,
                       style: TextStyle(
                           color: Colors.lightBlueAccent.shade700,
-                          fontWeight: FontWeight.w600)),
-                ],
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

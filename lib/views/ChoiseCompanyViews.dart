@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/models/Company.dart';
+import 'package:salles_app/models/CompanyList.dart';
+import 'package:salles_app/service/Auth.dart';
+import 'package:salles_app/service/CompanyService.dart';
 import '../locale/AppLocalizations.dart';
 
 class ChoiseCompanyViews extends StatefulWidget {
@@ -11,17 +15,76 @@ class ChoiseCompanyViews extends StatefulWidget {
 }
 
 class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
+  String _ids = '';
+  List<CompanyList>? companyOptions;
+  CompanyList? selectedCompany;
+  Company? _company;
+
+  void getIdUser() async {
+    String? userId = await Auth.getUserId();
+    if (userId != null) {
+      setState(() {
+        _ids = userId;
+      });
+      print('User ID: $userId');
+    } else {
+      print('User is not authenticated');
+    }
+  }
+
+  _getAllCompany() async {
+    try {
+      List<CompanyList>? companyList = await CompanyService().getAllCompany();
+      setState(() {
+        companyOptions = companyList;
+      });
+      print(companyList);
+    } catch (e) {
+      print('Error getting company list: $e');
+    }
+  }
+
+  _onCompanySelectionChanged(CompanyList? newValue) {
+    if (newValue != null) {
+      _getCompanyById(newValue.name);
+      setState(() {
+        selectedCompany = newValue;
+      });
+    }
+  }
+
+  _getCompanyById(String name) async {
+    try {
+      Company? company = await CompanyService().getCompanyByName(name);
+      setState(() {
+        _company = company;
+      });
+      print(_company);
+    } catch (e) {
+      print('Error getting company by ID: $e');
+    }
+  }
+
+  _updateCompanySellers(String companyId, String sellerId) async {
+    try {
+      await CompanyService().updateCompanySellers(companyId, sellerId);
+      print('Successfully updated company sellers');
+    } catch (e) {
+      print('Error updating company sellers: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getIdUser();
+    _getAllCompany();
+  }
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
-
-    String selectedCompany;
-    List<String> companyOptions = [
-      'Company 1',
-      'Company 2',
-      'Company 3',
-    ];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -43,67 +106,29 @@ class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
                 ),
               ),
               SizedBox(height: 24),
-              Autocomplete<String>(
-                optionsBuilder: (TextEditingValue textEditingValue) {
-                  if (textEditingValue.text == '') {
-                    return const Iterable<String>.empty();
-                  }
-                  return companyOptions.where(
-                      (option) => option.contains(textEditingValue.text));
-                },
-                onSelected: (String newValue) {
-                  setState(() {
-                    selectedCompany = newValue;
-                  });
-                },
-                fieldViewBuilder: (BuildContext context,
-                    TextEditingController textEditingController,
-                    FocusNode focusNode,
-                    VoidCallback onFieldSubmitted) {
-                  return TextField(
-                    controller: textEditingController,
-                    focusNode: focusNode,
-                    onSubmitted: (value) {
-                      onFieldSubmitted();
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Название компаний',
-                      hintText: 'Название компаний',
-                      prefixIcon: Icon(Icons.business),
-                    ),
-                  );
-                },
-                optionsViewBuilder: (BuildContext context,
-                    AutocompleteOnSelected<String> onSelected,
-                    Iterable<String> options) {
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Material(
-                      elevation: 4.0,
-                      child: SizedBox(
-                        height: 200.0,
-                        child: ListView(
-                          padding: EdgeInsets.all(8.0),
-                          children: options
-                              .map((String option) => GestureDetector(
-                                    onTap: () {
-                                      onSelected(option);
-                                    },
-                                    child: ListTile(
-                                      title: Text(option),
-                                    ),
-                                  ))
-                              .toList(),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+              DropdownButtonFormField<CompanyList>(
+                value: selectedCompany,
+                onChanged: _onCompanySelectionChanged,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Категория товара',
+                ),
+                items: companyOptions?.map<DropdownMenuItem<CompanyList>>(
+                  (CompanyList company) {
+                    return DropdownMenuItem<CompanyList>(
+                      value: company,
+                      child: Text(company.name),
+                    );
+                  },
+                ).toList(),
               ),
               SizedBox(height: 30),
               FilledButton.tonal(
-                onPressed: () {},
+                onPressed: () {
+                  if (_company != null) {
+                    _updateCompanySellers(_company!.id, _ids);
+                  }
+                },
                 child: Text("Зарегистрироваться"),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(

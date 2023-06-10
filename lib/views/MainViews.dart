@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/models/Users.dart';
+import 'package:salles_app/service/Auth.dart';
+import 'package:salles_app/service/User.dart';
 import 'package:salles_app/views/CategoryViews.dart';
 import 'package:salles_app/views/EmployeesView.dart';
 import 'package:salles_app/views/HomeViews.dart';
+import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/RecordViews.dart';
 import 'package:salles_app/views/SalesViews.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainViews extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -23,6 +28,53 @@ class _MainViewsState extends State<MainViews> {
     'Продажи',
   ];
 
+  String _ids = '';
+  Users? _user;
+
+  void getIdUser() async {
+    String? userId = await Auth.getUserId();
+    if (userId != null) {
+      setState(() {
+        _ids = userId;
+      });
+      print('User ID: $userId');
+      _userById(_ids); // Вызов _userById() после получения _ids
+    } else {
+      print('User is not authenticated');
+    }
+  }
+
+  _userById(id) async {
+    Users? user = await User().userById(id);
+    setState(() {
+      _user = user;
+    });
+  }
+
+  // void _userById(id) async {
+  //   Users? user = await User.userById(id);
+  //   setState(() {
+  //     _user = user;
+  //     print(_user);
+  //   });
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    getIdUser();
+  }
+  // Future<void> _initializeAuth() async {
+  //   bool isLoggedIn = await Auth.getUserId();
+  // setState(() {
+  //   _isLoggedIn = isLoggedIn;
+  // });
+  // }
+
+  // String _getId() {
+  //   String id = Auth.getUserId();
+  // }
+
   GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>(); // Добавленный ключ Scaffold
 
@@ -37,6 +89,8 @@ class _MainViewsState extends State<MainViews> {
       EmployeesView(),
       SalesViews(),
     ];
+
+    String _id = _ids;
 
     return Scaffold(
       key: _scaffoldKey, // Добавление ключа Scaffold
@@ -70,30 +124,80 @@ class _MainViewsState extends State<MainViews> {
       endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+          children: <Widget>[
+            Container(
+              height: 160,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _user != null
+                          ? '${_user?.lastName} ${_user?.firstName}'
+                          : 'username',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18, // Установите желаемый размер шрифта
+                      ),
+                    ),
+                    Text(
+                      _user != null ? 'Номер: ${_user?.phone}' : 'Номер: нету',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18, // Установите желаемый размер шрифта
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    ListTile(
+                      title: Text(
+                        _user != null
+                            ? 'Статус: ${_user!.enabled ? "Активен" : "Не активен"}'
+                            : 'Номер: нету',
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        _user != null
+                            ? 'Вы: ${_user!.role == "OWNER" ? "Владелец" : "Сотрудник"}'
+                            : 'Номер: нету',
+                      ),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Auth.logout();
+                    // Дополнительный код, который может потребоваться после выхода
+                  },
+                  child: TextButton(
+                    onPressed: () {
+                      Auth.logout();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginViews(
+                            changeLanguage: widget.changeLanguage,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text('Выйти'),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

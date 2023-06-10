@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:salles_app/service/RegService.dart';
 import '../locale/AppLocalizations.dart';
 
 class RegisterViews extends StatefulWidget {
@@ -20,6 +21,16 @@ class _RegisterViewsState extends State<RegisterViews> {
     });
     widget.changeLanguage(locale);
   }
+
+  String firstname = '';
+  String lastname = '';
+  String phoneNumber = '';
+  String password = '';
+
+  String errorfirstname = '';
+  String errorlastname = '';
+  String errorphoneNumber = '';
+  String errorpassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +67,14 @@ class _RegisterViewsState extends State<RegisterViews> {
                         labelText: 'Имя',
                         hintText: 'Имя',
                         prefixIcon: Icon(Icons.person),
+                        errorText:
+                            errorfirstname.isEmpty ? null : errorfirstname,
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          firstname = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 30),
                     TextField(
@@ -65,7 +83,13 @@ class _RegisterViewsState extends State<RegisterViews> {
                         labelText: 'Фамилия',
                         hintText: 'Фамилия',
                         prefixIcon: Icon(Icons.person),
+                        errorText: errorlastname.isEmpty ? null : errorlastname,
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          lastname = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 30),
                     TextField(
@@ -76,7 +100,14 @@ class _RegisterViewsState extends State<RegisterViews> {
                         hintText: '+777-777-77-77',
                         labelText: 'Номер телефона',
                         prefixIcon: Icon(Icons.phone_android_sharp),
+                        errorText:
+                            errorphoneNumber.isEmpty ? null : errorphoneNumber,
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          phoneNumber = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 24),
                     TextField(
@@ -86,18 +117,142 @@ class _RegisterViewsState extends State<RegisterViews> {
                         hintText: 'Пароль',
                         labelText: 'Пароль',
                         prefixIcon: Icon(Icons.lock),
+                        errorText: errorpassword.isEmpty ? null : errorpassword,
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          password = value;
+                        });
+                      },
                     ),
                     SizedBox(height: 30),
                     FilledButton.tonal(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context,
-                            arguments == 'Owner'
-                                ? '/createCompany'
-                                : '/choiseCompany');
+                      onPressed: () async {
+                        if (firstname.isEmpty &&
+                            lastname.isEmpty &&
+                            phoneNumber.isEmpty &&
+                            password.isEmpty) {
+                          print('Ошибка: Введите номер телефона и пароль');
+                          setState(() {
+                            errorfirstname =
+                                "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
+                            errorlastname =
+                                "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+                            errorphoneNumber =
+                                "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                            errorpassword =
+                                "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                          });
+                          return;
+                        }
+                        if (lastname.isEmpty &&
+                            phoneNumber.isEmpty &&
+                            password.isEmpty) {
+                          print('Ошибка: Введите номер телефона и пароль');
+                          setState(() {
+                            errorlastname =
+                                "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+                            errorphoneNumber =
+                                "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                            errorpassword =
+                                "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                          });
+                          return;
+                        }
+                        if (phoneNumber.isEmpty && password.isEmpty) {
+                          print('Ошибка: Введите номер телефона и пароль');
+                          setState(() {
+                            errorphoneNumber =
+                                "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                            errorpassword =
+                                "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                          });
+                          return;
+                        }
+
+                        if (password.isEmpty) {
+                          print(
+                              "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.");
+                          setState(() {
+                            errorfirstname = '';
+                            errorlastname = '';
+                            errorphoneNumber = '';
+                            errorpassword =
+                                "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                          });
+                          return;
+                        }
+                        if (firstname.isEmpty) {
+                          print(
+                              "Ошибка при вводе имени: 'Ошибка: Введите имя'.");
+                          setState(() {
+                            errorfirstname =
+                                "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
+                            errorlastname = '';
+                            errorphoneNumber = '';
+                            errorpassword = '';
+                          });
+                          return;
+                        }
+                        if (lastname.isEmpty) {
+                          print(
+                              "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.");
+                          setState(() {
+                            errorfirstname = "";
+                            errorlastname =
+                                "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+                            errorphoneNumber = '';
+                            errorpassword = '';
+                          });
+                          return;
+                        }
+                        if (phoneNumber.isEmpty) {
+                          print(
+                              "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.");
+                          setState(() {
+                            errorfirstname = "";
+                            errorlastname = "";
+                            errorphoneNumber =
+                                "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                            errorpassword = '';
+                          });
+                          return;
+                        }
+
+                        setState(() {
+                          errorfirstname = "";
+                          errorlastname = "";
+                          errorphoneNumber = "";
+                          errorpassword = '';
+                        });
+
+                        final phoneNumberWithoutDashes =
+                            phoneNumber.replaceAll('-', '');
+                        print('firstname: $firstname');
+                        print('lastname: $lastname');
+                        print(
+                            'phoneNumberWithoutDashes: $phoneNumberWithoutDashes');
+                        print('password: $password');
+                        print('arguments: $arguments');
+
+                        RegService.reg(firstname, lastname,
+                                phoneNumberWithoutDashes, arguments, password)
+                            .then((_) {
+                          // Проверяем, была ли успешная авторизация
+                          if (RegService.token != null) {
+                            // Авторизация успешна, переходим на главный экран
+                            Navigator.pushNamed(
+                                context,
+                                arguments == '0'
+                                    ? '/createCompany'
+                                    : '/choiseCompany');
+                          } else {
+                            // Ошибка авторизации, выводим сообщение об ошибке
+                            print('Ошибка авторизации');
+                          }
+                        });
                       },
-                      child: Text("Дальше"),
+                      child: Text("Продолжить"),
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
@@ -108,12 +263,12 @@ class _RegisterViewsState extends State<RegisterViews> {
                             Size(double.infinity, 48)),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/');
-                      },
-                      child: Text('Войти'),
-                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     Navigator.pushNamed(context, '/');
+                    //   },
+                    //   child: Text('Войти'),
+                    // ),
                     SizedBox(height: 10),
                   ],
                 ),

@@ -36,7 +36,7 @@ class _ChoiseViewsState extends State<ChoiseViews> {
               SizedBox(height: 35),
               FilledButton.tonal(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/reg', arguments: 'Owner');
+                  Navigator.pushNamed(context, '/reg', arguments: '0');
                 },
                 child: Text("Владелец"),
                 style: ButtonStyle(
@@ -52,7 +52,7 @@ class _ChoiseViewsState extends State<ChoiseViews> {
               SizedBox(height: 20),
               FilledButton.tonal(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/reg', arguments: 'Seller');
+                  Navigator.pushNamed(context, '/reg', arguments: '1');
                 },
                 child: Text("Продавец"),
                 style: ButtonStyle(
