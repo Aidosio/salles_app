@@ -75,7 +75,6 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         colorSchemeSeed: Colors.lightBlueAccent,
       ),
-        '/': (context) => LoginViews(
       // home: _isLoggedIn
       //     ? MainViews(
       //         changeLanguage: _changeLanguage,
@@ -83,13 +82,16 @@ class _MyAppState extends State<MyApp> {
       //     : LoginViews(
       //         changeLanguage: _changeLanguage,
       //       ),
-      home: _isLoggedIn
-          ? MainViews(
-              changeLanguage: _changeLanguage,
-            )
-          : LoginViews(
-              changeLanguage: _changeLanguage,
-            ),
+      home: LoginViews(
+        changeLanguage: _changeLanguage,
+      ),
+      // _isLoggedIn
+      //     ? MainViews(
+      //         changeLanguage: _changeLanguage,
+      //       )
+      // : LoginViews(
+      //     changeLanguage: _changeLanguage,
+      //   ),
       routes: {
         // '/': (context) => LoginViews(
         //       changeLanguage: _changeLanguage,
