@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salles_app/models/CategoryList.dart';
 import 'package:salles_app/service/CategoryService.dart';
 import 'package:salles_app/widgets/CategoryCardWidgets.dart';
+import 'package:salles_app/widgets/SwipeRefresh.dart';
 
 import '../locale/AppLocalizations.dart';
 import 'CategoryChildViews.dart';
@@ -46,29 +47,46 @@ class _CategoryViewsState extends State<CategoryViews> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.only(left: 15, right: 15, top: 8),
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            Visibility(
-              visible: isLoaded,
-              replacement: const Center(
-                child: CircularProgressIndicator(),
-              ),
-              child: Expanded(
-                // Оберните ListView в Expanded
-                child: ListView.builder(
-                  itemCount: _categoryList?.length,
-                  itemBuilder: ((context, index) {
-                    return CategoryCardWidgets(
-                      categoryName: _categoryList![index].name,
-                    );
-                  }),
+      body: SwipeRefresh(
+        onRefresh: () async {
+          try {
+            List<CategoryList>? categoryList =
+                await CategoryService().getAllCategory();
+            setState(() {
+              _categoryList = categoryList;
+            });
+            isLoaded = true;
+            print(_categoryList);
+          } catch (e) {
+            // Обработка исключения
+            print('Ошибка при получении списка категорий: $e');
+            // Дополнительный код для обработки ошибки
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.only(left: 15, right: 15, top: 8),
+          child: Column(
+            children: [
+              SizedBox(height: 10),
+              Visibility(
+                visible: isLoaded,
+                replacement: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                child: Expanded(
+                  // Оберните ListView в Expanded
+                  child: ListView.builder(
+                    itemCount: _categoryList?.length,
+                    itemBuilder: ((context, index) {
+                      return CategoryCardWidgets(
+                        categoryName: _categoryList![index].name,
+                      );
+                    }),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: Container(
@@ -80,10 +98,12 @@ class _CategoryViewsState extends State<CategoryViews> {
             Navigator.pushNamed(context, '/Product');
             print('1');
           },
-          label: const Text('Добавить товар'),
-          icon: const Icon(Icons.add),
-          backgroundColor: Colors.lightBlueAccent,
-          foregroundColor: Colors.white,
+          elevation: 0,
+          label: Text(
+            'Добавить товар',
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          icon: Icon(Icons.add),
           tooltip: "Добавить новый товар",
           extendedTextStyle: TextStyle(
               fontSize: typography.bodyMedium?.fontSize,

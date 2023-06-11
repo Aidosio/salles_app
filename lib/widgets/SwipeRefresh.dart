@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SwipeRefresh extends StatefulWidget {
-  final Widget child;
   final Future<void> Function() onRefresh;
+  final Widget child;
 
   SwipeRefresh({required this.child, required this.onRefresh});
 

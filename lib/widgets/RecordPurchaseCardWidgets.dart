@@ -53,7 +53,8 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
                               productName,
                               style: TextStyle(
                                   fontSize: typography.bodyMedium?.fontSize,
-                                  color: Colors.lightBlueAccent),
+                                  color: Colors.blue.shade700,
+                                  fontWeight: FontWeight.w700),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             )
@@ -74,7 +75,8 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
                             productPrice + ' тг',
                             style: TextStyle(
                                 fontSize: typography.bodyMedium?.fontSize,
-                                color: Colors.lightBlueAccent),
+                                color: Colors.blue.shade700,
+                                fontWeight: FontWeight.w700),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           )

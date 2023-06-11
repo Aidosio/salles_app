@@ -82,16 +82,17 @@ class _MyAppState extends State<MyApp> {
       //     : LoginViews(
       //         changeLanguage: _changeLanguage,
       //       ),
-      home: LoginViews(
-        changeLanguage: _changeLanguage,
-      ),
-      // _isLoggedIn
-      //     ? MainViews(
-      //         changeLanguage: _changeLanguage,
-      //       )
-      // : LoginViews(
-      //     changeLanguage: _changeLanguage,
-      //   ),
+      home:
+          // LoginViews(
+          //   changeLanguage: _changeLanguage,
+          // ),
+          _isLoggedIn
+              ? MainViews(
+                  changeLanguage: _changeLanguage,
+                )
+              : LoginViews(
+                  changeLanguage: _changeLanguage,
+                ),
       routes: {
         // '/': (context) => LoginViews(
         //       changeLanguage: _changeLanguage,

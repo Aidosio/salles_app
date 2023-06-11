@@ -3,6 +3,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:salles_app/widgets/RecordPurchaseCardWidgets.dart';
 
 import '../locale/AppLocalizations.dart';
+import '../widgets/RecordPurchaseViewsBottomBar.dart';
 
 class RecordPurchaseViews extends StatefulWidget {
   const RecordPurchaseViews({super.key});
@@ -50,39 +51,10 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 30),
-              height: 45,
-              width: double.infinity,
-              child: FloatingActionButton.extended(
-                onPressed: () async {
-                  String barcodeScanRes =
-                      await FlutterBarcodeScanner.scanBarcode(
-                    '#ff6666', // Цвет кнопки сканирования
-                    'Отмена', // Текст кнопки отмены
-                    true, // Показывать ли стрелку навигации назад на iOS
-                    ScanMode.BARCODE, // Режим сканирования (штрих-код)
-                  );
-
-                  // Здесь вы можете обрабатывать полученные результаты сканирования штрих-кода
-                  print('Результат сканирования: $barcodeScanRes');
-                },
-                label: Text(
-                  'Добавить товар',
-                  style: TextStyle(
-                      fontSize: typography.bodyMedium?.fontSize,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                ),
-                backgroundColor: Colors.lightBlueAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-            ),
+            RecordPurchaseViewsBottomBar(),
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),
