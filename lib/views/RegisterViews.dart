@@ -5,7 +5,10 @@ import '../locale/AppLocalizations.dart';
 
 class RegisterViews extends StatefulWidget {
   final Function(Locale) changeLanguage;
-  const RegisterViews({Key? key, required this.changeLanguage})
+  final Locale currentLocale;
+
+  const RegisterViews(
+      {Key? key, required this.changeLanguage, required this.currentLocale})
       : super(key: key);
 
   @override
@@ -13,15 +16,6 @@ class RegisterViews extends StatefulWidget {
 }
 
 class _RegisterViewsState extends State<RegisterViews> {
-  bool color = false;
-
-  void changeLanguageAndColor(colors, Locale locale) {
-    setState(() {
-      color = colors;
-    });
-    widget.changeLanguage(locale);
-  }
-
   String firstname = '';
   String lastname = '';
   String phoneNumber = '';
@@ -37,6 +31,14 @@ class _RegisterViewsState extends State<RegisterViews> {
     final arguments = ModalRoute.of(context)?.settings.arguments as String;
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    bool color = widget.currentLocale.languageCode.toString() != 'ru';
+
+    void changeLanguageAndColor(colors, Locale locale) {
+      setState(() {
+        color = colors;
+      });
+      widget.changeLanguage(locale);
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -279,17 +281,20 @@ class _RegisterViewsState extends State<RegisterViews> {
                   TextButton(
                     onPressed: () =>
                         changeLanguageAndColor(false, const Locale('ru', '')),
-                    child: Text('Русский'),
+                    child: Text('Рус'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                         color == false ? Colors.lightBlue.shade50 : null,
                       ),
                     ),
                   ),
+                  SizedBox(
+                    width: 8,
+                  ),
                   TextButton(
                     onPressed: () =>
                         changeLanguageAndColor(true, const Locale('es', '')),
-                    child: Text('Казахский'),
+                    child: Text('Қаз'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                         color == true ? Colors.lightBlue.shade50 : null,

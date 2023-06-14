@@ -20,6 +20,7 @@ class AppLocalizations {
         'message': 'Welcome to my app!',
         'enter': 'enter',
         'areYouHow': '',
+        'phoneNumber': 'Номер'
       };
     } else if (languageCode == 'ru') {
       return {
@@ -27,6 +28,7 @@ class AppLocalizations {
         'message': 'Добро пожаловать в мое приложение',
         'enter': 'Вход',
         'areYouHow': 'Вы являетесь',
+        'phoneNumber': 'Номер'
       };
     } else if (languageCode == 'es') {
       return {
@@ -34,6 +36,7 @@ class AppLocalizations {
         'message': 'Менің қосымшама қош келдіңіз',
         'enter': 'Кiру',
         'areYouHow': 'Сіз',
+        'phoneNumber': 'Нөмірі'
       };
     }
 
@@ -59,5 +62,9 @@ class AppLocalizations {
 
   String? get areYouHow {
     return _localizedValues['areYouHow'];
+  }
+
+  String? get phoneNumber {
+    return _localizedValues['phoneNumber'];
   }
 }

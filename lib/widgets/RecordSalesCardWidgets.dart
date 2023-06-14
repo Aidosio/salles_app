@@ -82,6 +82,7 @@ class RecordSalesCardWidgets extends StatelessWidget {
                         colorChoice: Colors.red.shade200,
                         idYes: idYes,
                         idNo: idNo,
+                        idCompany: '',
                         alertTitle: 'Вы уверен, что хотите удалить продажу?',
                         icon: Icon(
                           Icons.delete_outline,

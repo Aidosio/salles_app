@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/locale/AppLocalizations.dart';
+import 'package:salles_app/models/Company.dart';
 import 'package:salles_app/models/Users.dart';
 import 'package:salles_app/service/Auth.dart';
+import 'package:salles_app/service/CompanyService.dart';
 import 'package:salles_app/service/User.dart';
 import 'package:salles_app/views/CategoryViews.dart';
 import 'package:salles_app/views/EmployeesView.dart';
@@ -8,11 +11,14 @@ import 'package:salles_app/views/HomeViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/RecordViews.dart';
 import 'package:salles_app/views/SalesViews.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MainViews extends StatefulWidget {
   final Function(Locale) changeLanguage;
-  const MainViews({Key? key, required this.changeLanguage}) : super(key: key);
+  final Locale currentLocale;
+
+  const MainViews(
+      {Key? key, required this.changeLanguage, required this.currentLocale})
+      : super(key: key);
 
   @override
   State<MainViews> createState() => _MainViewsState();
@@ -30,6 +36,7 @@ class _MainViewsState extends State<MainViews> {
 
   String _ids = '';
   Users? _user;
+  Company? _company;
 
   void getIdUser() async {
     String? userId = await Auth.getUserId();
@@ -38,9 +45,22 @@ class _MainViewsState extends State<MainViews> {
         _ids = userId;
       });
       print('User ID: $userId');
-      _userById(_ids); // Вызов _userById() после получения _ids
+      _userById(_ids);
+      _getCompanyByOwnerId(_ids);
     } else {
       print('User is not authenticated');
+    }
+  }
+
+  _getCompanyByOwnerId(String id) async {
+    try {
+      Company? company = await CompanyService().getCompanyByOwnerId(id);
+      setState(() {
+        _company = company;
+      });
+      print(_company);
+    } catch (e) {
+      print('Error getting company by ID: $e');
     }
   }
 
@@ -80,17 +100,28 @@ class _MainViewsState extends State<MainViews> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
     PageController _pageController = PageController(initialPage: 0);
     List<Widget> _pages = [
       HomeViews(),
       CategoryViews(),
       RecordViews(),
-      EmployeesView(),
+      EmployeesView(
+        id: _ids,
+      ),
       SalesViews(),
     ];
 
-    String _id = _ids;
+    bool? color;
+    String? langCurrent = widget.currentLocale.languageCode;
+
+    void changeLanguageAndColor(colors, Locale locale) {
+      setState(() {
+        color = colors;
+      });
+      widget.changeLanguage(locale);
+    }
 
     return Scaffold(
       key: _scaffoldKey, // Добавление ключа Scaffold
@@ -125,54 +156,95 @@ class _MainViewsState extends State<MainViews> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            Container(
-              height: 160,
-              child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _user != null
-                          ? '${_user?.lastName} ${_user?.firstName}'
-                          : 'username',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18, // Установите желаемый размер шрифта
-                      ),
-                    ),
-                    Text(
-                      _user != null ? 'Номер: ${_user?.phone}' : 'Номер: нету',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18, // Установите желаемый размер шрифта
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            // Container(
+            //   height: 160,
+            //   child: DrawerHeader(
+            //     decoration: BoxDecoration(
+            //       color: Colors.blue,
+            //     ),
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.start,
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+
+            //       ],
+            //     ),
+            //   ),
+            // ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 20,
+                ),
                 Column(
                   children: [
                     ListTile(
                       title: Text(
                         _user != null
-                            ? 'Статус: ${_user!.enabled ? "Активен" : "Не активен"}'
-                            : 'Номер: нету',
+                            ? '${_company?.owner.lastName} ${_company?.owner.firstName}'
+                            : 'username',
+                        style: TextStyle(
+                          fontSize: 18, // Установите желаемый размер шрифта
+                        ),
                       ),
                     ),
                     ListTile(
                       title: Text(
                         _user != null
-                            ? 'Вы: ${_user!.role == "OWNER" ? "Владелец" : "Сотрудник"}'
+                            ? '${localizations?.phoneNumber ?? 'Номер'}: ${_company?.owner.phone}'
+                            : '${localizations?.phoneNumber ?? 'Номер'}: нету',
+                        style: TextStyle(
+                          fontSize: 18, // Установите желаемый размер шрифта
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        _company?.name ?? 'Default Company Name',
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        _company?.owner != null
+                            ? 'Статус: ${_company!.owner.enabled ? "Активен" : "Не активен"}'
                             : 'Номер: нету',
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        _company?.owner != null
+                            ? 'Вы: ${_company!.owner.role == "OWNER" ? "Владелец" : "Сотрудник"}'
+                            : 'Номер: нету',
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () => changeLanguageAndColor(
+                          langCurrent == 'ru', const Locale('ru', '')),
+                      child: Text('Рус'),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          color == false ? Colors.lightBlue.shade50 : null,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    TextButton(
+                      onPressed: () => changeLanguageAndColor(
+                          langCurrent == 'es', const Locale('es', '')),
+                      child: Text('Қаз'),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          color == true ? Colors.lightBlue.shade50 : null,
+                        ),
                       ),
                     ),
                   ],
@@ -190,6 +262,7 @@ class _MainViewsState extends State<MainViews> {
                         MaterialPageRoute(
                           builder: (context) => LoginViews(
                             changeLanguage: widget.changeLanguage,
+                            currentLocale: widget.currentLocale,
                           ),
                         ),
                       );

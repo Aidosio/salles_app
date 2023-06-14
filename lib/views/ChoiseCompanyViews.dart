@@ -127,6 +127,8 @@ class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
                 onPressed: () {
                   if (_company != null) {
                     _updateCompanySellers(_company!.id, _ids);
+                    // WaitingPage
+                    Navigator.pushNamed(context, '/waiting');
                   }
                 },
                 child: Text("Зарегистрироваться"),
