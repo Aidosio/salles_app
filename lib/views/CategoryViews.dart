@@ -29,7 +29,7 @@ class _CategoryViewsState extends State<CategoryViews> {
       if (result != '-1') {
         Navigator.pushNamed(
           context,
-          '/OtherPage',
+          '/Product',
           arguments: result,
         );
       }

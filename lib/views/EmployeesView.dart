@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salles_app/models/Company.dart';
 import 'package:salles_app/service/CompanyService.dart';
+import 'package:salles_app/widgets/BlockedRefreshWidgets.dart';
 import 'package:salles_app/widgets/EmployeesAcceptedWidget.dart';
 import 'package:salles_app/widgets/EmployeesConsiderationWidget.dart';
 import 'package:salles_app/widgets/SwipeRefresh.dart';
@@ -60,113 +61,119 @@ class _EmployeesViewState extends State<EmployeesView> {
             print('Error getting company by ID: $e');
           }
         },
-        child: Container(
-          padding: EdgeInsets.only(left: 15, right: 15, top: 8),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'На рассмотрении',
-                  style: TextStyle(
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w700,
+        child: Stack(children: [
+          Container(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 8),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'На рассмотрении',
+                    style: TextStyle(
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
-              ),
 
-              SizedBox(height: 5),
+                SizedBox(height: 5),
 
-              Divider(
-                height: 1,
-                thickness: 2,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-
-              SizedBox(height: 15),
-
-              Visibility(
-                visible: isLoaded,
-                replacement: const Center(
-                  child: CircularProgressIndicator(),
+                Divider(
+                  height: 1,
+                  thickness: 2,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
                 ),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _company?.sellers.length,
-                  itemBuilder: (context, index) {
-                    final seller = _company?.sellers[index];
 
-                    if (seller?.enabled == false) {
-                      // Неактивный пользователь
-                      return EmployeesConsiderationWidget(
+                SizedBox(height: 15),
+
+                Visibility(
+                  visible: isLoaded,
+                  replacement: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _company?.sellers.length,
+                    itemBuilder: (context, index) {
+                      final seller = _company?.sellers[index];
+
+                      if (seller?.enabled == false) {
+                        // Неактивный пользователь
+                        return EmployeesConsiderationWidget(
+                            fullName:
+                                '${seller?.lastName} ${seller?.firstName}',
+                            id: seller?.id,
+                            companyId: _company!.id);
+                      } else {
+                        // Активный пользователь
+                        return Container();
+                      }
+                    },
+                  ),
+                ),
+                // EmployeesConsiderationWidget(fullName: 'ФИО', id: '2'),
+                // EmployeesConsiderationWidget(fullName: 'ФИО', id: '2'),
+
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Сотрудники',
+                    style: TextStyle(
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 5),
+
+                Divider(
+                  height: 1,
+                  thickness: 2,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+
+                SizedBox(height: 15),
+
+                Visibility(
+                  visible: isLoaded,
+                  replacement: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _company?.sellers.length,
+                    itemBuilder: (context, index) {
+                      final seller = _company?.sellers[index];
+
+                      if (seller?.enabled == true) {
+                        // Активный пользователь
+                        return EmployeesAcceptedWidget(
                           fullName: '${seller?.lastName} ${seller?.firstName}',
+                          phoneNubmer: seller?.phone,
                           id: seller?.id,
-                          companyId: _company!.id);
-                    } else {
-                      // Активный пользователь
-                      return Container();
-                    }
-                  },
-                ),
-              ),
-              // EmployeesConsiderationWidget(fullName: 'ФИО', id: '2'),
-              // EmployeesConsiderationWidget(fullName: 'ФИО', id: '2'),
-
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Сотрудники',
-                  style: TextStyle(
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w700,
+                        );
+                      } else {
+                        // Неактивный пользователь
+                        return Container();
+                      }
+                    },
                   ),
                 ),
-              ),
-
-              SizedBox(height: 5),
-
-              Divider(
-                height: 1,
-                thickness: 2,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.black,
-              ),
-
-              SizedBox(height: 15),
-
-              Visibility(
-                visible: isLoaded,
-                replacement: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _company?.sellers.length,
-                  itemBuilder: (context, index) {
-                    final seller = _company?.sellers[index];
-
-                    if (seller?.enabled == true) {
-                      // Активный пользователь
-                      return EmployeesAcceptedWidget(
-                        fullName: '${seller?.lastName} ${seller?.firstName}',
-                        phoneNubmer: seller?.phone,
-                        id: seller?.id,
-                      );
-                    } else {
-                      // Неактивный пользователь
-                      return Container();
-                    }
-                  },
-                ),
-              ),
-              // EmployeesAcceptedWidget(
-              //     fullName: 'Арман Газис', phoneNubmer: '877056544', id: '3')
-            ],
+                // EmployeesAcceptedWidget(
+                //     fullName: 'Арман Газис', phoneNubmer: '877056544', id: '3')
+              ],
+            ),
           ),
-        ),
+          BlockedRefreshWidgets(
+            isVisible: true,
+          ),
+        ]),
       ),
     );
   }
