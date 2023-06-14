@@ -7,8 +7,11 @@ import '../locale/AppLocalizations.dart';
 
 class LoginViews extends StatefulWidget {
   final Function(Locale) changeLanguage;
+  final Locale currentLocale;
 
-  const LoginViews({Key? key, required this.changeLanguage}) : super(key: key);
+  const LoginViews(
+      {Key? key, required this.changeLanguage, required this.currentLocale})
+      : super(key: key);
 
   @override
   _LoginViewsState createState() => _LoginViewsState();
@@ -25,6 +28,26 @@ class _LoginViewsState extends State<LoginViews> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    bool color = widget.currentLocale.languageCode.toString() != 'ru';
+
+    void changeLanguageAndColor(colors, Locale locale) {
+      setState(() {
+        color = colors;
+      });
+      widget.changeLanguage(locale);
+    }
+
+    void navigateToMainViews(Locale locale) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainViews(
+            changeLanguage: widget.changeLanguage,
+            currentLocale: locale,
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -135,14 +158,17 @@ class _LoginViewsState extends State<LoginViews> {
                           // Проверяем, была ли успешная авторизация
                           if (Auth.token != null) {
                             // Авторизация успешна, переходим на главный экран
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MainViews(
-                                  changeLanguage: (Locale) {},
-                                ),
-                              ),
-                            );
+                            navigateToMainViews(widget.currentLocale);
+
+                            // Navigator.pushReplacement(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => MainViews(
+                            //       changeLanguage: (Locale) {},
+                            //       currentLocale: widget.currentLocale,
+                            //     ),
+                            //   ),
+                            // );
                           } else {
                             // Ошибка авторизации, выводим сообщение об ошибке
                             print('Ошибка авторизации');
@@ -160,6 +186,9 @@ class _LoginViewsState extends State<LoginViews> {
                             Size(double.infinity, 48)),
                       ),
                     ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, '/choise');
@@ -175,25 +204,26 @@ class _LoginViewsState extends State<LoginViews> {
                 children: [
                   TextButton(
                     onPressed: () =>
-                        widget.changeLanguage(const Locale('ru', '')),
-                    child: Text('Русский'),
+                        changeLanguageAndColor(false, const Locale('ru', '')),
+                    child: Text('Рус'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        Locale('ru', '') == Locale('ru', '')
-                            ? Colors.lightBlue.shade50
-                            : null,
+                        color == false ? Colors.lightBlue.shade50 : null,
                       ),
                     ),
                   ),
+                  SizedBox(
+                    width: 8,
+                  ),
                   TextButton(
-                    onPressed: () =>
-                        widget.changeLanguage(const Locale('es', '')),
-                    child: Text('Казахский'),
+                    onPressed: () {
+                      changeLanguageAndColor(true, const Locale('es', ''));
+                      print(widget.currentLocale.languageCode);
+                    },
+                    child: Text('Қаз'),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        Locale('es', '') == Locale('es', '')
-                            ? null
-                            : Colors.lightBlue.shade50,
+                        color == true ? Colors.lightBlue.shade50 : null,
                       ),
                     ),
                   ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/service/CompanyService.dart';
+import 'package:salles_app/service/User.dart';
 
 import '../locale/AppLocalizations.dart';
 
@@ -7,10 +9,12 @@ class IconButtonDialogWidgets extends StatelessWidget {
   final Icon icon;
   final String idNo;
   final String idYes;
+  final String idCompany;
   final Color colorChoice;
   const IconButtonDialogWidgets({
     Key? key,
     required this.idYes,
+    required this.idCompany,
     required this.idNo,
     required this.alertTitle,
     required this.icon,
@@ -21,6 +25,47 @@ class IconButtonDialogWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    bool isLoaded = false;
+
+    _activateUser(String id) async {
+      try {
+        await User().activateUser(id);
+        isLoaded = true;
+        if (isLoaded) {
+          Navigator.pop(context);
+        }
+        print('yes enabled');
+      } catch (e) {
+        print('Error getting company by ID: $e');
+      }
+    }
+
+    _disabledUser(String id) async {
+      try {
+        await User().disabledUser(id);
+        isLoaded = true;
+        if (isLoaded) {
+          Navigator.pop(context);
+        }
+        print('yes disabled');
+      } catch (e) {
+        print('Error getting company by ID: $e');
+      }
+    }
+
+    _deleteUser(String company, String id) async {
+      try {
+        await CompanyService().deleteByCompanySaller(company, id);
+        isLoaded = true;
+        if (isLoaded) {
+          Navigator.pop(context);
+        }
+        print('yes delete');
+      } catch (e) {
+        print('Error getting company by ID: $e');
+      }
+    }
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
       child: Container(
@@ -86,7 +131,13 @@ class IconButtonDialogWidgets extends StatelessWidget {
                               Expanded(
                                 child: FilledButton(
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    if (idNo == 'idNo') {
+                                      _activateUser(idYes);
+                                    } else {
+                                      _deleteUser(idCompany, idYes);
+                                    }
+
+                                    // Navigator.pop(context);
                                     print(idYes);
                                   },
                                   child: Text("Да"),

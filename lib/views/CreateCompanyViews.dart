@@ -31,6 +31,7 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
 
   void createCompany() async {
     await CompanyService().createCompany(name, _ids);
+    Navigator.pushNamed(context, '/waiting');
   }
 
   // void _postCompany() async{

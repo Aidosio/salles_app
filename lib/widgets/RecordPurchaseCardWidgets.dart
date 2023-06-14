@@ -87,6 +87,7 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
                     IconButtonDialogWidgets(
                         idYes: 'idYes',
                         idNo: 'idNo',
+                        idCompany: '',
                         alertTitle: 'Вы уверены, что хотите удалить товар?',
                         icon: Icon(Icons.delete_outline, color: Colors.black87),
                         colorChoice: Colors.red.shade200)
