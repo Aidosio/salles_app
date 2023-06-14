@@ -53,9 +53,9 @@ class _RecordViewsState extends State<RecordViews> {
                   style: TextStyle(
                       fontSize: typography.bodyMedium?.fontSize,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white),
+                      color: Colors.black),
                 ),
-                backgroundColor: Colors.lightBlueAccent,
+                elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(5),
