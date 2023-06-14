@@ -6,10 +6,12 @@ import '../locale/AppLocalizations.dart';
 class EmployeesConsiderationWidget extends StatelessWidget {
   final String fullName;
   final String id;
+  final String companyId;
   const EmployeesConsiderationWidget({
     Key? key,
     required this.fullName,
     required this.id,
+    required this.companyId,
   }) : super(key: key);
 
   @override
@@ -39,8 +41,9 @@ class EmployeesConsiderationWidget extends StatelessWidget {
             ),
             Row(children: [
               IconButtonDialogWidgets(
-                  idYes: 'idYes',
+                  idYes: id,
                   idNo: 'idNo',
+                  idCompany: companyId,
                   alertTitle: 'Вы уверены, что хотите нанять рабочего?',
                   icon: Icon(
                     Icons.done,
@@ -49,8 +52,9 @@ class EmployeesConsiderationWidget extends StatelessWidget {
                   colorChoice: Colors.green.shade200),
               SizedBox(width: 15),
               IconButtonDialogWidgets(
-                  idYes: 'idYes2',
+                  idYes: id,
                   idNo: 'idNo1',
+                  idCompany: companyId,
                   alertTitle: 'Вы уверены, что не хотите нанимать рабочего?',
                   icon: Icon(Icons.delete_outline),
                   colorChoice: Colors.red.shade200)

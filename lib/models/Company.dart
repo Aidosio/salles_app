@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:salles_app/models/Seller.dart';
+
 Company companyFromJson(String str) => Company.fromJson(json.decode(str));
 
 String companyToJson(Company data) => json.encode(data.toJson());
@@ -29,7 +31,8 @@ class Company {
         id: json["id"],
         name: json["name"],
         owner: Owner.fromJson(json["owner"]),
-        sellers: List<dynamic>.from(json["sellers"].map((x) => x)),
+        sellers:
+            List<Seller>.from(json["sellers"].map((x) => Seller.fromJson(x))),
         purchases: List<dynamic>.from(json["purchases"].map((x) => x)),
         products: List<dynamic>.from(json["products"].map((x) => x)),
       );

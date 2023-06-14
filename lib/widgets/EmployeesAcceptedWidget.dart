@@ -60,6 +60,7 @@ class EmployeesAcceptedWidget extends StatelessWidget {
                       colorChoice: Colors.red.shade200,
                       idYes: 'idYes',
                       idNo: 'idNo',
+                      idCompany: '',
                       alertTitle: 'Вы уверены, что хотите уволить сотрудника?',
                       icon: Icon(
                         Icons.delete_outline,
