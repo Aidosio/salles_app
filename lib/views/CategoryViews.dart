@@ -6,6 +6,9 @@ import 'package:salles_app/widgets/SwipeRefresh.dart';
 
 import '../locale/AppLocalizations.dart';
 import 'CategoryChildViews.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+
+import 'ProductViews.dart';
 
 class CategoryViews extends StatefulWidget {
   const CategoryViews({super.key});
@@ -15,6 +18,28 @@ class CategoryViews extends StatefulWidget {
 }
 
 class _CategoryViewsState extends State<CategoryViews> {
+  Future<void> _scanBarcode() async {
+    try {
+      String result = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666', // Цвет верхней панели сканера
+        'Отмена', // Текст кнопки отмены
+        true, // Использовать кнопку спуска затвора
+        ScanMode.BARCODE, // Режим сканирования (штрих-коды)
+      );
+      if (result != '-1') {
+        Navigator.pushNamed(
+          context,
+          '/OtherPage',
+          arguments: result,
+        );
+      }
+    } catch (e) {
+      // Обработка исключения
+      print('Ошибка сканирования штрих-кода: $e');
+      // Дополнительный код для обработки ошибки
+    }
+  }
+
   List<CategoryList>? _categoryList;
   bool isLoaded = false;
 
@@ -95,8 +120,7 @@ class _CategoryViewsState extends State<CategoryViews> {
         margin: EdgeInsets.zero,
         child: FloatingActionButton.extended(
           onPressed: () {
-            Navigator.pushNamed(context, '/Product');
-            print('1');
+            _scanBarcode();
           },
           elevation: 0,
           label: Text(

@@ -6,8 +6,12 @@ class ProductTextFieldViews extends StatelessWidget {
   final String hintTextExample;
   final String labelTextExample;
   final bool isPhone;
+  final bool isEnabled;
+  final String? initialValue;
   const ProductTextFieldViews({
     Key? key,
+    required this.initialValue,
+    required this.isEnabled,
     required this.isPhone,
     required this.hintTextExample,
     required this.labelTextExample,
@@ -20,6 +24,7 @@ class ProductTextFieldViews extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
       child: TextField(
+        enabled: isEnabled,
         keyboardType: isPhone ? TextInputType.phone : null,
         decoration: InputDecoration(
           border: OutlineInputBorder(),

@@ -4,7 +4,9 @@ import '../locale/AppLocalizations.dart';
 import '../widgets/ProductTextFieldViews.dart';
 
 class ProductViews extends StatefulWidget {
-  const ProductViews({Key? key}) : super(key: key);
+  const ProductViews({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ProductViews> createState() => _ProductViewsState();
@@ -22,6 +24,7 @@ class _ProductViewsState extends State<ProductViews> {
 
   @override
   Widget build(BuildContext context) {
+    final barcode = ModalRoute.of(context)?.settings.arguments as String?;
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
 
@@ -38,15 +41,18 @@ class _ProductViewsState extends State<ProductViews> {
               child: Column(
                 children: [
                   ProductTextFieldViews(
+                    isEnabled: true,
                     isPhone: false,
                     hintTextExample: 'Молоко',
                     labelTextExample: 'Название товара',
+                    initialValue: '',
                   ),
                   ProductTextFieldViews(
-                    isPhone: true,
-                    hintTextExample: '1465',
-                    labelTextExample: 'Цена товара',
-                  ),
+                      isEnabled: true,
+                      isPhone: true,
+                      hintTextExample: '1465',
+                      labelTextExample: 'Цена товара',
+                      initialValue: ''),
                   DropdownButtonFormField<String>(
                     value: selectedCategory,
                     onChanged: (String? newValue) {
@@ -69,9 +75,11 @@ class _ProductViewsState extends State<ProductViews> {
                   ),
                   SizedBox(height: 15),
                   ProductTextFieldViews(
+                    isEnabled: false,
                     isPhone: true,
                     hintTextExample: '10000000',
                     labelTextExample: 'Штрихкод',
+                    initialValue: barcode,
                   ),
                 ],
               ),
