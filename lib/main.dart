@@ -13,6 +13,7 @@ import 'package:salles_app/views/RecordPurchaseViews.dart';
 import 'package:salles_app/views/SalesRefundAcceptionViews.dart';
 import 'package:salles_app/views/SalesRefundViews.dart';
 import 'package:salles_app/views/WaitingPage.dart';
+import 'package:salles_app/widgets/SplashScreenWidgets.dart';
 
 import 'locale/AppLocalizationsDelegate.dart';
 import 'views/ChoiseCompanyViews.dart';
@@ -76,15 +77,17 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         colorSchemeSeed: Colors.lightBlueAccent,
       ),
-      home: _isLoggedIn
-          ? MainViews(
-              changeLanguage: _changeLanguage,
-              currentLocale: _currentLocale,
-            )
-          : LoginViews(
-              changeLanguage: _changeLanguage,
-              currentLocale: _currentLocale,
-            ),
+      home:
+          // SplashScreenWidgets(), Это отвечает за экран при открытии приложения
+          _isLoggedIn
+              ? MainViews(
+                  changeLanguage: _changeLanguage,
+                  currentLocale: _currentLocale,
+                )
+              : LoginViews(
+                  changeLanguage: _changeLanguage,
+                  currentLocale: _currentLocale,
+                ),
       // home:
       // LoginViews(
       //   changeLanguage: _changeLanguage,

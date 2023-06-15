@@ -6,6 +6,7 @@ import '../locale/AppLocalizations.dart';
 import '../widgets/RecordPurchaseViewsBottomBar.dart';
 
 class RecordPurchaseViews extends StatefulWidget {
+  // Создаем переменную для хранения результата сканирования
   const RecordPurchaseViews({super.key});
 
   @override
@@ -13,6 +14,14 @@ class RecordPurchaseViews extends StatefulWidget {
 }
 
 class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
+  void _handleBarcodeScanResult(String result) {
+    setState(() {
+      _barcodeScanResult =
+          result; // Обновляем состояние с полученным результатом
+    });
+  }
+
+  String _barcodeScanResult = '';
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -47,11 +56,14 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
                   RecordPurchaseCardWidgets(
                       productName: 'Томское Молоко', productPrice: '150'),
                   RecordPurchaseCardWidgets(
-                      productName: 'Томское Молоко', productPrice: '150')
+                      productName: 'Томское Молоко', productPrice: '150'),
+                  Text(_barcodeScanResult)
                 ],
               ),
             ),
-            RecordPurchaseViewsBottomBar(),
+            RecordPurchaseViewsBottomBar(
+              onBarcodeScanResult: _handleBarcodeScanResult,
+            ),
             SizedBox(
               height: 20,
             )

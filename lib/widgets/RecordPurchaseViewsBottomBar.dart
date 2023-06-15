@@ -4,7 +4,10 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../locale/AppLocalizations.dart';
 
 class RecordPurchaseViewsBottomBar extends StatelessWidget {
-  const RecordPurchaseViewsBottomBar({super.key});
+  final Function(String) onBarcodeScanResult;
+  const RecordPurchaseViewsBottomBar(
+      {Key? key, required this.onBarcodeScanResult})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +55,15 @@ class RecordPurchaseViewsBottomBar extends StatelessWidget {
         child: FilledButton.tonal(
           onPressed: () async {
             String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-              '#ff6666', // Цвет кнопки сканирования
-              'Отмена', // Текст кнопки отмены
-              true, // Показывать ли стрелку навигации назад на iOS
-              ScanMode.BARCODE, // Режим сканирования (штрих-код)
+              '#ff6666',
+              'Отмена',
+              true,
+              ScanMode.BARCODE,
             );
 
-            // Здесь вы можете обрабатывать полученные результаты сканирования штрих-кода
+            // Вызываем функцию обратного вызова с результатом сканирования
+            onBarcodeScanResult(barcodeScanRes);
+
             print('Результат сканирования: $barcodeScanRes');
           },
           child: Text(
