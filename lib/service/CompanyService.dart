@@ -142,6 +142,33 @@ class CompanyService {
     return null;
   }
 
+  Future<Company?> getCompanyBySallerId(String id) async {
+    try {
+      final token = await RegService.getToken();
+      final uri = Uri.parse(
+          'https://salles-app.onrender.com/api/v1/companies/sellers/$id');
+      final headers = {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      };
+
+      final response = await client.get(uri, headers: headers);
+
+      if (response.statusCode == 200) {
+        final json = response.body;
+        return companyFromJson(json);
+      } else {
+        print(
+            'Failed to get company by name. Status code: ${response.statusCode}');
+        print('Error response: ${response.body}');
+      }
+    } catch (e) {
+      print('Error getting company by name: $e');
+    }
+
+    return null;
+  }
+
   Future<void> deleteByCompanySaller(String companyId, String userId) async {
     try {
       final token = await RegService.getToken();

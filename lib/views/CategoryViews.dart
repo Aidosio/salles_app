@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:salles_app/models/CategoryList.dart';
+import 'package:salles_app/models/Company.dart';
+import 'package:salles_app/service/Auth.dart';
 import 'package:salles_app/service/CategoryService.dart';
+import 'package:salles_app/service/CompanyService.dart';
 import 'package:salles_app/widgets/CategoryCardWidgets.dart';
 import 'package:salles_app/widgets/SwipeRefresh.dart';
 
@@ -38,6 +41,8 @@ class _CategoryViewsState extends State<CategoryViews> {
 
   List<CategoryList>? _categoryList;
   bool isLoaded = false;
+  String _ids = '';
+  Company? _company;
 
   _getCategoryList() async {
     try {
@@ -55,9 +60,53 @@ class _CategoryViewsState extends State<CategoryViews> {
     }
   }
 
+  void getIdUser() async {
+    String? userId = await Auth.getUserId();
+    if (userId != null) {
+      setState(() {
+        _ids = userId;
+      });
+      print('User ID: $userId');
+      if (await Auth.checkRole('OWNER')) {
+        _getCompanyByOwnerId(_ids);
+      } else {
+        _getCompanyBySallerId(_ids);
+      }
+    } else {
+      print('User is not authenticated');
+    }
+  }
+
+  _getCompanyByOwnerId(String id) async {
+    try {
+      Company? company = await CompanyService().getCompanyByOwnerId(id);
+      setState(() {
+        _company = company;
+      });
+      print(_company);
+      isLoaded = true;
+    } catch (e) {
+      print('Error getting company by ID: $e');
+    }
+  }
+
+  _getCompanyBySallerId(String id) async {
+    try {
+      Company? company = await CompanyService().getCompanyBySallerId(id);
+      setState(() {
+        _company = company;
+      });
+      print(_company);
+      isLoaded = true;
+    } catch (e) {
+      print('Error getting company by ID: $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    getIdUser();
     _getCategoryList();
   }
 
@@ -100,6 +149,7 @@ class _CategoryViewsState extends State<CategoryViews> {
                     itemBuilder: ((context, index) {
                       return CategoryCardWidgets(
                         categoryName: _categoryList![index].name,
+                        companyId: _company != null ? _company!.id : 'null',
                       );
                     }),
                   ),

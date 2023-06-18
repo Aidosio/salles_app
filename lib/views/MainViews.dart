@@ -47,7 +47,11 @@ class _MainViewsState extends State<MainViews> {
       });
       print('User ID: $userId');
       _userById(_ids);
-      _getCompanyByOwnerId(_ids);
+      if (await Auth.checkRole('OWNER')) {
+        _getCompanyByOwnerId(_ids);
+      } else {
+        _getCompanyBySallerId(_ids);
+      }
     } else {
       print('User is not authenticated');
     }
@@ -56,6 +60,18 @@ class _MainViewsState extends State<MainViews> {
   _getCompanyByOwnerId(String id) async {
     try {
       Company? company = await CompanyService().getCompanyByOwnerId(id);
+      setState(() {
+        _company = company;
+      });
+      print(_company);
+    } catch (e) {
+      print('Error getting company by ID: $e');
+    }
+  }
+
+  _getCompanyBySallerId(String id) async {
+    try {
+      Company? company = await CompanyService().getCompanyBySallerId(id);
       setState(() {
         _company = company;
       });
@@ -157,20 +173,19 @@ class _MainViewsState extends State<MainViews> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            // Container(
-            //   height: 160,
-            //   child: DrawerHeader(
-            //     decoration: BoxDecoration(
-            //       color: Colors.blue,
-            //     ),
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.start,
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //       ],
-            //     ),
-            //   ),
-            // ),
+            Container(
+              height: 160,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [],
+                ),
+              ),
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,40 +197,20 @@ class _MainViewsState extends State<MainViews> {
                   children: [
                     ListTile(
                       title: Text(
-                        _user != null
-                            ? '${_company?.owner.lastName} ${_company?.owner.firstName}'
-                            : 'username',
-                        style: TextStyle(
-                          fontSize: 18, // Установите желаемый размер шрифта
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        _user != null
-                            ? '${localizations?.phoneNumber ?? 'Номер'}: ${_company?.owner.phone}'
-                            : '${localizations?.phoneNumber ?? 'Номер'}: нету',
-                        style: TextStyle(
-                          fontSize: 18, // Установите желаемый размер шрифта
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        _company?.name ?? 'Default Company Name',
+                        'Название: ${_company?.name}' ?? 'Default Company Name',
                       ),
                     ),
                     ListTile(
                       title: Text(
                         _company?.owner != null
                             ? 'Статус: ${_company!.owner.enabled ? "Активен" : "Не активен"}'
-                            : 'Номер: нету',
+                            : 'Статус: Не активен',
                       ),
                     ),
                     ListTile(
                       title: Text(
                         _company?.owner != null
-                            ? 'Вы: ${_company!.owner.role == "OWNER" ? "Владелец" : "Сотрудник"}'
+                            ? 'Вы: ${Auth.checkRole('OWNER') == "OWNER" ? "Владелец" : "Сотрудник"}'
                             : 'Номер: нету',
                       ),
                     ),
