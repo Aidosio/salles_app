@@ -78,7 +78,8 @@ class _MyAppState extends State<MyApp> {
         colorSchemeSeed: Colors.lightBlueAccent,
       ),
       home:
-          // SplashScreenWidgets(), Это отвечает за экран при открытии приложения
+          // _buildHome()
+          // SplashScreenWidgets(),
           _isLoggedIn
               ? MainViews(
                   changeLanguage: _changeLanguage,
@@ -149,6 +150,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+
 
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({Key? key, required this.title}) : super(key: key);

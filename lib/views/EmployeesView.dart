@@ -170,9 +170,6 @@ class _EmployeesViewState extends State<EmployeesView> {
               ],
             ),
           ),
-          BlockedRefreshWidgets(
-            isVisible: true,
-          ),
         ]),
       ),
     );

@@ -4,10 +4,12 @@ import '../locale/AppLocalizations.dart';
 
 class CategoryCardWidgets extends StatelessWidget {
   final String categoryName;
+  final String companyId;
 
   const CategoryCardWidgets({
     Key? key,
     required this.categoryName,
+    required this.companyId,
   }) : super(key: key);
 
   @override
@@ -32,7 +34,7 @@ class CategoryCardWidgets extends StatelessWidget {
           Navigator.pushNamed(
             context,
             '/category-views',
-            arguments: 'Овощи и фрукты',
+            arguments: {'categoryName': categoryName, 'companyId': companyId},
           );
         },
         child: Row(
