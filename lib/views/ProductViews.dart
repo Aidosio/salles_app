@@ -78,7 +78,7 @@ class _ProductViewsState extends State<ProductViews> {
                     isEnabled: false,
                     isPhone: true,
                     hintTextExample: '10000000',
-                    labelTextExample: 'Штрихкод',
+                    labelTextExample: '$barcode',
                     initialValue: barcode,
                   ),
                 ],

@@ -7,6 +7,7 @@ import 'package:salles_app/service/CompanyService.dart';
 import 'package:salles_app/service/User.dart';
 import 'package:salles_app/views/CategoryViews.dart';
 import 'package:salles_app/views/EmployeesView.dart';
+import 'package:salles_app/views/EmployeesView2.dart';
 import 'package:salles_app/views/HomeViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/RecordViews.dart';
@@ -107,7 +108,7 @@ class _MainViewsState extends State<MainViews> {
       HomeViews(),
       CategoryViews(),
       RecordViews(),
-      EmployeesView(
+      EmployeesView2(
         id: _ids,
       ),
       SalesViews(),
@@ -166,7 +167,6 @@ class _MainViewsState extends State<MainViews> {
             //       mainAxisAlignment: MainAxisAlignment.start,
             //       crossAxisAlignment: CrossAxisAlignment.start,
             //       children: [
-
             //       ],
             //     ),
             //   ),

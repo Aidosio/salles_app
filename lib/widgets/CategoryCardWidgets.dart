@@ -52,7 +52,7 @@ class CategoryCardWidgets extends StatelessWidget {
                     TextSpan(
                       text: categoryName,
                       style: TextStyle(
-                          color: Colors.blue.shade700,
+                          color: Colors.blue.shade500,
                           fontWeight: FontWeight.w600),
                     ),
                   ],
