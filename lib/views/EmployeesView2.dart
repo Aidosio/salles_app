@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:salles_app/models/Company.dart';
 import 'package:salles_app/service/CompanyService.dart';
-import 'package:salles_app/widgets/BlockedRefreshWidgets.dart';
-import 'package:salles_app/widgets/EmployeesAcceptedWidget.dart';
-import 'package:salles_app/widgets/EmployeesConsiderationWidget.dart';
-import 'package:salles_app/widgets/SwipeRefresh.dart';
+import 'package:salles_app/views/EmployeesAcceptedViews.dart';
 import '../locale/AppLocalizations.dart';
+import 'EmployeesConsiderationViews.dart';
 
 class EmployeesView2 extends StatefulWidget {
   final String id;
@@ -46,20 +44,24 @@ class _EmployeesViewState extends State<EmployeesView2> {
 
     return DefaultTabController(
       initialIndex: 1,
-      length: 2,
+      length: 5,
       child: Scaffold(
-          appBar: TabBar(
-            tabs: <Widget>[
-              Tab(
-                text: "На рассмотрении",
-              ),
-              Tab(
-                text: "Сотрудники",
-              ),
-            ],
-          ),
-          resizeToAvoidBottomInset: false,
-          body: Text("444")),
+        appBar: TabBar(
+          tabs: <Widget>[
+            Tab(
+              text: "На рассмотрении",
+            ),
+            Tab(
+              text: "Сотрудники",
+            ),
+          ],
+        ),
+        resizeToAvoidBottomInset: false,
+        body: TabBarView(children: <Widget>[
+          EmployeesConsiderationViews(),
+          EmployeesAcceptedViews(),
+        ]),
+      ),
     );
   }
 }
