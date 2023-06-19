@@ -88,32 +88,13 @@ class _MainViewsState extends State<MainViews> {
     });
   }
 
-  // void _userById(id) async {
-  //   Users? user = await User.userById(id);
-  //   setState(() {
-  //     _user = user;
-  //     print(_user);
-  //   });
-  // }
-
   @override
   void initState() {
     super.initState();
     getIdUser();
   }
-  // Future<void> _initializeAuth() async {
-  //   bool isLoggedIn = await Auth.getUserId();
-  // setState(() {
-  //   _isLoggedIn = isLoggedIn;
-  // });
-  // }
 
-  // String _getId() {
-  //   String id = Auth.getUserId();
-  // }
-
-  GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>(); // Добавленный ключ Scaffold
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +122,7 @@ class _MainViewsState extends State<MainViews> {
     }
 
     return Scaffold(
-      key: _scaffoldKey, // Добавление ключа Scaffold
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -158,7 +139,7 @@ class _MainViewsState extends State<MainViews> {
             padding: const EdgeInsets.only(right: 15),
             child: IconButton.filledTonal(
               onPressed: () {
-                _scaffoldKey.currentState!.openEndDrawer(); // Открытие Drawer
+                _scaffoldKey.currentState!.openEndDrawer();
               },
               icon: Icon(
                 Icons.account_circle_outlined,
@@ -247,7 +228,6 @@ class _MainViewsState extends State<MainViews> {
                 GestureDetector(
                   onTap: () {
                     Auth.logout();
-                    // Дополнительный код, который может потребоваться после выхода
                   },
                   child: TextButton(
                     onPressed: () {
@@ -271,7 +251,6 @@ class _MainViewsState extends State<MainViews> {
         ),
       ),
       body: Container(
-        // padding: EdgeInsets.only(left: 15, right: 15, bottom: 0, top: 8),
         child: _pages[currentPageIndex],
       ),
       bottomNavigationBar: NavigationBar(

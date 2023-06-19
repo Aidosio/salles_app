@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/models/Products.dart';
+import 'package:salles_app/service/ProductsListService.dart';
 
 import '../locale/AppLocalizations.dart';
 
@@ -76,6 +78,7 @@ class CategoryChildCardWidgets extends StatelessWidget {
                   Expanded(
                     child: FilledButton(
                       onPressed: () {
+                        ProductsListService().deletePoduct(id);
                         print(id);
                       },
                       child: Text("Удалить"),
@@ -95,27 +98,27 @@ class CategoryChildCardWidgets extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        print(id);
-                      },
-                      child: Text("Изменить"),
-                      style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(5),
-                            ),
-                          ),
-                        ),
-                        minimumSize: MaterialStateProperty.all(
-                          Size(0, 40),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // SizedBox(width: 10),
+                  // Expanded(
+                  //   child: FilledButton(
+                  //     onPressed: () {
+                  //       print(id);
+                  //     },
+                  //     child: Text("Изменить"),
+                  //     style: ButtonStyle(
+                  //       shape: MaterialStateProperty.all(
+                  //         RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.all(
+                  //             Radius.circular(5),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       minimumSize: MaterialStateProperty.all(
+                  //         Size(0, 40),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )
             ],
