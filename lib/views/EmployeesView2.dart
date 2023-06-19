@@ -44,7 +44,7 @@ class _EmployeesViewState extends State<EmployeesView2> {
 
     return DefaultTabController(
       initialIndex: 1,
-      length: 5,
+      length: 2,
       child: Scaffold(
         appBar: TabBar(
           tabs: <Widget>[

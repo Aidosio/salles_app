@@ -30,7 +30,7 @@ class _CategoryViewsState extends State<CategoryViews> {
         ScanMode.BARCODE, // Режим сканирования (штрих-коды)
       );
       if (result != '-1') {
-        Navigator.pushNamed(context, '/Product', arguments: result);
+        Navigator.pushNamed(context, '/product', arguments: result);
       }
     } catch (e) {
       // Обработка исключения
