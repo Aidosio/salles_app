@@ -53,7 +53,6 @@ class _LoginViewsState extends State<LoginViews> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
       body: Stack(children: [
         Align(
           alignment: Alignment.center,

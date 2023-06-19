@@ -148,7 +148,9 @@ class _CategoryViewsState extends State<CategoryViews> {
                     itemCount: _categoryList?.length,
                     itemBuilder: ((context, index) {
                       return CategoryCardWidgets(
-                        categoryName: _categoryList![index].name,
+                        categoryName: _categoryList?[index].name != null
+                            ? _categoryList![index].name
+                            : _categoryList![index].name,
                         companyId: _company != null ? _company!.id : 'null',
                       );
                     }),
