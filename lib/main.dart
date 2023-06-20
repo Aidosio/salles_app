@@ -9,7 +9,9 @@ import 'package:salles_app/views/ExampleViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/MainViews.dart';
 import 'package:salles_app/views/ProductViews.dart';
+import 'package:salles_app/views/RecordCalculateViews.dart';
 import 'package:salles_app/views/RecordPurchaseViews.dart';
+import 'package:salles_app/views/RecordViews.dart';
 import 'package:salles_app/views/SalesRefundAcceptionViews.dart';
 import 'package:salles_app/views/SalesRefundViews.dart';
 import 'package:salles_app/views/SalesViews.dart';
@@ -113,6 +115,8 @@ class _MyAppState extends State<MyApp> {
         '/product': (context) => ProductViews(),
         '/record-Purchase': (context) => RecordPurchaseViews(),
         '/sales-views': (context) => SalesViews2(),
+        '/record-calculate': (context) => RecordCalculateViews(),
+        '/record': (context) => RecordViews(),
       },
     );
   }

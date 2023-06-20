@@ -21,6 +21,10 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
     });
   }
 
+  void _handleCalculatePressed() {
+    Navigator.pushNamed(context, '/record-calulate');
+  }
+
   String _barcodeScanResult = '';
   @override
   Widget build(BuildContext context) {
