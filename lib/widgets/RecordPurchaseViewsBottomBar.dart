@@ -5,9 +5,11 @@ import '../locale/AppLocalizations.dart';
 
 class RecordPurchaseViewsBottomBar extends StatelessWidget {
   final Function(String) onBarcodeScanResult;
-  const RecordPurchaseViewsBottomBar(
-      {Key? key, required this.onBarcodeScanResult})
-      : super(key: key);
+
+  const RecordPurchaseViewsBottomBar({
+    Key? key,
+    required this.onBarcodeScanResult,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class RecordPurchaseViewsBottomBar extends StatelessWidget {
         width: double.infinity,
         child: FilledButton.tonal(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/record-calculate');
           },
           child: Text(
             'Рассчитать',

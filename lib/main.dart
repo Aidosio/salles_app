@@ -9,9 +9,13 @@ import 'package:salles_app/views/ExampleViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/MainViews.dart';
 import 'package:salles_app/views/ProductViews.dart';
+import 'package:salles_app/views/RecordCalculateViews.dart';
 import 'package:salles_app/views/RecordPurchaseViews.dart';
+import 'package:salles_app/views/RecordViews.dart';
 import 'package:salles_app/views/SalesRefundAcceptionViews.dart';
 import 'package:salles_app/views/SalesRefundViews.dart';
+import 'package:salles_app/views/SalesViews.dart';
+import 'package:salles_app/views/SalesViews2.dart';
 import 'package:salles_app/views/WaitingPage.dart';
 import 'package:salles_app/widgets/SplashScreenWidgets.dart';
 
@@ -108,8 +112,11 @@ class _MyAppState extends State<MyApp> {
         '/category-views': (context) => CategoryChildViews(),
         '/sales-refund': (context) => SalesRefundViews(),
         '/sales-refund-Accept': (context) => SalesRefundAcceptionViews(),
-        '/Product': (context) => ProductViews(),
-        '/Record-Purchase': (context) => RecordPurchaseViews(),
+        '/product': (context) => ProductViews(),
+        '/record-Purchase': (context) => RecordPurchaseViews(),
+        '/sales-views': (context) => SalesViews2(),
+        '/record-calculate': (context) => RecordCalculateViews(),
+        '/record': (context) => RecordViews(),
       },
     );
   }

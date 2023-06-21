@@ -46,7 +46,7 @@ class _RecordViewsState extends State<RecordViews> {
               child: FloatingActionButton.extended(
                 onPressed: () {
                   print('next');
-                  Navigator.pushNamed(context, '/Record-Purchase');
+                  Navigator.pushNamed(context, '/record-Purchase');
                 },
                 label: Text(
                   'Оформить продажу',

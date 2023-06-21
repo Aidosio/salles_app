@@ -12,6 +12,7 @@ import 'package:salles_app/views/HomeViews.dart';
 import 'package:salles_app/views/LoginViews.dart';
 import 'package:salles_app/views/RecordViews.dart';
 import 'package:salles_app/views/SalesViews.dart';
+import 'package:salles_app/views/SalesViews2.dart';
 
 class MainViews extends StatefulWidget {
   final Function(Locale) changeLanguage;
@@ -108,7 +109,7 @@ class _MainViewsState extends State<MainViews> {
       EmployeesView2(
         id: _ids,
       ),
-      SalesViews(),
+      SalesViews2(),
     ];
 
     bool? color;
