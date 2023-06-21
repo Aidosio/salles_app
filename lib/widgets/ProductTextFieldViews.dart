@@ -8,6 +8,7 @@ class ProductTextFieldViews extends StatelessWidget {
   final bool isPhone;
   final bool isEnabled;
   final String? initialValue;
+  final void Function(String) onChanged; // Добавлен колбэк onChanged
   const ProductTextFieldViews({
     Key? key,
     required this.initialValue,
@@ -15,6 +16,7 @@ class ProductTextFieldViews extends StatelessWidget {
     required this.isPhone,
     required this.hintTextExample,
     required this.labelTextExample,
+    required this.onChanged, // Добавлен параметр onChanged
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class ProductTextFieldViews extends StatelessWidget {
           hintText: hintTextExample,
           labelText: labelTextExample,
         ),
+        onChanged: onChanged, // Привязываем onChanged к текстовому полю
       ),
     );
   }

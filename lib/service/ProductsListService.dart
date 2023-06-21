@@ -1,10 +1,41 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:salles_app/models/ProductsList.dart';
 import 'package:http/http.dart' as http;
 import 'package:salles_app/service/Auth.dart';
 
 class ProductsListService {
+  Future<String?> createProduct(String companyId, String categoryName,
+      String name, double price, String barcode, int count) async {
+    var client = http.Client();
+    String? token = await Auth.getToken();
+    var uri = Uri.parse(
+        'https://salles-app.onrender.com/api/v1/product/company/$companyId/category/$categoryName');
+
+    var body = {
+      "name": name,
+      "price": price.toString(),
+      "barcode": barcode,
+      "count": count.toString()
+    };
+
+    var response = await client.post(
+      uri,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode(body),
+    );
+
+    if (response.statusCode == 200) {
+      return 'Успешно создано';
+    } else {
+      return 'Ошибка при создании';
+    }
+  }
+
   Future<List<ProductsList>?> getAllProductsByCategoryId(
       String companyId, String categoryName) async {
     var client = http.Client();
