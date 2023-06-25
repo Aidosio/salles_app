@@ -28,7 +28,8 @@ class _EmployeesViewState extends State<EmployeesView2> {
         appBar: TabBar(
           tabs: <Widget>[
             Tab(
-              text: "На рассмотрении",
+              text: localizations?.underConsideration ?? '',
+              // text: "На рассмотрении",
             ),
             Tab(
               text: "Сотрудники",
