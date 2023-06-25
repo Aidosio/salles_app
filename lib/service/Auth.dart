@@ -51,6 +51,19 @@ class Auth {
     return userRole == expectedRole;
   }
 
+  static Future<String> checkRoles(String expectedRole) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    if (token == null) {
+      return ''; // Возвращаем пустую строку, если токен отсутствует
+    }
+
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+    String userRole = decodedToken['role'];
+    return userRole;
+  }
+
   static Future<String?> getUserId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');

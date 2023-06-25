@@ -5,16 +5,16 @@ import 'package:salles_app/views/EmployeesAcceptedViews.dart';
 import '../locale/AppLocalizations.dart';
 import 'EmployeesConsiderationViews.dart';
 
-class EmployeesView2 extends StatefulWidget {
+class EmployeesView3 extends StatefulWidget {
   final String id;
 
-  const EmployeesView2({Key? key, required this.id}) : super(key: key);
+  const EmployeesView3({Key? key, required this.id}) : super(key: key);
 
   @override
-  State<EmployeesView2> createState() => _EmployeesViewState();
+  State<EmployeesView3> createState() => _EmployeesViewState();
 }
 
-class _EmployeesViewState extends State<EmployeesView2> {
+class _EmployeesViewState extends State<EmployeesView3> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -23,14 +23,10 @@ class _EmployeesViewState extends State<EmployeesView2> {
 
     return DefaultTabController(
       initialIndex: 0,
-      length: 2,
+      length: 1,
       child: Scaffold(
         appBar: TabBar(
           tabs: <Widget>[
-            Tab(
-              text: localizations?.underConsideration ?? '',
-              // text: "На рассмотрении",
-            ),
             Tab(
               text: localizations?.employees ?? '',
               // text: "Сотрудники",
@@ -39,7 +35,6 @@ class _EmployeesViewState extends State<EmployeesView2> {
         ),
         resizeToAvoidBottomInset: false,
         body: TabBarView(children: <Widget>[
-          EmployeesConsiderationViews(id: ids),
           EmployeesAcceptedViews(id: ids),
         ]),
       ),

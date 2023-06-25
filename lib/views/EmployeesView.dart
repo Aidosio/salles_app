@@ -156,6 +156,7 @@ class _EmployeesViewState extends State<EmployeesView> {
                       return EmployeesAcceptedWidget(
                         fullName: '${seller?.lastName} ${seller?.firstName}',
                         phoneNubmer: seller?.phone,
+                        role: true,
                         id: seller?.id,
                       );
                     } else {

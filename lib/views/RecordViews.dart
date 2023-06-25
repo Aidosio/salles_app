@@ -85,10 +85,10 @@ class _RecordViewsState extends State<RecordViews> {
       List<SalesList>? salesList = await SalesService().getAllSales(id);
       setState(() {
         _salesList = salesList;
-        _filteredSalesList = salesList != null ? List.from(salesList) : null;
+        _filteredSalesList = salesList != null ? List.from(salesList) : [];
+        isLoaded = true; // Обновите значение переменной isLoaded
       });
       print(_filteredSalesList);
-      isLoaded = true;
     } catch (e) {
       print('Error getting sales by ID: $e');
     }
@@ -160,81 +160,72 @@ class _RecordViewsState extends State<RecordViews> {
     TextTheme typography = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: RefreshIndicator(
-        onRefresh: _refreshSalesList,
-        child: SwipeRefresh(
-          onRefresh: _refreshSalesList,
-          child: Container(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 8),
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    physics: ScrollPhysics(),
-                    child: Column(
-                      children: [
-                        Visibility(
-                          visible: isLoaded,
-                          replacement: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: _filteredSalesList?.length,
-                            itemBuilder: (context, index) {
-                              if (_filteredSalesList!.isNotEmpty) {
-                                if (!_filteredSalesList![index].status) {
-                                  return RecordSalesCardWidgets(
-                                    idYes: _filteredSalesList![index].id,
-                                    idNo: 'no',
-                                    salesId: _filteredSalesList![index].id,
-                                    id: _filteredSalesList![index].id,
-                                    onPressed: () => _deleteSales(
-                                        _filteredSalesList![index].id),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              } else {
-                                return Container(
-                                  child: Text('data'),
-                                );
-                              }
-                            },
-                          ),
+      body: SwipeRefresh(
+        onRefresh: () async {
+          try {
+            List<SalesList>? salesList =
+                await SalesService().getAllSales(_company!.id);
+            setState(() {
+              _salesList = salesList;
+              _filteredSalesList =
+                  salesList != null ? List.from(salesList) : null;
+            });
+            isLoaded = true;
+          } catch (e) {
+            print('Error getting sales by ID: $e');
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.only(left: 15, right: 15, top: 8),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: ScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Visibility(
+                        visible: isLoaded,
+                        replacement: Center(
+                          child: CircularProgressIndicator(),
                         ),
-                      ],
-                    ),
+                        child: _filteredSalesList != null &&
+                                _filteredSalesList!.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: _filteredSalesList!.length,
+                                itemBuilder: (context, index) {
+                                  if (!_filteredSalesList![index].status) {
+                                    return RecordSalesCardWidgets(
+                                      idYes: _filteredSalesList![index].id,
+                                      idNo: 'no',
+                                      salesId: _filteredSalesList![index].id,
+                                      id: _filteredSalesList![index].id,
+                                      onPressed: () => _deleteSales(
+                                          _filteredSalesList![index].id),
+                                    );
+                                  } else if (index ==
+                                      _filteredSalesList!.length - 1) {
+                                    // Последний элемент и все предыдущие имеют status == true
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      child: Text('У вас нету активных продаж'),
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                },
+                              )
+                            : Container(
+                                child: Text('У вас нету активных продаж'),
+                              ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  height: 45,
-                  width: double.infinity,
-                  child: FloatingActionButton.extended(
-                    onPressed: () {
-                      _createSales(_company!.id);
-                    },
-                    label: Text(
-                      localizations?.makeASale ?? '',
-                      style: TextStyle(
-                        fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                    ),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5),
-                      ),
-                    ),
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
