@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import '../locale/AppLocalizations.dart';
 import '../models/Products.dart';
 import 'package:salles_app/service/ProductsListService.dart';
 
@@ -126,6 +127,8 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    TextTheme typography = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(),
       body: Container(
@@ -158,7 +161,10 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
                                 );
                               },
                             )
-                          : Text('No products available')),
+                          : Text(
+                              localizations?.noProductsAvailable ?? '',
+                              // 'No products available',
+                            )),
                 ],
               ),
             ),

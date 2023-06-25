@@ -32,7 +32,8 @@ class _EmployeesViewState extends State<EmployeesView2> {
               // text: "На рассмотрении",
             ),
             Tab(
-              text: "Сотрудники",
+              text: localizations?.employees ?? '',
+              // text: "Сотрудники",
             ),
           ],
         ),

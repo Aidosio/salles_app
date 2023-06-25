@@ -119,7 +119,9 @@ class _ProductViewsState extends State<ProductViews> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Назад', textAlign: TextAlign.left),
+        title: Text(localizations?.backWards ?? '',
+            // 'Назад',
+            textAlign: TextAlign.left),
       ),
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -134,8 +136,10 @@ class _ProductViewsState extends State<ProductViews> {
                       ProductTextFieldViews(
                         isEnabled: true,
                         isPhone: false,
-                        hintTextExample: 'Название товара',
-                        labelTextExample: 'Название товара',
+                        hintTextExample: localizations?.productName ?? '',
+                        // 'Название товара',
+                        labelTextExample: localizations?.productName ?? '',
+                        // 'Название товара',
                         initialValue: '',
                         onChanged: (value) {
                           setState(() {
@@ -147,7 +151,8 @@ class _ProductViewsState extends State<ProductViews> {
                         isEnabled: true,
                         isPhone: true,
                         hintTextExample: '1000 тг',
-                        labelTextExample: 'Цена товара',
+                        labelTextExample: localizations?.productPrice ?? '',
+                        // 'Цена товара',
                         initialValue: '',
                         onChanged: (value) {
                           setState(() {
@@ -158,8 +163,9 @@ class _ProductViewsState extends State<ProductViews> {
                       ProductTextFieldViews(
                         isEnabled: true,
                         isPhone: true,
-                        hintTextExample: '100 шт',
-                        labelTextExample: 'Количество',
+                        hintTextExample: '100 ${localizations?.pieces ?? ''}',
+                        labelTextExample: localizations?.quantityGoods ?? '',
+                        // 'Количество',
                         initialValue: '',
                         onChanged: (value) {
                           setState(() {
@@ -177,7 +183,8 @@ class _ProductViewsState extends State<ProductViews> {
                         },
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Категория товара',
+                          labelText: localizations?.productCategory ?? '',
+                          // 'Категория товара',
                         ),
                         items:
                             _categoryList?.map<DropdownMenuItem<CategoryList>>(
@@ -215,7 +222,8 @@ class _ProductViewsState extends State<ProductViews> {
                           '${_company!.id}, ${selectedCategory!.id}, ${productName}, ${productPrice}, ${barcode!}, $productCount');
                     },
                     child: Text(
-                      'Добавить',
+                      localizations?.add ?? '',
+                      // 'Добавить',
                       style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                       ),

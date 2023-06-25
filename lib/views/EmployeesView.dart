@@ -68,7 +68,8 @@ class _EmployeesViewState extends State<EmployeesView> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'На рассмотрении',
+                  localizations?.underConsideration ?? '',
+                  // 'На рассмотрении',
                   style: TextStyle(
                     fontSize: typography.bodyMedium?.fontSize,
                     fontWeight: FontWeight.w700,
@@ -118,7 +119,8 @@ class _EmployeesViewState extends State<EmployeesView> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  'Сотрудники',
+                  localizations?.employees ?? '',
+                  // 'Сотрудники',
                   style: TextStyle(
                     fontSize: typography.bodyMedium?.fontSize,
                     fontWeight: FontWeight.w700,

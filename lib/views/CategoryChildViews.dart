@@ -88,8 +88,10 @@ class _CategoryChildViewsState extends State<CategoryChildViews> {
               isLoaded
                   ? _productsList == null || _productsList!.isEmpty
                       ? Align(
-                          child:
-                              Text('У вас пока нету товаров в этой категорий'),
+                          child: Text(
+                            localizations?.dontProductsInCategory ?? '',
+                            // 'У вас пока нету товаров в этой категорий'
+                          ),
                         ) // Надпись "Data" при отсутствии товаров
                       : Expanded(
                           // Оберните ListView в Expanded

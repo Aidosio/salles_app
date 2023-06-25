@@ -38,7 +38,10 @@ class _ChoiseViewsState extends State<ChoiseViews> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/reg', arguments: '0');
                 },
-                child: Text("Владелец"),
+                child: Text(
+                  localizations?.companyOwner ?? '',
+                  // "Владелец",
+                ),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
@@ -54,7 +57,10 @@ class _ChoiseViewsState extends State<ChoiseViews> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/reg', arguments: '1');
                 },
-                child: Text("Продавец"),
+                child: Text(
+                  localizations?.seller ?? '',
+                  // "Продавец",
+                ),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(

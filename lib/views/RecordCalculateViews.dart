@@ -19,7 +19,11 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
     TextTheme typography = Theme.of(context).textTheme;
 
     return Scaffold(
-      appBar: AppBar(title: Text(('Назад'))),
+      appBar: AppBar(
+          title: Text(
+        localizations?.backWards ?? '',
+        // 'Назад',
+      )),
       body: Align(
         alignment: Alignment.center,
         child: Container(
@@ -30,7 +34,8 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
               SvgPicture.asset('done_circle.svg'),
               SizedBox(height: 0),
               Text(
-                ('Итоговая сумма:'),
+                localizations?.totalAmount ?? '',
+                // 'Итоговая сумма:',
                 style: TextStyle(
                   fontSize: typography.titleLarge?.fontSize,
                   fontWeight: FontWeight.bold,
@@ -38,7 +43,7 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
               ),
               SizedBox(height: 10),
               Text(
-                'totalPrice',
+                'totalPrice' ' тг',
                 style: TextStyle(
                   fontSize: typography.titleLarge?.fontSize,
                   fontWeight: FontWeight.w600,
@@ -53,7 +58,8 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
                     Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
                   child: Text(
-                    'Закончить',
+                    localizations?.endText ?? '',
+                    // 'Закончить',
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w600,

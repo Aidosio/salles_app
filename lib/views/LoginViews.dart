@@ -68,7 +68,7 @@ class _LoginViewsState extends State<LoginViews> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          localizations?.enter ?? '',
+                          localizations?.enterTitle ?? '',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 81, 86, 88),
@@ -84,7 +84,8 @@ class _LoginViewsState extends State<LoginViews> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: '+777-777-77-77',
-                            labelText: 'Номер телефона',
+                            labelText: localizations?.phoneNumber ?? '',
+                            // 'Номер телефона',
                             prefixIcon: Icon(Icons.phone_android_sharp),
                             errorText: errorPhone.isEmpty ? null : errorPhone,
                           ),
@@ -99,7 +100,8 @@ class _LoginViewsState extends State<LoginViews> {
                           obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Пароль',
+                            labelText: localizations?.password ?? '',
+                            // 'Пароль',
                             prefixIcon: Icon(Icons.lock),
                             errorText:
                                 errorPassword.isEmpty ? null : errorPassword,
@@ -118,15 +120,23 @@ class _LoginViewsState extends State<LoginViews> {
                             });
 
                             if (phoneNumber.isEmpty && password.isEmpty) {
-                              print('Ошибка: Введите номер телефона и пароль');
+                              print(localizations?.errorNumberAndPassword ?? ''
+                                  // 'Ошибка: Введите номер телефона и пароль'
+                                  );
                               setState(() {
-                                errorPassword = 'Ошибка: Введите пароль';
-                                errorPhone = 'Ошибка: Введите номер телефона';
+                                errorPassword =
+                                    localizations?.errorPassword ?? '';
+                                // 'Ошибка: Введите пароль';
+                                errorPhone = localizations?.errorNumber ?? '';
+                                // 'Ошибка: Введите номер телефона';
                               });
                               return;
                             }
                             if (password.isEmpty) {
-                              print('Ошибка: Введите пароль');
+                              print(errorPassword =
+                                  localizations?.errorPassword ??
+                                      ''
+                                          'Ошибка: Введите пароль');
                               setState(() {
                                 errorPhone = '';
                                 errorPassword = 'Ошибка: Введите пароль';
@@ -180,7 +190,10 @@ class _LoginViewsState extends State<LoginViews> {
                               });
                             });
                           },
-                          child: Text("Войти"),
+                          child: Text(
+                            localizations?.enter ?? '',
+                            // "Войти",
+                          ),
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
@@ -199,7 +212,10 @@ class _LoginViewsState extends State<LoginViews> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/choise');
                           },
-                          child: Text('Зарегистрироваться'),
+                          child: Text(
+                            localizations?.registerTitle ?? '',
+                            // 'Зарегистрироваться',
+                          ),
                         ),
                       ],
                     ),

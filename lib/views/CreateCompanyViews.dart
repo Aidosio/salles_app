@@ -49,7 +49,8 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Регистрация компаний',
+                localizations?.companyRegistration ?? '',
+                // 'Регистрация компаний',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 81, 86, 88),
@@ -60,8 +61,10 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
               TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Название компаний',
-                  hintText: 'Название компаний',
+                  labelText: localizations?.companyName ?? '',
+                  // 'Название компаний',
+                  hintText: localizations?.companyName ?? '',
+                  // 'Название компаний',
                   prefixIcon: Icon(Icons.business),
                 ),
                 onChanged: (value) {
@@ -75,7 +78,10 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
                 onPressed: () {
                   createCompany(name, _ids);
                 },
-                child: Text("Зарегистрироваться"),
+                child: Text(
+                  localizations?.registerTitle ?? '',
+                  // "Зарегистрироваться",
+                ),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(

@@ -181,7 +181,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                     child: Column(
                       children: [
                         Text(
-                          'Регистрация',
+                          localizations?.registrationPage ?? '',
+                          // 'Регистрация',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: const Color.fromARGB(255, 81, 86, 88),
@@ -395,10 +396,18 @@ class _RegisterViewsState extends State<RegisterViews> {
                             }
                           },
                           child: Text(
-                            'Зарегистрироваться',
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 81, 86, 88),
+                            localizations?.enter ?? '',
+                            // "Войти",
+                          ),
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)),
+                              ),
                             ),
+                            minimumSize: MaterialStateProperty.all(
+                                Size(double.infinity, 48)),
                           ),
                         ),
                       ],
@@ -407,33 +416,20 @@ class _RegisterViewsState extends State<RegisterViews> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Switch language to',
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 81, 86, 88),
-                        ),
+                      TextButton(
+                        onPressed: () => changeLanguageAndColor(
+                            false, const Locale('ru', '')),
+                        child: Text('Рус'),
                       ),
-                      SizedBox(width: 8),
-                      ElevatedButton(
-                        onPressed: () {
-                          changeLanguageAndColor(isEnglish, Locale('ru', 'RU'));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: isEnglish ? null : Colors.grey[400],
-                          onPrimary: Colors.black,
-                        ),
-                        child: Text('Русский'),
+                      SizedBox(
+                        width: 8,
                       ),
-                      SizedBox(width: 8),
-                      ElevatedButton(
+                      TextButton(
                         onPressed: () {
-                          changeLanguageAndColor(isEnglish, Locale('en', 'US'));
+                          changeLanguageAndColor(true, const Locale('es', ''));
+                          print(widget.currentLocale.languageCode);
                         },
-                        style: ElevatedButton.styleFrom(
-                          primary: isEnglish ? Colors.grey[400] : null,
-                          onPrimary: Colors.black,
-                        ),
-                        child: Text('English'),
+                        child: Text('Қаз'),
                       ),
                     ],
                   ),

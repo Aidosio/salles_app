@@ -91,7 +91,8 @@ class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Запрос в компанию',
+                localizations?.requestToCompany ?? '',
+                // 'Запрос в компанию',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: const Color.fromARGB(255, 81, 86, 88),

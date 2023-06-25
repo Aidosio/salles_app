@@ -27,14 +27,13 @@ class MainViews extends StatefulWidget {
 }
 
 class _MainViewsState extends State<MainViews> {
+  String mainPage = '';
+  String categoryPage = '';
+  String recordPage = '';
+  String employees = '';
+  String salesPage = '';
+
   int currentPageIndex = 0;
-  List<String> pageNames = [
-    'Главная',
-    'Категория',
-    'Оформить',
-    'Сотрудники',
-    'Продажи',
-  ];
 
   String _ids = '';
   Users? _user;
@@ -100,8 +99,20 @@ class _MainViewsState extends State<MainViews> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    List<String> pageNames = [
+      mainPage,
+      categoryPage,
+      recordPage,
+      employees,
+      salesPage,
+    ];
     TextTheme typography = Theme.of(context).textTheme;
     PageController _pageController = PageController(initialPage: 0);
+    mainPage = localizations?.mainPage ?? '';
+    categoryPage = localizations?.categoryPage ?? '';
+    recordPage = localizations?.recordPage ?? '';
+    employees = localizations?.employees ?? '';
+    salesPage = localizations?.salesPage ?? '';
     List<Widget> _pages = [
       HomeViews(
         id: _ids,
@@ -113,7 +124,7 @@ class _MainViewsState extends State<MainViews> {
       ),
       SalesViews(),
     ];
-
+    // String mainPages = localizations?.mainPage ?? '';
     bool? color;
     String? langCurrent = widget.currentLocale.languageCode;
 
@@ -181,22 +192,23 @@ class _MainViewsState extends State<MainViews> {
                   children: [
                     ListTile(
                       title: Text(
-                        'Название: ${_company?.name}' ?? 'Default Company Name',
+                        '${localizations?.titleName} ${_company?.name}' ??
+                            'Default Company Name',
                       ),
                     ),
                     ListTile(
                       title: Text(
                         _company?.owner != null
-                            ? 'Статус: ${_company!.owner.enabled ? "Активен" : "Не активен"}'
-                            : 'Статус: Не активен',
+                            ? '${localizations?.status} ${_company!.owner.enabled ? localizations?.activeStatus : localizations?.notActiveStatus}'
+                            : '${localizations?.status} ${localizations?.notActiveStatus}',
                       ),
                     ),
                     ListTile(
-                      title: Text(
-                        _company?.owner != null
-                            ? 'Вы: ${Auth.checkRole('OWNER') == "OWNER" ? "Владелец" : "Сотрудник"}'
-                            : 'Номер: нету',
-                      ),
+                      title: Text(_company?.owner != null
+                              ? '${localizations?.youAreTitle} ${Auth.checkRole('OWNER') == "OWNER" ? localizations?.companyOwner : localizations?.employeSingle}'
+                              : '${localizations?.numberText} ${localizations?.notText}'
+                          // Номер: нету',
+                          ),
                     ),
                   ],
                 ),
@@ -245,7 +257,10 @@ class _MainViewsState extends State<MainViews> {
                         ),
                       );
                     },
-                    child: Text('Выйти'),
+                    child: Text(
+                      localizations?.exit ?? '',
+                      // 'Выйти',
+                    ),
                   ),
                 ),
               ],
@@ -267,7 +282,7 @@ class _MainViewsState extends State<MainViews> {
           NavigationDestination(
             selectedIcon: Icon(Icons.home),
             icon: Icon(Icons.home_outlined),
-            label: 'Главная',
+            label: 'mainPage',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.shopping_cart),
