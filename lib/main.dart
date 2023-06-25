@@ -113,7 +113,6 @@ class _MyAppState extends State<MyApp> {
         '/sales-refund': (context) => SalesRefundViews(),
         '/sales-refund-accept': (context) => SalesRefundAcceptionViews(),
         '/product': (context) => ProductViews(),
-        '/record-purchase': (context) => RecordPurchaseViews(),
         '/sales-views': (context) => SalesViews2(),
         '/record-calculate': (context) => RecordCalculateViews(),
         '/record': (context) => RecordViews(),

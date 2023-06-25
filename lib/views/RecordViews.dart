@@ -153,7 +153,7 @@ class _RecordViewsState extends State<RecordViews> {
                                 idYes: _salesList![index].id,
                                 idNo: 'no',
                                 salesId: _salesList![index].id,
-                                id: _company!.id,
+                                id: _salesList![index].id,
                               );
                             }
                           } else {

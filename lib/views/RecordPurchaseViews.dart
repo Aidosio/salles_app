@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:salles_app/models/ProductIdsList.dart';
-import 'package:salles_app/models/Products.dart';
-import 'package:salles_app/models/ProductsList.dart';
+import '../models/Products.dart';
 import 'package:salles_app/service/ProductsListService.dart';
-import 'package:salles_app/service/SalesService.dart';
-import 'package:salles_app/widgets/RecordPurchaseCardWidgets.dart';
 
-import '../locale/AppLocalizations.dart';
 import '../models/Sales.dart';
+import '../service/SalesService.dart';
+import '../widgets/RecordPurchaseCardWidgets.dart';
 import '../widgets/RecordPurchaseViewsBottomBar.dart';
 
 class RecordPurchaseViews extends StatefulWidget {
-  // Создаем переменную для хранения результата сканирования
-  const RecordPurchaseViews({super.key});
+  final String arguments;
+
+  const RecordPurchaseViews({Key? key, required this.arguments})
+      : super(key: key);
 
   @override
   State<RecordPurchaseViews> createState() => _RecordPurchaseViewsState();
@@ -21,133 +20,145 @@ class RecordPurchaseViews extends StatefulWidget {
 
 class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
   bool isLoading = false;
-  List<dynamic>? _salesList;
+  String _barcodeScanResult = '';
+  List<Map<String, dynamic>> _productsList = [];
   Sales? _sales;
-  String? _salesId;
-  String? _companyId;
-  final List<Map<String, dynamic>> _productsList = [];
 
-  // _getProductsById(String companyId, String productId, int quantity) async {
-  //   try {
-  //     Products? products =
-  //         await ProductsListService().getProductsById(companyId, productId);
-  //     if (products != null) {
-  //       Map<String, dynamic> productMap = {
-  //         "products": products.toJson(),
-  //         "quantity": quantity,
-  //       };
-  //       _productsList.add(productMap);
-  //       print(_productsList);
-  //       isLoading = true;
-  //     }
-  //   } catch (e) {
-  //     print('products $e');
-  //   }
-  // }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final arguments = (ModalRoute.of(context)?.settings.arguments ??
-            <String, dynamic>{'companyId': '', 'salesId': ''})
-        as Map<String, dynamic>;
-
-    print(arguments["salesId"]);
-    print(arguments["companyId"]);
-
-    SalesService().getSales(arguments["salesId"]!).then((sales) {
-      setState(() {
-        _sales = sales;
-        _salesList = _sales?.productIds;
-      });
-
-      if (_salesList != null) {
-        for (int i = 0; i < _salesList!.length; i++) {
-          var productIdsList = ProductIdsList.fromJson(_salesList![i]);
-          print(productIdsList.productId);
-          print(productIdsList.quantity);
-
-          print(arguments["companyId"]);
-          print(arguments["salesId"]);
-
-          // _getProductsById(arguments["companyId"], productIdsList.productId,
-          //     productIdsList.quantity);
-        }
+  getBarcodeProduct(String barcode) async {
+    try {
+      Products? products =
+          await ProductsListService().getProductsByBarcode(barcode);
+      if (products != null) {
+        addProductToList(products);
       }
+      addProductsSales(widget.arguments, products!.id);
+    } catch (e) {
+      print('Error getting product: $e');
+    }
+  }
 
+  addProductToList(Products product) {
+    setState(() {
+      Map<String, dynamic> productMap = {
+        "product": product,
+      };
+      _productsList.add(productMap);
       isLoading = true;
-    }).catchError((error) {
-      setState(() {
-        isLoading = true;
-      });
-      print('Error getting sales: $error');
     });
+    print(_productsList);
+  }
+
+  addProductsSales(String salesId, String productId) async {
+    try {
+      Sales? sales = await SalesService().addProdutsSales(salesId, productId);
+    } catch (e) {
+      print('addProdutsSales $e');
+    }
+  }
+
+  removeProdutsSales(String salesId, String productId) async {
+    try {
+      await SalesService().removeProdutsSales(salesId, productId);
+      setState(() {
+        _productsList
+            .removeWhere((productMap) => productMap['product'].id == productId);
+      });
+    } catch (e) {
+      print('removeProdutsSales $e');
+    }
   }
 
   void _handleBarcodeScanResult(String result) {
     setState(() {
-      _barcodeScanResult =
-          result; // Обновляем состояние с полученным результатом
+      _barcodeScanResult = result;
     });
+    getBarcodeProduct(_barcodeScanResult.toString());
+    print(_barcodeScanResult);
   }
 
-  void _handleCalculatePressed() {
-    Navigator.pushNamed(context, '/record-calulate');
+  _getProductsById(String productId, int quantity) async {
+    try {
+      Products? products =
+          await ProductsListService().getProductsById(productId);
+      if (products != null) {
+        Map<String, dynamic> productMap = {
+          "product": products,
+          "quantity": quantity,
+        };
+        setState(() {
+          _productsList.add(productMap);
+          isLoading = true;
+        });
+        print(_productsList);
+      }
+    } catch (e) {
+      print('products $e');
+    }
   }
 
-  String _barcodeScanResult = '';
+  getSales(String id) async {
+    try {
+      Sales? sales = await SalesService().getSales(id);
+      List<dynamic> productIds = sales!.productIds;
+
+      for (int i = 0; i < productIds.length; i++) {
+        String productId = productIds[i]['productId'];
+        int quantity = productIds[i]['quantity'];
+
+        _getProductsById(productId, quantity);
+      }
+
+      setState(() {
+        _sales = sales;
+      });
+
+      isLoading = true;
+    } catch (e) {
+      print('Sales $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getSales(widget.arguments);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context);
-    TextTheme typography = Theme.of(context).textTheme;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text(
-          'Назад',
-          style: TextStyle(
-              fontSize: typography.titleLarge?.fontSize,
-              fontWeight: FontWeight.w600),
-        ),
-      ),
+      appBar: AppBar(),
       body: Container(
         padding: EdgeInsets.only(left: 15, right: 15, top: 8),
         child: Column(
           children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 20),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Оформление покупки',
-                style: TextStyle(
-                    fontSize: typography.bodyMedium?.fontSize,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
             Expanded(
               child: Column(
                 children: [
-                  RecordPurchaseCardWidgets(
-                      productName: 'Томское Молоко', productPrice: '150'),
-                  // Text(_sales?.id ?? ''),
-                  // Visibility(
-                  //   visible: isLoading,
-                  //   replacement: Center(
-                  //     child: CircularProgressIndicator(),
-                  //   ),
-                  //   child: ListView.builder(
-                  //     shrinkWrap: true,
-                  //     physics: NeverScrollableScrollPhysics(),
-                  //     itemCount: _productsList.length,
-                  //     itemBuilder: (context, index) {
-                  //   return RecordPurchaseCardWidgets(
-                  //       productName: 'Томское Молоко', productPrice: '150');
-                  // },
-                  //   ),
-                  // ),
-                  // RecordPurchaseCardWidgets(
-                  //     productName: 'Томское Молоко', productPrice: '150'),
-                  // Text(_barcodeScanResult)
+                  Visibility(
+                      visible: isLoading,
+                      replacement: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      child: _productsList.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: _productsList.length,
+                              itemBuilder: (context, index) {
+                                final productMap = _productsList[index]
+                                    as Map<String, dynamic>;
+                                final product =
+                                    productMap["product"] as Products;
+                                return RecordPurchaseCardWidgets(
+                                  productName: product.name,
+                                  productPrice: product.price.toString(),
+                                  onPressed: () => removeProdutsSales(
+                                      widget.arguments, product.id),
+                                );
+                              },
+                            )
+                          : Text('No products available')),
                 ],
               ),
             ),

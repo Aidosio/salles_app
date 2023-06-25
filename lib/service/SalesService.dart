@@ -153,6 +153,48 @@ class SalesService {
     return null;
   }
 
+  Future<Sales?> addProdutsSales(String salesId, String productId) async {
+    var client = http.Client();
+    String? token = await Auth.getToken();
+
+    var uri = Uri.parse(
+        'https://salles-app.onrender.com/api/v1/sales/add-product/$salesId?productId=$productId&quantity=1');
+    var response = await client.put(
+      uri,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return salesFromJson(json);
+    }
+    return null;
+  }
+
+  Future<Sales?> removeProdutsSales(String salesId, String productId) async {
+    var client = http.Client();
+    String? token = await Auth.getToken();
+
+    var uri = Uri.parse(
+        'https://salles-app.onrender.com/api/v1/sales/remove-product/$salesId?productId=$productId');
+    var response = await client.put(
+      uri,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return salesFromJson(json);
+    }
+    return null;
+  }
+
   Future<int?> deleteSales(String id) async {
     var client = http.Client();
     String? token = await Auth.getToken();
