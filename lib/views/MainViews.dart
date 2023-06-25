@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:salles_app/locale/AppLocalizations.dart';
 import 'package:salles_app/models/Company.dart';
@@ -92,6 +94,31 @@ class _MainViewsState extends State<MainViews> {
   void initState() {
     super.initState();
     getIdUser();
+    startLogoutTimer();
+  }
+
+  Timer? _logoutTimer;
+
+  @override
+  void dispose() {
+    _logoutTimer?.cancel(); // Cancel the timer when the widget is disposed
+    super.dispose();
+  }
+
+  void startLogoutTimer() {
+    const logoutDuration = Duration(minutes: 23);
+    _logoutTimer = Timer(logoutDuration, () {
+      Auth.logout();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginViews(
+            changeLanguage: widget.changeLanguage,
+            currentLocale: widget.currentLocale,
+          ),
+        ),
+      );
+    });
   }
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
