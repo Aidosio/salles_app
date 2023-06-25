@@ -17,13 +17,9 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    final arguments = ModalRoute.of(context)?.settings.arguments as String;
 
     return Scaffold(
-      appBar: AppBar(
-          title: Text(
-        localizations?.backWards ?? '',
-        // 'Назад',
-      )),
       body: Align(
         alignment: Alignment.center,
         child: Container(
@@ -31,7 +27,7 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset('done_circle.svg'),
+              // SvgPicture.asset('done_circle.svg'),
               SizedBox(height: 0),
               Text(
                 localizations?.totalAmount ?? '',
@@ -43,11 +39,11 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
               ),
               SizedBox(height: 10),
               Text(
-                'totalPrice' ' тг',
+                arguments,
                 style: TextStyle(
-                  fontSize: typography.titleLarge?.fontSize,
-                  fontWeight: FontWeight.w600,
-                ),
+                    fontSize: typography.titleLarge?.fontSize,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.green.shade400),
               ),
               SizedBox(height: 20),
               Container(
@@ -55,7 +51,7 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
                 child: FilledButton.tonal(
                   onPressed: () {
                     print('id');
-                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.popUntil(context, (route) => route.isFirst);
                   },
                   child: Text(
                     localizations?.endText ?? '',

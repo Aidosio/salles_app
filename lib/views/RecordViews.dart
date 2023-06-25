@@ -11,9 +11,10 @@ import '../service/Auth.dart';
 import '../service/CompanyService.dart';
 import '../service/User.dart';
 import '../widgets/SwipeRefresh.dart';
+import 'RecordPurchaseViews.dart';
 
 class RecordViews extends StatefulWidget {
-  const RecordViews({super.key});
+  const RecordViews({Key? key}) : super(key: key);
 
   @override
   State<RecordViews> createState() => _RecordViewsState();
@@ -25,6 +26,7 @@ class _RecordViewsState extends State<RecordViews> {
   Users? _user;
   Company? _company;
   List<SalesList>? _salesList;
+  List<SalesList>? _filteredSalesList;
   Sales? _sales;
 
   void getIdUser() async {
@@ -52,7 +54,6 @@ class _RecordViewsState extends State<RecordViews> {
         _company = company;
       });
       _getAllSales(company!.id);
-      // _salesList = _company!.purchases as SalesList?;
       print(_company);
     } catch (e) {
       print('Error getting company by ID: $e');
@@ -66,7 +67,6 @@ class _RecordViewsState extends State<RecordViews> {
         _company = company;
       });
       _getAllSales(company!.id);
-      // _salesList = _company!.purchases.cast<SalesList>() as SalesList?;
       print(_company);
     } catch (e) {
       print('Error getting company by ID: $e');
@@ -85,7 +85,9 @@ class _RecordViewsState extends State<RecordViews> {
       List<SalesList>? salesList = await SalesService().getAllSales(id);
       setState(() {
         _salesList = salesList;
+        _filteredSalesList = salesList != null ? List.from(salesList) : null;
       });
+      print(_filteredSalesList);
       isLoaded = true;
     } catch (e) {
       print('Error getting sales by ID: $e');
@@ -95,13 +97,40 @@ class _RecordViewsState extends State<RecordViews> {
   _createSales(id) async {
     try {
       Sales? sales = await SalesService().createSales(id);
-      setState(() {
-        _sales = sales;
-      });
-      Navigator.pushNamed(context, '/record-purchase',
-          arguments: {"salesId": sales!.id, "companyId": _company!.id});
+      if (sales != null) {
+        setState(() {
+          _sales = sales;
+          _filteredSalesList?.add(SalesList(
+            id: sales.id,
+            createDate: sales.createDate,
+            status: sales.status,
+            productIds: sales.productIds ?? [], // Ensure productIds is not null
+            returnProducts:
+                sales.returnProducts ?? [], // Ensure returnProducts is not null
+          ));
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RecordPurchaseViews(arguments: sales.id),
+          ),
+        );
+      } else {
+        print('Error creating sales: returned object is null');
+      }
     } catch (e) {
-      print('create sales $e');
+      print('Error creating sales: $e');
+    }
+  }
+
+  _deleteSales(String id) async {
+    try {
+      await SalesService().deleteSales(id);
+      setState(() {
+        _filteredSalesList?.removeWhere((sales) => sales.id == id);
+      });
+    } catch (e) {
+      print('object');
     }
   }
 
@@ -124,6 +153,8 @@ class _RecordViewsState extends State<RecordViews> {
                 await SalesService().getAllSales(_company!.id);
             setState(() {
               _salesList = salesList;
+              _filteredSalesList =
+                  salesList != null ? List.from(salesList) : null;
             });
             isLoaded = true;
           } catch (e) {
@@ -147,16 +178,20 @@ class _RecordViewsState extends State<RecordViews> {
                         child: ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: _salesList?.length,
+                          itemCount: _filteredSalesList?.length,
                           itemBuilder: (context, index) {
-                            if (!_salesList!.isEmpty) {
-                              if (!_salesList![index].status) {
+                            if (_filteredSalesList!.isNotEmpty) {
+                              if (!_filteredSalesList![index].status) {
                                 return RecordSalesCardWidgets(
-                                  idYes: _salesList![index].id,
+                                  idYes: _filteredSalesList![index].id,
                                   idNo: 'no',
-                                  salesId: _salesList![index].id,
-                                  id: _company!.id,
+                                  salesId: _filteredSalesList![index].id,
+                                  id: _filteredSalesList![index].id,
+                                  onPressed: () => _deleteSales(
+                                      _filteredSalesList![index].id),
                                 );
+                              } else {
+                                return Container();
                               }
                             } else {
                               return Container(
@@ -166,19 +201,6 @@ class _RecordViewsState extends State<RecordViews> {
                           },
                         ),
                       ),
-
-                      // RecordSalesCardWidgets(
-                      //   idYes: 'yes',
-                      //   idNo: 'no',
-                      //   salesId: '55465464989842132132165464789',
-                      //   id: '1',
-                      // ),
-                      // RecordSalesCardWidgets(
-                      //   idYes: 'yes',
-                      //   idNo: 'no',
-                      //   salesId: '5522222222222222266666666664',
-                      //   id: '2',
-                      // ),
                     ],
                   ),
                 ),
@@ -190,16 +212,14 @@ class _RecordViewsState extends State<RecordViews> {
                 child: FloatingActionButton.extended(
                   onPressed: () {
                     _createSales(_company!.id);
-                    // print('next');
-                    // Navigator.pushNamed(context, '/');
                   },
                   label: Text(
                     localizations?.makeASale ?? '',
-                    // 'Оформить продажу',
                     style: TextStyle(
-                        fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                   elevation: 0,
                   shape: RoundedRectangleBorder(

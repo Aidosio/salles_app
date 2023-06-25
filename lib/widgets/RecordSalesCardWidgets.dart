@@ -9,12 +9,14 @@ class RecordSalesCardWidgets extends StatelessWidget {
   final String id;
   final String idYes;
   final String idNo;
+  final VoidCallback onPressed;
   const RecordSalesCardWidgets({
     Key? key,
     required this.salesId,
     required this.id,
     required this.idNo,
     required this.idYes,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -72,29 +74,10 @@ class RecordSalesCardWidgets extends StatelessWidget {
                       )
                     ],
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.red.shade200,
-                      ),
-                      child: IconButtonDialogWidgetsRecord(
-                        colorChoice: Colors.red.shade200,
-                        idYes: idYes,
-                        idNo: idNo,
-                        idCompany: '',
-                        alertTitle: 'Вы уверен, что хотите удалить продажу?',
-                        icon: Icon(
-                          Icons.delete_outline,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ),
-                  )
+                  Container(
+                      child: IconButton(
+                          onPressed: onPressed,
+                          icon: Icon(Icons.delete_outline))),
                 ],
               )
             ],

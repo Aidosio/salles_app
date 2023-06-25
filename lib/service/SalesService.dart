@@ -132,6 +132,28 @@ class SalesService {
     return null;
   }
 
+  Future<int?> salesStatud(String id) async {
+    var client = http.Client();
+    String? token = await Auth.getToken();
+
+    var uri = Uri.parse(
+        'https://salles-app.onrender.com/api/v1/sales/set-status/$id');
+
+    var response = await client.post(
+      uri,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return response.statusCode;
+    }
+    return null;
+  }
+
   Future<Sales?> returnProdutsSales(String salesId, String productId) async {
     var client = http.Client();
     String? token = await Auth.getToken();

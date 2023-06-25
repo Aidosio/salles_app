@@ -33,7 +33,6 @@ class _MyBarWidgetState extends State<MyBarWidget> {
   @override
   void initState() {
     super.initState();
-    currentTotalPrice = widget.totalPrice;
   }
 
   @override
@@ -43,10 +42,10 @@ class _MyBarWidgetState extends State<MyBarWidget> {
     calculateTotalPrice(String id) async {
       String? totalPrices = await SalesService().calculateTotalPrice(id);
       setState(() {
-        currentTotalPrice = totalPrices ?? widget.totalPrice;
+        currentTotalPrice = totalPrices!;
       });
       print(totalPrices);
-      Navigator.pop(context);
+      Navigator.popUntil(context, (route) => route.isFirst);
     }
 
     TextTheme typography = Theme.of(context).textTheme;
@@ -69,7 +68,9 @@ class _MyBarWidgetState extends State<MyBarWidget> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Text(currentTotalPrice + ' тг'),
+              Text(currentTotalPrice == ''
+                  ? widget.totalPrice + ' тг'
+                  : currentTotalPrice + ' тг'),
             ],
           ),
           SizedBox(height: 16),

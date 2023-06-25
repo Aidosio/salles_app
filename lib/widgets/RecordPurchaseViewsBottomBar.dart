@@ -5,10 +5,11 @@ import '../locale/AppLocalizations.dart';
 
 class RecordPurchaseViewsBottomBar extends StatelessWidget {
   final Function(String) onBarcodeScanResult;
-
+  final VoidCallback onPressed;
   const RecordPurchaseViewsBottomBar({
     Key? key,
     required this.onBarcodeScanResult,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -20,9 +21,7 @@ class RecordPurchaseViewsBottomBar extends StatelessWidget {
         height: 40,
         width: double.infinity,
         child: FilledButton.tonal(
-          onPressed: () {
-            Navigator.pushNamed(context, '/record-calculate');
-          },
+          onPressed: onPressed,
           child: Text(
             'Рассчитать',
             style: TextStyle(
