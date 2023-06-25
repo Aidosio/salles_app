@@ -12,17 +12,25 @@ class BlockedRefreshWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: isVisible,
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Color.fromRGBO(27, 16, 16, 0.1),
+      child: Overlay(
+        initialEntries: [
+          OverlayEntry(
+            builder: (context) {
+              return Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Color.fromRGBO(27, 16, 16, 0.1),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
+                ],
+              );
+            },
           ),
-          Container(
-            alignment: Alignment.center,
-            child: CircularProgressIndicator(),
-          )
         ],
       ),
     );

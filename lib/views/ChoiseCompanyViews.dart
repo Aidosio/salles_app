@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:salles_app/models/Company.dart';
 import 'package:salles_app/models/CompanyList.dart';
 import 'package:salles_app/service/Auth.dart';
@@ -15,22 +16,9 @@ class ChoiseCompanyViews extends StatefulWidget {
 }
 
 class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
-  String _ids = '';
   List<CompanyList>? companyOptions;
   CompanyList? selectedCompany;
   Company? _company;
-
-  void getIdUser() async {
-    String? userId = await Auth.getUserId();
-    if (userId != null) {
-      setState(() {
-        _ids = userId;
-      });
-      print('User ID: $userId');
-    } else {
-      print('User is not authenticated');
-    }
-  }
 
   _getAllCompany() async {
     try {
@@ -77,7 +65,6 @@ class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
   @override
   void initState() {
     super.initState();
-    getIdUser();
     _getAllCompany();
   }
 
@@ -85,6 +72,12 @@ class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    final arguments = ModalRoute.of(context)?.settings.arguments as String;
+
+    final decodedToken = JwtDecoder.decode(arguments);
+    final _ids = decodedToken['id'];
+
+    print('User ID: $_ids');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

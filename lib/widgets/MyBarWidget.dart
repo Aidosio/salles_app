@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/service/SalesService.dart';
 
 import '../locale/AppLocalizations.dart';
 
-class MyBarWidget extends StatelessWidget {
+class MyBarWidget extends StatefulWidget {
   final String totalPrice;
   final String buttonTitle;
   final String id;
@@ -23,8 +24,30 @@ class MyBarWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _MyBarWidgetState createState() => _MyBarWidgetState();
+}
+
+class _MyBarWidgetState extends State<MyBarWidget> {
+  String currentTotalPrice = '';
+
+  @override
+  void initState() {
+    super.initState();
+    currentTotalPrice = widget.totalPrice;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+
+    calculateTotalPrice(String id) async {
+      String? totalPrices = await SalesService().calculateTotalPrice(id);
+      setState(() {
+        currentTotalPrice = totalPrices ?? widget.totalPrice;
+      });
+      print(totalPrices);
+      Navigator.pop(context);
+    }
 
     TextTheme typography = Theme.of(context).textTheme;
     return Container(
@@ -35,7 +58,7 @@ class MyBarWidget extends StatelessWidget {
           Divider(
             height: 1,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -46,27 +69,27 @@ class MyBarWidget extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Text(totalPrice + ' тг'),
+              Text(currentTotalPrice + ' тг'),
             ],
           ),
-          SizedBox(height: 10),
-          isVisible
+          SizedBox(height: 16),
+          widget.isVisible
               ? Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Возврат:',
-                          style: TextStyle(
-                            fontSize: typography.bodyMedium?.fontSize,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(totalRefund + ' тг'),
-                      ],
-                    ),
-                    SizedBox(height: 10),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       'Возврат:',
+                    //       style: TextStyle(
+                    //         fontSize: typography.bodyMedium?.fontSize,
+                    //         fontWeight: FontWeight.w600,
+                    //       ),
+                    //     ),
+                    //     Text(widget.totalRefund + ' тг'),
+                    //   ],
+                    // ),
+                    // SizedBox(height: 10),
                   ],
                 )
               : Container(),
@@ -74,14 +97,15 @@ class MyBarWidget extends StatelessWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: () {
-                if (popBack && routeWay != null) {
-                  Navigator.pushNamed(context, routeWay!);
+                if (widget.popBack && widget.routeWay != null) {
+                  Navigator.pushNamed(context, widget.routeWay!,
+                      arguments: widget.id);
                 } else {
-                  Navigator.pop(context);
+                  calculateTotalPrice(widget.id);
                 }
-                print(id);
+                print(widget.id);
               },
-              child: Text(buttonTitle),
+              child: Text(widget.buttonTitle),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(

@@ -5,7 +5,16 @@ import 'package:flutter/material.dart';
 import '../locale/AppLocalizations.dart';
 
 class SalesRefundAcceptionCardWidgets extends StatelessWidget {
-  const SalesRefundAcceptionCardWidgets({super.key});
+  final String name;
+  final String price;
+  final VoidCallback onPressed;
+
+  const SalesRefundAcceptionCardWidgets({
+    Key? key,
+    required this.name,
+    required this.price,
+    required this.onPressed, // Добавьте это
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +56,14 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Яблоко',
+                    name,
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    '6000' + ' тг',
+                    price + ' тг',
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w400),
@@ -76,28 +85,7 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
                         ),
                         child: IconButton(
                           padding: EdgeInsets.zero,
-                          onPressed: () {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(
-                                  SnackBar(
-                                    duration: Duration(seconds: 5),
-                                    content: Text('Вы сделали возврат'),
-                                    action: SnackBarAction(
-                                        label: 'Отменить',
-                                        onPressed: () {
-                                          print('object');
-                                        }),
-                                  ),
-                                )
-                                .closed
-                                .then((SnackBarClosedReason reason) {
-                              if (reason != SnackBarClosedReason.action) {
-                                // Кнопка 'Отменить' не была нажата
-                                print('id');
-                              }
-                            });
-                            ;
-                          },
+                          onPressed: onPressed,
                           icon: Icon(
                             Icons.wrap_text_rounded,
                             size: 20,
@@ -110,19 +98,18 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
                 ],
               ),
             ]),
-            SizedBox(height: 10),
-            Container(
-              child: TextField(
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Количество',
-                  labelStyle:
-                      TextStyle(fontSize: typography.bodyMedium?.fontSize),
-                  hintText: '100',
-                ),
-              ),
-            ),
+            // Container(
+            //   child: TextField(
+            //     keyboardType: TextInputType.phone,
+            //     decoration: InputDecoration(
+            //       border: OutlineInputBorder(),
+            //       labelText: 'Количество',
+            //       labelStyle:
+            //           TextStyle(fontSize: typography.bodyMedium?.fontSize),
+            //       hintText: '100',
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

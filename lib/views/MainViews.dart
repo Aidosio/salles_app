@@ -103,13 +103,15 @@ class _MainViewsState extends State<MainViews> {
     TextTheme typography = Theme.of(context).textTheme;
     PageController _pageController = PageController(initialPage: 0);
     List<Widget> _pages = [
-      HomeViews(),
+      HomeViews(
+        id: _ids,
+      ),
       CategoryViews(),
       RecordViews(),
       EmployeesView2(
         id: _ids,
       ),
-      SalesViews2(),
+      SalesViews(),
     ];
 
     bool? color;

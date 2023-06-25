@@ -15,32 +15,11 @@ class EmployeesView2 extends StatefulWidget {
 }
 
 class _EmployeesViewState extends State<EmployeesView2> {
-  Company? _company;
-  bool isLoaded = false;
-
-  _getCompanyByOwnerId(String id) async {
-    try {
-      Company? company = await CompanyService().getCompanyByOwnerId(id);
-      setState(() {
-        _company = company;
-      });
-      isLoaded = true;
-      print(_company);
-    } catch (e) {
-      print('Error getting company by ID: $e');
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getCompanyByOwnerId(widget.id);
-  }
-
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    String ids = widget.id;
 
     return DefaultTabController(
       initialIndex: 1,
@@ -58,8 +37,8 @@ class _EmployeesViewState extends State<EmployeesView2> {
         ),
         resizeToAvoidBottomInset: false,
         body: TabBarView(children: <Widget>[
-          EmployeesConsiderationViews(),
-          EmployeesAcceptedViews(),
+          EmployeesConsiderationViews(id: ids),
+          EmployeesAcceptedViews(id: ids),
         ]),
       ),
     );

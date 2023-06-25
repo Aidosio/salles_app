@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:salles_app/widgets/IconButtonDialogWidgets.dart';
+import 'package:salles_app/widgets/IconButtonDialogWidgetsRecord.dart';
 
 import '../locale/AppLocalizations.dart';
 
@@ -35,7 +35,8 @@ class RecordSalesCardWidgets extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, '/');
+          Navigator.pushNamed(context, '/record-purchase',
+              arguments: {"salesId": salesId, "companyId": id});
         },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 15),
@@ -78,7 +79,7 @@ class RecordSalesCardWidgets extends StatelessWidget {
                         shape: BoxShape.rectangle,
                         color: Colors.red.shade200,
                       ),
-                      child: IconButtonDialogWidgets(
+                      child: IconButtonDialogWidgetsRecord(
                         colorChoice: Colors.red.shade200,
                         idYes: idYes,
                         idNo: idNo,

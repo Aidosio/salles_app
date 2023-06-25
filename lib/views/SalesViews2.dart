@@ -18,7 +18,7 @@ class _SalesViewsState extends State<SalesViews2> {
     TextTheme typography = Theme.of(context).textTheme;
 
     return DefaultTabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 4,
       child: Scaffold(
         appBar: TabBar(
@@ -29,23 +29,11 @@ class _SalesViewsState extends State<SalesViews2> {
             Tab(
               text: "Сегодня",
             ),
-            Tab(
-              text: "Вчера",
-            ),
-            Tab(
-              text: "Последняя неделя",
-            ),
-            Tab(
-              text: "Прошлые месяца",
-            ),
           ],
         ),
         resizeToAvoidBottomInset: false,
         body: TabBarView(children: <Widget>[
           PurchasesList(),
-          PurchasesList(),
-          PurchasesList(),
-          PurchasesList()
         ]),
       ),
     );

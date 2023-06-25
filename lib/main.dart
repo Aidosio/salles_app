@@ -36,7 +36,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _currentLocale = const Locale('ru', '');
+  Locale _currentLocale = const Locale('es', '');
   AppLocalizationsDelegate _localizationsDelegate = AppLocalizationsDelegate();
   bool _isLoggedIn = false;
 
@@ -111,9 +111,9 @@ class _MyAppState extends State<MyApp> {
             ),
         '/category-views': (context) => CategoryChildViews(),
         '/sales-refund': (context) => SalesRefundViews(),
-        '/sales-refund-Accept': (context) => SalesRefundAcceptionViews(),
+        '/sales-refund-accept': (context) => SalesRefundAcceptionViews(),
         '/product': (context) => ProductViews(),
-        '/record-Purchase': (context) => RecordPurchaseViews(),
+        '/record-purchase': (context) => RecordPurchaseViews(),
         '/sales-views': (context) => SalesViews2(),
         '/record-calculate': (context) => RecordCalculateViews(),
         '/record': (context) => RecordViews(),

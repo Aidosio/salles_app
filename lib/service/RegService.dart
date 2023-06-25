@@ -28,9 +28,6 @@ class RegService {
       final responseBody = jsonDecode(response.body);
       token = responseBody['token'];
 
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('token', token!);
-
       print('Успешная авторизация $token');
     } else {
       print('Ошибка авторизации: ${response.statusCode}');

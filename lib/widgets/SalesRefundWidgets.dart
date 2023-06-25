@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import '../locale/AppLocalizations.dart';
 
 class SalesRefundWidgets extends StatelessWidget {
-  const SalesRefundWidgets({super.key});
+  final String name;
+  final String price;
+
+  const SalesRefundWidgets({
+    Key? key,
+    required this.name,
+    required this.price,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +40,13 @@ class SalesRefundWidgets extends StatelessWidget {
                   Text(
                     'Название товара:',
                     style: TextStyle(
-                        fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                   Text(
-                    'Яблоки',
+                    name,
                     style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],
@@ -49,12 +57,13 @@ class SalesRefundWidgets extends StatelessWidget {
                   Text(
                     'Цена:',
                     style: TextStyle(
-                        fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                   Text(
-                    '10000' + ' тг',
+                    price + ' тг',
                     style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],
@@ -65,12 +74,13 @@ class SalesRefundWidgets extends StatelessWidget {
                   Text(
                     'Кол-во:',
                     style: TextStyle(
-                        fontSize: typography.bodyMedium?.fontSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                   Text(
-                    '10' + ' шт',
+                    '1' + ' шт',
                     style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],

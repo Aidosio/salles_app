@@ -28,7 +28,7 @@ class SalesHistoryWidget extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/sales-refund', arguments: '');
+            Navigator.pushNamed(context, '/sales-refund', arguments: checkNum);
           },
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 15),

@@ -212,11 +212,6 @@ class _LoginViewsState extends State<LoginViews> {
                         onPressed: () => changeLanguageAndColor(
                             false, const Locale('ru', '')),
                         child: Text('Рус'),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            color == false ? Colors.lightBlue.shade50 : null,
-                          ),
-                        ),
                       ),
                       SizedBox(
                         width: 8,
@@ -227,11 +222,6 @@ class _LoginViewsState extends State<LoginViews> {
                           print(widget.currentLocale.languageCode);
                         },
                         child: Text('Қаз'),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            color == true ? Colors.lightBlue.shade50 : null,
-                          ),
-                        ),
                       ),
                     ],
                   ),

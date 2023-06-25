@@ -35,12 +35,14 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  Container(
-                      width: 140,
-                      child: Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 140,
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
@@ -58,40 +60,50 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             )
-                          ])),
-                  Container(
-                    padding: EdgeInsets.only(left: 10),
-                    width: 100,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Цена:',
-                            style: TextStyle(
-                                fontSize: typography.bodyMedium?.fontSize,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            productPrice + ' тг',
-                            style: TextStyle(
-                                fontSize: typography.bodyMedium?.fontSize,
-                                color: Colors.blue.shade700,
-                                fontWeight: FontWeight.w700),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          )
-                        ]),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(left: 10),
+                        width: 100,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Цена:',
+                              style: TextStyle(
+                                  fontSize: typography.bodyMedium?.fontSize,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              productPrice + ' тг',
+                              style: TextStyle(
+                                  fontSize: typography.bodyMedium?.fontSize,
+                                  color: Colors.blue.shade700,
+                                  fontWeight: FontWeight.w700),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Column(
+                          children: [
+                            IconButtonDialogWidgets(
+                                idYes: 'idYes',
+                                idNo: 'idNo',
+                                idCompany: '',
+                                alertTitle:
+                                    'Вы уверены, что хотите удалить товар?',
+                                icon: Icon(Icons.delete_outline,
+                                    color: Colors.black87),
+                                colorChoice: Colors.red.shade200)
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                      child: Column(children: [
-                    IconButtonDialogWidgets(
-                        idYes: 'idYes',
-                        idNo: 'idNo',
-                        idCompany: '',
-                        alertTitle: 'Вы уверены, что хотите удалить товар?',
-                        icon: Icon(Icons.delete_outline, color: Colors.black87),
-                        colorChoice: Colors.red.shade200)
-                  ])),
                 ],
               ),
             ],

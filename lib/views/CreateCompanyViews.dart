@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:salles_app/service/CompanyService.dart';
 import 'package:salles_app/service/RegService.dart';
 import '../locale/AppLocalizations.dart';
@@ -13,24 +14,11 @@ class CreateCompanyViews extends StatefulWidget {
 }
 
 class _CreateCompanyViewsState extends State<CreateCompanyViews> {
-  String _ids = '';
   String name = '';
   String errorName = '';
 
-  void getIdUser() async {
-    String? userId = await RegService.getUserId();
-    if (userId != null) {
-      setState(() {
-        _ids = userId;
-      });
-      print('User ID: $userId');
-    } else {
-      print('User is not authenticated');
-    }
-  }
-
-  void createCompany() async {
-    await CompanyService().createCompany(name, _ids);
+  void createCompany(String names, String id) async {
+    await CompanyService().createCompany(names, id);
     Navigator.pushNamed(context, '/waiting');
   }
 
@@ -39,15 +27,15 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
   // }
 
   @override
-  void initState() {
-    super.initState();
-    getIdUser();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    final arguments = ModalRoute.of(context)?.settings.arguments as String;
+
+    final decodedToken = JwtDecoder.decode(arguments);
+    final _ids = decodedToken['id'];
+
+    print('User ID: $_ids');
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -84,7 +72,9 @@ class _CreateCompanyViewsState extends State<CreateCompanyViews> {
               ),
               SizedBox(height: 30),
               FilledButton.tonal(
-                onPressed: createCompany,
+                onPressed: () {
+                  createCompany(name, _ids);
+                },
                 child: Text("Зарегистрироваться"),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(

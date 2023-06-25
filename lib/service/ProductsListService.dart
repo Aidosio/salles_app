@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
 
+import 'package:salles_app/models/Products.dart';
 import 'package:salles_app/models/ProductsList.dart';
 import 'package:http/http.dart' as http;
 import 'package:salles_app/service/Auth.dart';
@@ -55,6 +55,68 @@ class ProductsListService {
       var json = response.body;
       return productsListFromJson(json);
     }
+    return null;
+  }
+
+  Future<List<ProductsList>?> getLastProducts(String companyId) async {
+    var client = http.Client();
+    String? token = await Auth.getToken();
+
+    var uri = Uri.parse(
+        'https://salles-app.onrender.com/api/v1/product/$companyId/latest');
+
+    try {
+      var response = await client.get(
+        uri,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var json = response.body;
+        return productsListFromJson(json);
+      } else {
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error getting last products: $e');
+    } finally {
+      client.close();
+    }
+
+    return null;
+  }
+
+  getProductsById(String productId) async {
+    var client = http.Client();
+    String? token = await Auth.getToken();
+
+    var uri =
+        Uri.parse('https://salles-app.onrender.com/api/v1/product/$productId');
+
+    try {
+      var response = await client.get(
+        uri,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var json = response.body;
+        return productsFromJson(json);
+      } else {
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error getting last products: $e');
+    } finally {
+      client.close();
+    }
+
     return null;
   }
 
