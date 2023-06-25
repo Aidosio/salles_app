@@ -115,10 +115,6 @@ class _LoginViewsState extends State<LoginViews> {
                         SizedBox(height: 30),
                         FilledButton.tonal(
                           onPressed: () async {
-                            setState(() {
-                              isLoading = true;
-                            });
-
                             if (phoneNumber.isEmpty && password.isEmpty) {
                               print(localizations?.errorNumberAndPassword ?? ''
                                   // 'Ошибка: Введите номер телефона и пароль'
@@ -176,6 +172,9 @@ class _LoginViewsState extends State<LoginViews> {
                             Auth.authenticate(
                                     phoneNumberWithoutDashes, password)
                                 .then((_) {
+                              setState(() {
+                                isLoading = true;
+                              });
                               // Проверяем, была ли успешная авторизация
                               if (Auth.token != null) {
                                 // Авторизация успешна, переходим на главный экран
