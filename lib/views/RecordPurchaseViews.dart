@@ -21,7 +21,7 @@ class RecordPurchaseViews extends StatefulWidget {
 class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
   bool isLoading = false;
   String _barcodeScanResult = '';
-  List<Map<String, dynamic>> _productsList = [];
+  List<Products> _productsList = [];
   Sales? _sales;
 
   getBarcodeProduct(String barcode) async {
@@ -39,10 +39,7 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
 
   addProductToList(Products product) {
     setState(() {
-      Map<String, dynamic> productMap = {
-        "product": product,
-      };
-      _productsList.add(productMap);
+      _productsList.add(product);
       isLoading = true;
     });
     print(_productsList);
@@ -60,8 +57,7 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
     try {
       await SalesService().removeProdutsSales(salesId, productId);
       setState(() {
-        _productsList
-            .removeWhere((productMap) => productMap['product'].id == productId);
+        _productsList.removeWhere((product) => product.id == productId);
       });
     } catch (e) {
       print('removeProdutsSales $e');
@@ -76,17 +72,13 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
     print(_barcodeScanResult);
   }
 
-  _getProductsById(String productId, int quantity) async {
+  _getProductsById(String productId) async {
     try {
       Products? products =
           await ProductsListService().getProductsById(productId);
       if (products != null) {
-        Map<String, dynamic> productMap = {
-          "product": products,
-          "quantity": quantity,
-        };
         setState(() {
-          _productsList.add(productMap);
+          _productsList.add(products);
           isLoading = true;
         });
         print(_productsList);
@@ -103,9 +95,8 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
 
       for (int i = 0; i < productIds.length; i++) {
         String productId = productIds[i]['productId'];
-        int quantity = productIds[i]['quantity'];
 
-        _getProductsById(productId, quantity);
+        _getProductsById(productId);
       }
 
       setState(() {
@@ -117,6 +108,28 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
       print('Sales $e');
     }
   }
+
+  setStatus(String id) async {
+    try {
+      await SalesService().salesStatud(id);
+    } catch (e) {
+      print('object status $e');
+    }
+  }
+
+  calcTotalPrice(String id) async {
+    try {
+      String? totalPrice = await SalesService().calculateTotalPrice(id);
+      setStatus(id);
+      Navigator.pushNamed(context, '/record-calculate', arguments: totalPrice);
+    } catch (e) {
+      print('object total $e');
+    }
+  }
+
+  // () {
+  //           Navigator.pushNamed(context, '/record-calculate');
+  //         },
 
   @override
   void initState() {
@@ -136,38 +149,39 @@ class _RecordPurchaseViewsState extends State<RecordPurchaseViews> {
               child: Column(
                 children: [
                   Visibility(
-                      visible: isLoading,
-                      replacement: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      child: _productsList.isNotEmpty
-                          ? ListView.builder(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: _productsList.length,
-                              itemBuilder: (context, index) {
-                                final productMap = _productsList[index]
-                                    as Map<String, dynamic>;
-                                final product =
-                                    productMap["product"] as Products;
-                                return RecordPurchaseCardWidgets(
-                                  productName: product.name,
-                                  productPrice: product.price.toString(),
-                                  onPressed: () => removeProdutsSales(
-                                      widget.arguments, product.id),
-                                );
-                              },
-                            )
-                          : Text('No products available')),
+                    visible: isLoading,
+                    replacement: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    child: _productsList.isNotEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: _productsList.length,
+                            itemBuilder: (context, index) {
+                              final product = _productsList[index];
+                              return RecordPurchaseCardWidgets(
+                                productName: product.name,
+                                productPrice: product.price.toString(),
+                                onPressed: () => removeProdutsSales(
+                                  widget.arguments,
+                                  product.id,
+                                ),
+                              );
+                            },
+                          )
+                        : Text('No products available'),
+                  ),
                 ],
               ),
             ),
             RecordPurchaseViewsBottomBar(
               onBarcodeScanResult: _handleBarcodeScanResult,
+              onPressed: () => calcTotalPrice(widget.arguments),
             ),
             SizedBox(
               height: 20,
-            )
+            ),
           ],
         ),
       ),
