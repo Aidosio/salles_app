@@ -52,23 +52,26 @@ class _RegisterViewsState extends State<RegisterViews> {
           password.isEmpty) {
         print('Ошибка: Введите номер телефона и пароль');
         setState(() {
-          errorFirstname = "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
-          errorLastname =
-              "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
-          errorPhoneNumber =
-              "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
-          errorPassword = "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+          errorFirstname = localizations?.errorEnteringName ?? '';
+          // "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
+          errorLastname = localizations?.errorEnteringLastName ?? '';
+          // "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+          errorPhoneNumber = localizations?.errorEnteringPhoneNumber ?? '';
+          // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+          errorPassword = localizations?.errorEnteringPassword ?? '';
+          // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
         });
         return;
       }
       if (lastname.isEmpty && phoneNumber.isEmpty && password.isEmpty) {
         print('Ошибка: Введите номер телефона и пароль');
         setState(() {
-          errorLastname =
-              "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
-          errorPhoneNumber =
-              "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
-          errorPassword = "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+          errorLastname = localizations?.errorEnteringLastName ?? '';
+          // "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+          errorPhoneNumber = localizations?.errorEnteringPhoneNumber ?? '';
+          // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+          errorPassword = localizations?.errorEnteringPassword ?? '';
+          // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
         });
         return;
       }
@@ -76,8 +79,11 @@ class _RegisterViewsState extends State<RegisterViews> {
         print('Ошибка: Введите номер телефона и пароль');
         setState(() {
           errorPhoneNumber =
-              "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
-          errorPassword = "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+              errorPhoneNumber = localizations?.errorEnteringPhoneNumber ?? '';
+          // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+          errorPassword =
+              errorPassword = localizations?.errorEnteringPassword ?? '';
+          // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
         });
         return;
       }
@@ -88,14 +94,16 @@ class _RegisterViewsState extends State<RegisterViews> {
           errorFirstname = '';
           errorLastname = '';
           errorPhoneNumber = '';
-          errorPassword = "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+          errorPassword = localizations?.errorEnteringPassword ?? '';
+          // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
         });
         return;
       }
       if (firstname.isEmpty) {
         print("Ошибка при вводе имени: 'Ошибка: Введите имя'.");
         setState(() {
-          errorFirstname = "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
+          errorFirstname = localizations?.errorEnteringName ?? '';
+          // "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
           errorLastname = '';
           errorPhoneNumber = '';
           errorPassword = '';
@@ -106,8 +114,8 @@ class _RegisterViewsState extends State<RegisterViews> {
         print("Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.");
         setState(() {
           errorFirstname = "";
-          errorLastname =
-              "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+          errorLastname = localizations?.errorEnteringLastName ?? '';
+          // "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
           errorPhoneNumber = '';
           errorPassword = '';
         });
@@ -119,8 +127,8 @@ class _RegisterViewsState extends State<RegisterViews> {
         setState(() {
           errorFirstname = "";
           errorLastname = "";
-          errorPhoneNumber =
-              "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+          errorPhoneNumber = localizations?.errorEnteringPhoneNumber ?? '';
+          // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
           errorPassword = '';
         });
         return;
@@ -193,8 +201,10 @@ class _RegisterViewsState extends State<RegisterViews> {
                         TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Имя',
-                            hintText: 'Имя',
+                            labelText: localizations?.personFirstName ?? '',
+                            // 'Имя',
+                            hintText: localizations?.personFirstName ?? '',
+                            // 'Имя',
                             prefixIcon: Icon(Icons.person),
                             errorText: errorFirstname.isNotEmpty
                                 ? errorFirstname
@@ -210,8 +220,10 @@ class _RegisterViewsState extends State<RegisterViews> {
                         TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Фамилия',
-                            hintText: 'Фамилия',
+                            labelText: localizations?.personSecondName ?? '',
+                            // 'Фамилия',
+                            hintText: localizations?.personSecondName ?? '',
+                            // 'Фамилия',
                             prefixIcon: Icon(Icons.person),
                             errorText:
                                 errorLastname.isNotEmpty ? errorLastname : null,
@@ -231,7 +243,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: '+777-777-77-77',
-                            labelText: 'Номер телефона',
+                            labelText: localizations?.phoneNumber ?? '',
+                            // 'Номер телефона',
                             prefixIcon: Icon(Icons.phone_android_sharp),
                             errorText: errorPhoneNumber.isNotEmpty
                                 ? errorPhoneNumber
@@ -248,8 +261,10 @@ class _RegisterViewsState extends State<RegisterViews> {
                           obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: 'Пароль',
-                            labelText: 'Пароль',
+                            hintText: localizations?.password ?? '',
+                            // 'Пароль',
+                            labelText: localizations?.password ?? '',
+                            // 'Пароль',
                             prefixIcon: Icon(Icons.lock),
                             errorText:
                                 errorPassword.isNotEmpty ? errorPassword : null,
@@ -270,13 +285,18 @@ class _RegisterViewsState extends State<RegisterViews> {
                               print('Ошибка: Введите номер телефона и пароль');
                               setState(() {
                                 errorFirstname =
-                                    "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
+                                    localizations?.errorEnteringName ?? '';
+                                // "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
                                 errorLastname =
-                                    "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+                                    localizations?.errorEnteringLastName ?? '';
+                                // "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
                                 errorPhoneNumber =
-                                    "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                                    localizations?.errorEnteringPhoneNumber ??
+                                        '';
+                                // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
                                 errorPassword =
-                                    "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                                    localizations?.errorEnteringPassword ?? '';
+                                // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
                               });
                               return;
                             }
@@ -286,11 +306,15 @@ class _RegisterViewsState extends State<RegisterViews> {
                               print('Ошибка: Введите номер телефона и пароль');
                               setState(() {
                                 errorLastname =
-                                    "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+                                    localizations?.errorEnteringLastName ?? '';
+                                // "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
                                 errorPhoneNumber =
-                                    "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                                    localizations?.errorEnteringPhoneNumber ??
+                                        '';
+                                // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
                                 errorPassword =
-                                    "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                                    localizations?.errorEnteringPassword ?? '';
+                                // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
                               });
                               return;
                             }
@@ -298,9 +322,12 @@ class _RegisterViewsState extends State<RegisterViews> {
                               print('Ошибка: Введите номер телефона и пароль');
                               setState(() {
                                 errorPhoneNumber =
-                                    "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                                    localizations?.errorEnteringPhoneNumber ??
+                                        '';
+                                // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
                                 errorPassword =
-                                    "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                                    localizations?.errorEnteringPassword ?? '';
+                                // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
                               });
                               return;
                             }
@@ -313,7 +340,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                                 errorLastname = '';
                                 errorPhoneNumber = '';
                                 errorPassword =
-                                    "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
+                                    localizations?.errorEnteringPassword ?? '';
+                                // "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.";
                               });
                               return;
                             }
@@ -322,7 +350,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                                   "Ошибка при вводе имени: 'Ошибка: Введите имя'.");
                               setState(() {
                                 errorFirstname =
-                                    "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
+                                    localizations?.errorEnteringName ?? '';
+                                // "Ошибка при вводе имени: 'Ошибка: Введите имя'.";
                                 errorLastname = '';
                                 errorPhoneNumber = '';
                                 errorPassword = '';
@@ -335,7 +364,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                               setState(() {
                                 errorFirstname = "";
                                 errorLastname =
-                                    "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
+                                    localizations?.errorEnteringLastName ?? '';
+                                // "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
                                 errorPhoneNumber = '';
                                 errorPassword = '';
                               });
@@ -348,7 +378,9 @@ class _RegisterViewsState extends State<RegisterViews> {
                                 errorFirstname = "";
                                 errorLastname = "";
                                 errorPhoneNumber =
-                                    "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
+                                    localizations?.errorEnteringPhoneNumber ??
+                                        '';
+                                // "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.";
                                 errorPassword = '';
                               });
                               return;

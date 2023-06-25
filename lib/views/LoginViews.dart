@@ -130,29 +130,40 @@ class _LoginViewsState extends State<LoginViews> {
                             }
                             if (password.isEmpty) {
                               print(errorPassword =
-                                  localizations?.errorPassword ??
-                                      ''
-                                          'Ошибка: Введите пароль');
+                                      localizations?.errorPassword ?? ''
+                                  // 'Ошибка: Введите пароль'
+                                  );
                               setState(() {
                                 errorPhone = '';
-                                errorPassword = 'Ошибка: Введите пароль';
+                                errorPassword =
+                                    localizations?.errorPassword ?? '';
+                                // 'Ошибка: Введите пароль';
                               });
                               return;
                             }
 
                             if (password.isEmpty) {
-                              print('Ошибка: Введите пароль');
+                              print(localizations?.errorPassword ?? ''
+                                  // 'Ошибка: Введите пароль'
+                                  );
                               setState(() {
                                 errorPhone = '';
-                                errorPassword = 'Ошибка: Введите пароль';
+                                errorPassword =
+                                    localizations?.errorPassword ?? '';
+                                // 'Ошибка: Введите пароль';
                               });
                               return;
                             }
 
                             if (phoneNumber.isEmpty) {
-                              print('Ошибка: Введите номер телефона');
+                              print(
+                                  errorPhone = localizations?.errorNumber ?? ''
+                                  // 'Ошибка: Введите номер телефона'
+                                  );
                               setState(() {
-                                errorPhone = 'Ошибка: Введите номер телефона';
+                                errorPhone = errorPhone =
+                                    localizations?.errorNumber ?? '';
+                                // 'Ошибка: Введите номер телефона';
                                 errorPassword = '';
                               });
                               return;
@@ -165,8 +176,9 @@ class _LoginViewsState extends State<LoginViews> {
 
                             final phoneNumberWithoutDashes =
                                 phoneNumber.replaceAll('-', '');
-                            print('Номер телефона: $phoneNumberWithoutDashes');
-                            print('Пароль: $password');
+                            print(
+                                '${localizations?.phoneNumber}: $phoneNumberWithoutDashes');
+                            print('${localizations?.password}: $password');
                             print(await Auth.isLoggedIn());
 
                             setState(() {
@@ -182,7 +194,9 @@ class _LoginViewsState extends State<LoginViews> {
                                 navigateToMainViews(widget.currentLocale);
                               } else {
                                 // Ошибка авторизации, выводим сообщение об ошибке
-                                print('Ошибка авторизации');
+                                print(localizations?.authorizationError ?? ''
+                                    // 'Ошибка авторизации'
+                                    );
                               }
 
                               setState(() {
