@@ -62,6 +62,14 @@ class AppLocalizations {
         'registrationPage': 'registrationPage',
         'errorNumberAndPassword': 'errorNumberAndPassword',
         'errorPassword': 'errorPassword',
+        'errorNumber': 'errorNumber',
+        'authorizationError': 'authorizationError',
+        'errorEnteringName': 'errorEnteringName',
+        'errorEnteringLastName': 'errorEnteringLastName',
+        'errorEnteringPhoneNumber': 'errorEnteringPhoneNumber',
+        'errorEnteringPassword': 'errorEnteringPassword',
+        'personFirstName': 'personName',
+        'personSecondName': 'personSecondName',
       };
     } else if (languageCode == 'ru') {
       return {
@@ -112,7 +120,17 @@ class AppLocalizations {
         'registrationPage': 'Регистрация',
         'errorNumberAndPassword': 'Ошибка: Введите номер телефона и пароль',
         'errorPassword': 'Ошибка: Введите пароль',
-        'error телефон нөміріPassword': 'Ошибка: Введите номер телефона',
+        'errorNumber': 'Ошибка: Введите номер телефона',
+        'authorizationError': 'Ошибка авторизации',
+        'errorEnteringName': "Ошибка при вводе имени: 'Ошибка: Введите имя'.",
+        'errorEnteringLastName':
+            "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.",
+        'errorEnteringPhoneNumber':
+            "Ошибка при вводе номера телефона: 'Ошибка: Введите номер телефона'.",
+        'errorEnteringPassword':
+            "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.",
+        'personFirstName': 'Имя',
+        'personSecondName': 'Фамилия',
       };
     } else if (languageCode == 'es') {
       return {
@@ -165,6 +183,17 @@ class AppLocalizations {
             'Қате: Телефон нөмірі мен құпия сөзді енгізіңіз',
         'errorPassword': 'Қате: Құпия сөзді енгізіңіз',
         'errorNumber': 'Қате: Телефон нөмірің енгізіңіз',
+        'authorizationError': 'Авторизация кезінде қате',
+        'errorEnteringName':
+            "Есімді енгізу кезінде қате: 'Қате: есімді енгізіңіз'.",
+        'errorEnteringLastName':
+            "Фамилияны енгізу кезіндегі қате: 'Қате: Фамилияны енгізіңіз'.",
+        'errorEnteringPhoneNumber':
+            "Телефон нөмірін енгізудегі қате: 'Қате: Телефон нөмірін енгізіңіз'.",
+        'errorEnteringPassword':
+            "Құпия сөзді енгізу қатесі: 'Қате: Құпия сөзді енгізіңіз'.",
+        'personFirstName': 'Аты',
+        'personSecondName': 'Тегі',
       };
     }
 
@@ -370,5 +399,33 @@ class AppLocalizations {
 
   String? get errorNumber {
     return _localizedValues['errorNumber'];
+  }
+
+  String? get authorizationError {
+    return _localizedValues['authorizationError'];
+  }
+
+  String? get errorEnteringName {
+    return _localizedValues['errorEnteringName'];
+  }
+
+  String? get errorEnteringLastName {
+    return _localizedValues['errorEnteringLastName'];
+  }
+
+  String? get errorEnteringPhoneNumber {
+    return _localizedValues['errorEnteringPhoneNumber'];
+  }
+
+  String? get errorEnteringPassword {
+    return _localizedValues['errorEnteringPassword'];
+  }
+
+  String? get personFirstName {
+    return _localizedValues['errorEnteringPassword'];
+  }
+
+  String? get personSecondName {
+    return _localizedValues['errorEnteringPassword'];
   }
 }
