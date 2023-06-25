@@ -171,11 +171,11 @@ class _CategoryViewsState extends State<CategoryViews> {
           },
           elevation: 0,
           label: Text(
-            'Добавить товар',
+            localizations?.addNewProduct ?? '',
+            // 'Добавить товар',
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
           icon: Icon(Icons.add),
-          tooltip: "Добавить новый товар",
           extendedTextStyle: TextStyle(
               fontSize: typography.bodyMedium?.fontSize,
               fontWeight: FontWeight.w400),

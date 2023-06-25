@@ -41,36 +41,40 @@ class _EmployeesAcceptedViewsState extends State<EmployeesAcceptedViews> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
-    return Container(
-      padding: EdgeInsets.only(left: 15, right: 15, top: 8),
-      child: Column(
-        children: [
-          Visibility(
-            visible: isLoaded,
-            replacement: const Center(
-              child: CircularProgressIndicator(),
-            ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: _company?.sellers.length,
-              itemBuilder: (context, index) {
-                final seller = _company?.sellers[index];
+    return SingleChildScrollView(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(left: 15, right: 15, top: 8),
+          child: SingleChildScrollView(
+            physics: ScrollPhysics(),
+            child: Visibility(
+              visible: isLoaded,
+              replacement: const Center(
+                child: CircularProgressIndicator(),
+              ),
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: _company?.sellers.length,
+                itemBuilder: (context, index) {
+                  final seller = _company?.sellers[index];
 
-                if (seller?.enabled == true) {
-                  // Активный пользователь
-                  return EmployeesAcceptedWidget(
-                    fullName: '${seller?.lastName} ${seller?.firstName}',
-                    phoneNubmer: seller?.phone,
-                    id: seller?.id,
-                  );
-                } else {
-                  // Неактивный пользователь
-                  return Container();
-                }
-              },
+                  if (seller?.enabled == true) {
+                    // Активный пользователь
+                    return EmployeesAcceptedWidget(
+                      fullName: '${seller?.lastName} ${seller?.firstName}',
+                      phoneNubmer: seller?.phone,
+                      id: seller?.id,
+                    );
+                  } else {
+                    // Неактивный пользователь
+                    return Container();
+                  }
+                },
+              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -119,7 +119,8 @@ class _HomeViewsState extends State<HomeViews> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Последние продажи',
+                        localizations?.lastSales ?? '',
+                        // 'Последние продажи',
                         style: TextStyle(
                             fontSize: typography.bodyMedium?.fontSize,
                             fontWeight: FontWeight.w600),
@@ -142,7 +143,8 @@ class _HomeViewsState extends State<HomeViews> {
                       SalesHistoryWidget(checkNum: '4564644', price: '4500')
                     else
                       Text(
-                        'У вас пока нету продаж',
+                        localizations?.youHaveNoSales ?? '',
+                        // 'У вас пока нету продаж',
                         style: TextStyle(
                             fontSize: typography.bodyLarge?.fontSize,
                             fontWeight: FontWeight.w500),
@@ -157,7 +159,8 @@ class _HomeViewsState extends State<HomeViews> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Последние добавленные товары',
+                        localizations?.lastAddedProducts ?? '',
+                        // 'Последние добавленные товары',
                         style: TextStyle(
                             fontSize: typography.bodyMedium?.fontSize,
                             fontWeight: FontWeight.w600),

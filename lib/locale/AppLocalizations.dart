@@ -20,7 +20,13 @@ class AppLocalizations {
         'message': 'Welcome to my app!',
         'enter': 'enter',
         'areYouHow': '',
-        'phoneNumber': 'Номер'
+        'phoneNumber': 'Номер',
+        'youHaveNoSales': 'youHaveNoSales',
+        'lastSales': 'lastSales',
+        'lastAddedProducts': 'lastAddedProducts',
+        'addNewProduct': 'addNewProduct',
+        'makeASale': 'makeASale',
+        'underConsideration': 'underConsideration',
       };
     } else if (languageCode == 'ru') {
       return {
@@ -28,7 +34,13 @@ class AppLocalizations {
         'message': 'Добро пожаловать в мое приложение',
         'enter': 'Вход',
         'areYouHow': 'Вы являетесь',
-        'phoneNumber': 'Номер'
+        'phoneNumber': 'Номер',
+        'youHaveNoSales': 'У вас нет продаж',
+        'lastSales': 'Последние продажи',
+        'lastAddedProducts': 'Последние добавленные товары',
+        'addNewProduct': 'Добавить товар',
+        'makeASale': 'Оформить продажу',
+        'underConsideration': 'На рассмотрении',
       };
     } else if (languageCode == 'es') {
       return {
@@ -36,7 +48,13 @@ class AppLocalizations {
         'message': 'Менің қосымшама қош келдіңіз',
         'enter': 'Кiру',
         'areYouHow': 'Сіз',
-        'phoneNumber': 'Нөмірі'
+        'phoneNumber': 'Нөмірі',
+        'youHaveNoSales': 'Сізде сатылым жоқ',
+        'lastSales': 'Соңғы сатылымдар',
+        'lastAddedProducts': 'Соңғы қосылған тауарлар',
+        'addNewProduct': 'Тауар қосу',
+        'makeASale': 'Сатуды рәсімдеу',
+        'underConsideration': 'Қарауда',
       };
     }
 
@@ -66,5 +84,33 @@ class AppLocalizations {
 
   String? get phoneNumber {
     return _localizedValues['phoneNumber'];
+  }
+
+  String? get youHaveNoSales {
+    return _localizedValues['youHaveNoSales'];
+  }
+
+  String? get phoneNumber2 {
+    return _localizedValues['phoneNumber2'];
+  }
+
+  String? get lastSales {
+    return _localizedValues['lastSales'];
+  }
+
+  String? get lastAddedProducts {
+    return _localizedValues['lastAddedProducts'];
+  }
+
+  String? get addNewProduct {
+    return _localizedValues['addNewProduct'];
+  }
+
+  String? get makeASale {
+    return _localizedValues['makeASale'];
+  }
+
+  String? get underConsideration {
+    return _localizedValues['underConsideration'];
   }
 }

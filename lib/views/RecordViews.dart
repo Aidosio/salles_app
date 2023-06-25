@@ -135,49 +135,52 @@ class _RecordViewsState extends State<RecordViews> {
           child: Column(
             children: [
               Expanded(
-                child: Column(
-                  children: [
-                    Visibility(
-                      visible: isLoaded,
-                      replacement: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: _salesList?.length,
-                        itemBuilder: (context, index) {
-                          if (!_salesList!.isEmpty) {
-                            if (!_salesList![index].status) {
-                              return RecordSalesCardWidgets(
-                                idYes: _salesList![index].id,
-                                idNo: 'no',
-                                salesId: _salesList![index].id,
-                                id: _company!.id,
+                child: SingleChildScrollView(
+                  physics: ScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Visibility(
+                        visible: isLoaded,
+                        replacement: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: _salesList?.length,
+                          itemBuilder: (context, index) {
+                            if (!_salesList!.isEmpty) {
+                              if (!_salesList![index].status) {
+                                return RecordSalesCardWidgets(
+                                  idYes: _salesList![index].id,
+                                  idNo: 'no',
+                                  salesId: _salesList![index].id,
+                                  id: _company!.id,
+                                );
+                              }
+                            } else {
+                              return Container(
+                                child: Text('data'),
                               );
                             }
-                          } else {
-                            return Container(
-                              child: Text('data'),
-                            );
-                          }
-                        },
+                          },
+                        ),
                       ),
-                    ),
 
-                    // RecordSalesCardWidgets(
-                    //   idYes: 'yes',
-                    //   idNo: 'no',
-                    //   salesId: '55465464989842132132165464789',
-                    //   id: '1',
-                    // ),
-                    // RecordSalesCardWidgets(
-                    //   idYes: 'yes',
-                    //   idNo: 'no',
-                    //   salesId: '5522222222222222266666666664',
-                    //   id: '2',
-                    // ),
-                  ],
+                      // RecordSalesCardWidgets(
+                      //   idYes: 'yes',
+                      //   idNo: 'no',
+                      //   salesId: '55465464989842132132165464789',
+                      //   id: '1',
+                      // ),
+                      // RecordSalesCardWidgets(
+                      //   idYes: 'yes',
+                      //   idNo: 'no',
+                      //   salesId: '5522222222222222266666666664',
+                      //   id: '2',
+                      // ),
+                    ],
+                  ),
                 ),
               ),
               Container(
@@ -191,7 +194,8 @@ class _RecordViewsState extends State<RecordViews> {
                     // Navigator.pushNamed(context, '/');
                   },
                   label: Text(
-                    'Оформить продажу',
+                    localizations?.makeASale ?? '',
+                    // 'Оформить продажу',
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w600,

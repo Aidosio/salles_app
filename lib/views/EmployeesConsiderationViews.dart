@@ -62,31 +62,35 @@ class _EmployeesConsiderationViewsState
       },
       child: Container(
         padding: EdgeInsets.only(left: 15, right: 15, top: 8),
-        child: Column(
-          children: [
-            Visibility(
-              visible: isLoaded,
-              replacement: const Center(
-                child: CircularProgressIndicator(),
-              ),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: _company?.sellers.length,
-                itemBuilder: (context, index) {
-                  final seller = _company?.sellers[index];
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Column(
+            children: [
+              Visibility(
+                visible: isLoaded,
+                replacement: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                child: ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _company?.sellers.length,
+                  itemBuilder: (context, index) {
+                    final seller = _company?.sellers[index];
 
-                  if (seller?.enabled == false) {
-                    return EmployeesConsiderationWidget(
-                        fullName: '${seller?.lastName} ${seller?.firstName}',
-                        id: seller?.id,
-                        companyId: _company!.id);
-                  } else {
-                    return Container();
-                  }
-                },
+                    if (seller?.enabled == false) {
+                      return EmployeesConsiderationWidget(
+                          fullName: '${seller?.lastName} ${seller?.firstName}',
+                          id: seller?.id,
+                          companyId: _company!.id);
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
