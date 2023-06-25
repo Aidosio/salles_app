@@ -85,10 +85,10 @@ class _RecordViewsState extends State<RecordViews> {
       List<SalesList>? salesList = await SalesService().getAllSales(id);
       setState(() {
         _salesList = salesList;
-        _filteredSalesList = salesList != null ? List.from(salesList) : null;
+        _filteredSalesList = salesList != null ? List.from(salesList) : [];
+        isLoaded = true; // Обновите значение переменной isLoaded
       });
       print(_filteredSalesList);
-      isLoaded = true;
     } catch (e) {
       print('Error getting sales by ID: $e');
     }
@@ -175,31 +175,37 @@ class _RecordViewsState extends State<RecordViews> {
                         replacement: Center(
                           child: CircularProgressIndicator(),
                         ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: _filteredSalesList?.length,
-                          itemBuilder: (context, index) {
-                            if (_filteredSalesList!.isNotEmpty) {
-                              if (!_filteredSalesList![index].status) {
-                                return RecordSalesCardWidgets(
-                                  idYes: _filteredSalesList![index].id,
-                                  idNo: 'no',
-                                  salesId: _filteredSalesList![index].id,
-                                  id: _filteredSalesList![index].id,
-                                  onPressed: () => _deleteSales(
-                                      _filteredSalesList![index].id),
-                                );
-                              } else {
-                                return Container();
-                              }
-                            } else {
-                              return Container(
-                                child: Text('data'),
-                              );
-                            }
-                          },
-                        ),
+                        child: _filteredSalesList != null &&
+                                _filteredSalesList!.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: _filteredSalesList!.length,
+                                itemBuilder: (context, index) {
+                                  if (!_filteredSalesList![index].status) {
+                                    return RecordSalesCardWidgets(
+                                      idYes: _filteredSalesList![index].id,
+                                      idNo: 'no',
+                                      salesId: _filteredSalesList![index].id,
+                                      id: _filteredSalesList![index].id,
+                                      onPressed: () => _deleteSales(
+                                          _filteredSalesList![index].id),
+                                    );
+                                  } else if (index ==
+                                      _filteredSalesList!.length - 1) {
+                                    // Последний элемент и все предыдущие имеют status == true
+                                    return Container(
+                                      alignment: Alignment.center,
+                                      child: Text('У вас нету автиных продаж'),
+                                    );
+                                  } else {
+                                    return Container();
+                                  }
+                                },
+                              )
+                            : Container(
+                                child: Text('У вас нету автиных продаж'),
+                              ),
                       ),
                     ],
                   ),

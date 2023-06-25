@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:salles_app/widgets/IconButtonDialogWidgets.dart';
 
 import '../locale/AppLocalizations.dart';
+import '../service/Auth.dart';
 
 class EmployeesAcceptedWidget extends StatelessWidget {
   final String fullName;
   final String id;
+  final bool role;
 
   final String phoneNubmer;
   const EmployeesAcceptedWidget(
       {Key? key,
       required this.fullName,
       required this.id,
-      required this.phoneNubmer})
+      required this.phoneNubmer,
+      required this.role})
       : super(key: key);
 
   @override
@@ -50,24 +53,27 @@ class EmployeesAcceptedWidget extends StatelessWidget {
               ),
             ],
           ),
-          Column(
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: IconButtonDialogWidgets(
-                      colorChoice: Colors.red.shade200,
-                      idYes: 'idYes',
-                      idNo: 'idNo',
-                      idCompany: '',
-                      alertTitle: 'Вы уверены, что хотите уволить сотрудника?',
-                      icon: Icon(
-                        Icons.delete_outline,
-                        color: Colors.black87,
-                      ))),
-            ],
-          ),
+          role
+              ? Column(
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: IconButtonDialogWidgets(
+                            colorChoice: Colors.red.shade200,
+                            idYes: 'idYes',
+                            idNo: 'idNo',
+                            idCompany: '',
+                            alertTitle:
+                                'Вы уверены, что хотите уволить сотрудника?',
+                            icon: Icon(
+                              Icons.delete_outline,
+                              color: Colors.black87,
+                            ))),
+                  ],
+                )
+              : Container()
         ]),
       ),
     );

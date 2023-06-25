@@ -16,6 +16,8 @@ import 'package:salles_app/views/RecordViews.dart';
 import 'package:salles_app/views/SalesViews.dart';
 import 'package:salles_app/views/SalesViews2.dart';
 
+import 'EmployeesView3.dart';
+
 class MainViews extends StatefulWidget {
   final Function(Locale) changeLanguage;
   final Locale currentLocale;
@@ -40,6 +42,15 @@ class _MainViewsState extends State<MainViews> {
   String _ids = '';
   Users? _user;
   Company? _company;
+
+  getRole() async {
+    bool role = await Auth.checkRole('OWNER');
+    setState(() {
+      roles = role;
+    });
+  }
+
+  bool? roles = true;
 
   void getIdUser() async {
     String? userId = await Auth.getUserId();
@@ -95,6 +106,7 @@ class _MainViewsState extends State<MainViews> {
     super.initState();
     getIdUser();
     startLogoutTimer();
+    getRole();
   }
 
   Timer? _logoutTimer;
@@ -140,15 +152,20 @@ class _MainViewsState extends State<MainViews> {
     recordPage = localizations?.recordPage ?? '';
     employees = localizations?.employees ?? '';
     salesPage = localizations?.salesPage ?? '';
+
     List<Widget> _pages = [
       HomeViews(
         id: _ids,
       ),
       CategoryViews(),
       RecordViews(),
-      EmployeesView2(
-        id: _ids,
-      ),
+      roles!
+          ? EmployeesView2(
+              id: _ids,
+            )
+          : EmployeesView3(
+              id: _ids,
+            ),
       SalesViews(),
     ];
     // String mainPages = localizations?.mainPage ?? '';
@@ -232,7 +249,7 @@ class _MainViewsState extends State<MainViews> {
                     ),
                     ListTile(
                       title: Text(_company?.owner != null
-                              ? '${localizations?.youAreTitle} ${Auth.checkRole('OWNER') == "OWNER" ? localizations?.companyOwner : localizations?.employeSingle}'
+                              ? '${localizations?.youAreTitle} ${roles! ? localizations?.companyOwner : localizations?.employeSingle}'
                               : '${localizations?.numberText} ${localizations?.notText}'
                           // Номер: нету',
                           ),

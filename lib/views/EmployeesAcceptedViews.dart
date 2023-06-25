@@ -3,6 +3,7 @@ import 'package:salles_app/widgets/EmployeesAcceptedWidget.dart';
 
 import '../locale/AppLocalizations.dart';
 import '../models/Company.dart';
+import '../service/Auth.dart';
 import '../service/CompanyService.dart';
 
 class EmployeesAcceptedViews extends StatefulWidget {
@@ -17,24 +18,64 @@ class EmployeesAcceptedViews extends StatefulWidget {
 class _EmployeesAcceptedViewsState extends State<EmployeesAcceptedViews> {
   Company? _company;
   bool isLoaded = false;
+  List<dynamic> _activeSellers = [];
+
+  getRole() async {
+    bool role = await Auth.checkRole('OWNER');
+    setState(() {
+      roles = role;
+    });
+  }
+
+  bool? roles;
 
   _getCompanyByOwnerId(String id) async {
     try {
       Company? company = await CompanyService().getCompanyByOwnerId(id);
       setState(() {
         _company = company;
+        _filterActiveSellers();
       });
-      isLoaded = true;
       print(_company);
+      isLoaded = true;
     } catch (e) {
       print('Error getting company by ID: $e');
     }
   }
 
+  _getCompanyBySallerId(String id) async {
+    try {
+      Company? company = await CompanyService().getCompanyBySallerId(id);
+      setState(() {
+        _company = company;
+        _filterActiveSellers();
+      });
+      print(_company);
+      isLoaded = true;
+    } catch (e) {
+      print('Error getting company by ID: $e');
+    }
+  }
+
+  _getCompany() async {
+    if (await Auth.checkRole('OWNER')) {
+      _getCompanyByOwnerId(widget.id);
+    } else {
+      _getCompanyBySallerId(widget.id);
+    }
+  }
+
+  void _filterActiveSellers() {
+    _activeSellers =
+        _company?.sellers.where((seller) => seller.enabled == true).toList() ??
+            [];
+  }
+
   @override
   void initState() {
     super.initState();
-    _getCompanyByOwnerId(widget.id);
+    getRole();
+    _getCompany();
   }
 
   @override
@@ -52,25 +93,35 @@ class _EmployeesAcceptedViewsState extends State<EmployeesAcceptedViews> {
               replacement: const Center(
                 child: CircularProgressIndicator(),
               ),
-              child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: _company?.sellers.length,
-                itemBuilder: (context, index) {
-                  final seller = _company?.sellers[index];
-
-                  if (seller?.enabled == true) {
-                    // Активный пользователь
-                    return EmployeesAcceptedWidget(
-                      fullName: '${seller?.lastName} ${seller?.firstName}',
-                      phoneNubmer: seller?.phone,
-                      id: seller?.id,
-                    );
-                  } else {
-                    // Неактивный пользователь
-                    return Container();
-                  }
-                },
+              child: Column(
+                children: [
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _activeSellers.length,
+                    itemBuilder: (context, index) {
+                      final seller = _activeSellers[index];
+                      return EmployeesAcceptedWidget(
+                        fullName: '${seller.lastName} ${seller.firstName}',
+                        phoneNubmer: seller.phone,
+                        role: roles!,
+                        id: seller.id,
+                      );
+                    },
+                  ),
+                  if (_activeSellers.isEmpty)
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: Text(
+                        'Нету активных сотрудников',
+                        style: TextStyle(
+                          fontSize: typography.bodyMedium?.fontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
           ),

@@ -114,43 +114,43 @@ class _HomeViewsState extends State<HomeViews> {
             padding: EdgeInsets.only(left: 15, right: 15, top: 8),
             child: Column(
               children: [
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        localizations?.lastSales ?? '',
-                        // 'Последние продажи',
-                        style: TextStyle(
-                            fontSize: typography.bodyMedium?.fontSize,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Divider(
-                      height: 1,
-                      thickness: 2,
-                      indent: 0,
-                      endIndent: 0,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    SizedBox(height: 15),
-                    if (isTrue)
-                      SalesHistoryWidget(checkNum: '4564644', price: '4500')
-                    else
-                      Text(
-                        localizations?.youHaveNoSales ?? '',
-                        // 'У вас пока нету продаж',
-                        style: TextStyle(
-                            fontSize: typography.bodyLarge?.fontSize,
-                            fontWeight: FontWeight.w500),
-                      ),
-                  ],
-                ),
+                // Column(
+                //   children: [
+                //     Align(
+                //       alignment: Alignment.topLeft,
+                //       child: Text(
+                //         localizations?.lastSales ?? '',
+                //         // 'Последние продажи',
+                //         style: TextStyle(
+                //             fontSize: typography.bodyMedium?.fontSize,
+                //             fontWeight: FontWeight.w600),
+                //       ),
+                //     ),
+                //     SizedBox(height: 5),
+                //     Divider(
+                //       height: 1,
+                //       thickness: 2,
+                //       indent: 0,
+                //       endIndent: 0,
+                //       color: Colors.black,
+                //     ),
+                //   ],
+                // ),
+                // Column(
+                //   children: [
+                //     SizedBox(height: 15),
+                //     if (isTrue)
+                //       SalesHistoryWidget(checkNum: '4564644', price: '4500')
+                //     else
+                //       Text(
+                //         localizations?.youHaveNoSales ?? '',
+                //         // 'У вас пока нету продаж',
+                //         style: TextStyle(
+                //             fontSize: typography.bodyLarge?.fontSize,
+                //             fontWeight: FontWeight.w500),
+                //       ),
+                //   ],
+                // ),
                 Column(
                   children: [
                     SizedBox(
@@ -178,7 +178,7 @@ class _HomeViewsState extends State<HomeViews> {
                   ],
                 ),
                 SingleChildScrollView(
-                  physics: ScrollPhysics(), // Добавлено для прокрутки
+                  physics: ScrollPhysics(),
                   child: Column(
                     children: [
                       Visibility(
@@ -186,30 +186,30 @@ class _HomeViewsState extends State<HomeViews> {
                         replacement: Center(
                           child: CircularProgressIndicator(),
                         ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics:
-                              NeverScrollableScrollPhysics(), // Отключена прокрутка ListView
-                          itemCount: _productsList?.length,
-                          itemBuilder: (context, index) {
-                            if (!_productsList!.isEmpty) {
-                              return CategoryChildCardWidgets(
-                                titleName: _productsList![index].name,
-                                cost: _productsList![index].price.toString(),
-                                quantity:
-                                    _productsList![index].count.toString(),
-                                barcode: _productsList![index].barcode,
-                                categoryName:
-                                    _productsList![index].category.name,
-                                id: _productsList![index].id,
-                              );
-                            } else {
-                              return Container(
-                                child: Text('data'),
-                              );
-                            }
-                          },
-                        ),
+                        child: _productsList != null &&
+                                _productsList!.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: _productsList!.length,
+                                itemBuilder: (context, index) {
+                                  return CategoryChildCardWidgets(
+                                    titleName: _productsList![index].name,
+                                    cost:
+                                        _productsList![index].price.toString(),
+                                    quantity:
+                                        _productsList![index].count.toString(),
+                                    barcode: _productsList![index].barcode,
+                                    categoryName:
+                                        _productsList![index].category.name,
+                                    id: _productsList![index].id,
+                                  );
+                                },
+                              )
+                            : Container(
+                                child:
+                                    Text('У вас пока нету добавленых товаров'),
+                              ),
                       ),
                     ],
                   ),

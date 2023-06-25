@@ -169,12 +169,13 @@ class _LoginViewsState extends State<LoginViews> {
                             print('Пароль: $password');
                             print(await Auth.isLoggedIn());
 
+                            setState(() {
+                              isLoading = true;
+                            });
+
                             Auth.authenticate(
                                     phoneNumberWithoutDashes, password)
                                 .then((_) {
-                              setState(() {
-                                isLoading = true;
-                              });
                               // Проверяем, была ли успешная авторизация
                               if (Auth.token != null) {
                                 // Авторизация успешна, переходим на главный экран
