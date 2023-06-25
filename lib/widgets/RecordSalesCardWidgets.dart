@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:salles_app/widgets/IconButtonDialogWidgetsRecord.dart';
 
 import '../locale/AppLocalizations.dart';
+import '../views/RecordPurchaseViews.dart';
 
 class RecordSalesCardWidgets extends StatelessWidget {
   final String salesId;
@@ -35,8 +36,10 @@ class RecordSalesCardWidgets extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, '/record-purchase',
-              arguments: {"salesId": salesId, "companyId": id});
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => RecordPurchaseViews(arguments: id)));
         },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 15),

@@ -6,11 +6,13 @@ import '../locale/AppLocalizations.dart';
 class RecordPurchaseCardWidgets extends StatelessWidget {
   final String productName;
   final String productPrice;
+  final VoidCallback onPressed;
 
   const RecordPurchaseCardWidgets({
     Key? key,
     required this.productName,
     required this.productPrice,
+    required this.onPressed, // Добавьте это
   }) : super(key: key);
 
   @override
@@ -90,15 +92,18 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
                       Container(
                         child: Column(
                           children: [
-                            IconButtonDialogWidgets(
-                                idYes: 'idYes',
-                                idNo: 'idNo',
-                                idCompany: '',
-                                alertTitle:
-                                    'Вы уверены, что хотите удалить товар?',
-                                icon: Icon(Icons.delete_outline,
-                                    color: Colors.black87),
-                                colorChoice: Colors.red.shade200)
+                            IconButton(
+                                onPressed: onPressed,
+                                icon: Icon(Icons.delete_outline))
+                            // IconButtonDialogWidgets(
+                            //     idYes: 'idYes',
+                            //     idNo: 'idNo',
+                            //     idCompany: '',
+                            //     alertTitle:
+                            //         'Вы уверены, что хотите удалить товар?',
+                            //     icon: Icon(Icons.delete_outline,
+                            //         color: Colors.black87),
+                            //     colorChoice: Colors.red.shade200)
                           ],
                         ),
                       ),

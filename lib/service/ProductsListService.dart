@@ -120,6 +120,38 @@ class ProductsListService {
     return null;
   }
 
+  getProductsByBarcode(String barcode) async {
+    var client = http.Client();
+    String? token = await Auth.getToken();
+
+    var uri = Uri.parse(
+        'https://salles-app.onrender.com/api/v1/product/barcode/$barcode');
+
+    try {
+      var response = await client.get(
+        uri,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var json = response.body;
+        var parsedJson = jsonDecode(json);
+        return Products.fromJson(parsedJson);
+      } else {
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error getting products: $e');
+    } finally {
+      client.close();
+    }
+
+    return null;
+  }
+
   Future<int?> deletePoduct(String id) async {
     String? token = await Auth.getToken();
     var client = http.Client();

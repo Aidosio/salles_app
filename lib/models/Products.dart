@@ -12,7 +12,7 @@ String productsToJson(Products data) => json.encode(data.toJson());
 class Products {
   String id;
   String name;
-  int price;
+  dynamic price;
   String barcode;
   int count;
   Category category;
