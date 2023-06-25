@@ -27,7 +27,8 @@ class _SalesViewsState extends State<SalesViews2> {
           labelPadding: EdgeInsets.symmetric(horizontal: 30),
           tabs: <Widget>[
             Tab(
-              text: "Сегодня",
+              text: localizations?.todayText ?? '',
+              // "Сегодня",
             ),
           ],
         ),

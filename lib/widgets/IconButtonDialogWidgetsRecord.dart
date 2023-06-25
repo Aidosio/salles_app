@@ -110,7 +110,10 @@ class IconButtonDialogWidgetsRecord extends StatelessWidget {
                                     Navigator.pop(context);
                                     print(idNo);
                                   },
-                                  child: Text("Нет"),
+                                  child: Text(
+                                    localizations?.notText ?? '',
+                                    // "Нет",
+                                  ),
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStatePropertyAll<Color>(
@@ -141,7 +144,10 @@ class IconButtonDialogWidgetsRecord extends StatelessWidget {
                                     // // Navigator.pop(context);
                                     print(idYes);
                                   },
-                                  child: Text("Да"),
+                                  child: Text(
+                                    localizations?.yesText ?? '',
+                                    // "Да",
+                                  ),
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStatePropertyAll<Color>(

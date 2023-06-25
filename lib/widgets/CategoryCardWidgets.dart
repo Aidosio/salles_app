@@ -45,7 +45,8 @@ class CategoryCardWidgets extends StatelessWidget {
               child: RichText(
                 textAlign: TextAlign.left,
                 text: TextSpan(
-                  text: 'Категория: ',
+                  text: localizations?.categoryText ?? '',
+                  // 'Категория: ',
                   style: TextStyle(
                       color: Colors.black87,
                       fontSize: typography.bodyMedium?.fontSize,

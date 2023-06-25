@@ -62,7 +62,8 @@ class _MyBarWidgetState extends State<MyBarWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Общая сумма:',
+                localizations?.totalAmount ?? '',
+                // 'Общая сумма: ',
                 style: TextStyle(
                   fontSize: typography.bodyMedium?.fontSize,
                   fontWeight: FontWeight.w600,

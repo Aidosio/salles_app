@@ -54,12 +54,14 @@ class CategoryChildCardWidgets extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                'Цена: ' + cost + ' тг',
+                '${localizations?.priceText}' + cost + ' тг',
+                // 'Цена: '
                 style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
               ),
               SizedBox(height: 5),
               Text(
-                'Количество: ' + quantity + ' шт',
+                '${localizations?.colonQuantityGoods}' + quantity + ' шт',
+                // 'Количество: '
                 style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
               ),
               SizedBox(height: 5),
@@ -69,7 +71,8 @@ class CategoryChildCardWidgets extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Text(
-                'Категория: ' + categoryName,
+                ' ' + categoryName,
+                // 'Категория: '
                 style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
               ),
               SizedBox(height: 15),
@@ -81,7 +84,10 @@ class CategoryChildCardWidgets extends StatelessWidget {
                         ProductsListService().deletePoduct(id);
                         print(id);
                       },
-                      child: Text("Удалить"),
+                      child: Text(
+                        localizations?.deleteText ?? '',
+                        // "Удалить",
+                      ),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStatePropertyAll<Color>(Colors.red),

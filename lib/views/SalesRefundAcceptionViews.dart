@@ -178,9 +178,12 @@ class _SalesRefundAcceptionViewsState extends State<SalesRefundAcceptionViews> {
             ),
           ),
           MyBarWidget(
-              totalPrice:
-                  _sales != null ? _sales!.price.toString() : 'загрузка...',
-              buttonTitle: 'Закончить',
+              totalPrice: _sales != null
+                  ? _sales!.price.toString()
+                  : localizations?.loadingState ?? '',
+              // 'загрузка...',
+              buttonTitle: localizations?.toFinishText ?? '',
+              // 'Закончить',
               id: _sales != null ? _sales!.id : '1',
               popBack: false,
               routeWay: null,

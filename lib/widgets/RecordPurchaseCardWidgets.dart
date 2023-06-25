@@ -48,7 +48,8 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Название товара:',
+                              localizations?.colonProductName ?? '',
+                              // 'Название товара:',
                               style: TextStyle(
                                   fontSize: typography.bodyMedium?.fontSize,
                                   fontWeight: FontWeight.w600),
@@ -72,7 +73,8 @@ class RecordPurchaseCardWidgets extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Цена:',
+                              localizations?.priceText ?? '',
+                              // 'Цена: ',
                               style: TextStyle(
                                   fontSize: typography.bodyMedium?.fontSize,
                                   fontWeight: FontWeight.w600),

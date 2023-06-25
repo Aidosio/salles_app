@@ -38,14 +38,16 @@ class SalesRefundAcceptionCardWidgets extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Название',
+                    localizations?.justTitleName ?? '',
+                    // 'Название',
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Цена',
+                    localizations?.justTitlePrice ?? '',
+                    // 'Цена',
                     style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w600),

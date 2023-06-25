@@ -70,6 +70,28 @@ class AppLocalizations {
         'errorEnteringPassword': 'errorEnteringPassword',
         'personFirstName': 'personName',
         'personSecondName': 'personSecondName',
+        'loadingState': 'loadingState',
+        'toFinishText': 'toFinishText',
+        'todayText': 'todayText',
+        'waitText': 'waitText',
+        'requestConsideration': 'requestConsideration',
+        'categoryText': 'categoryText',
+        'priceText': 'priceText',
+        'colonQuantityGoods': 'colonQuantityGoods',
+        'colonCategories': 'colonQuantityGoods',
+        'deleteText': 'deleteText',
+        'wantFireEmployee': 'wantFireEmployee',
+        'wantHireWorker': 'wantHireWorker',
+        'dontWantHireWorker': 'dontWantHireWorker',
+        'yesText': 'yesText',
+        'colonProductName': 'colonProductName',
+        'calculateText': 'calculateText',
+        'cancelText': 'cancelText',
+        'saleNumberColon': 'saleNumberColon',
+        'chequeColon': 'chequeColon',
+        'amountColon': 'amountColon',
+        'justTitleName': 'justTitleName',
+        'justTitlePrice': 'justTitlePrice',
       };
     } else if (languageCode == 'ru') {
       return {
@@ -115,7 +137,7 @@ class AppLocalizations {
         'pieces': 'шт',
         'add': 'Добавить',
         'endText': 'Закончить',
-        'totalAmount': 'Итоговая сумма:',
+        'totalAmount': 'Итоговая сумма: ',
         'noProductsAvailable': 'Нет доступных продуктов',
         'registrationPage': 'Регистрация',
         'errorNumberAndPassword': 'Ошибка: Введите номер телефона и пароль',
@@ -131,6 +153,29 @@ class AppLocalizations {
             "Ошибка при вводе пароля: 'Ошибка: Введите пароль'.",
         'personFirstName': 'Имя',
         'personSecondName': 'Фамилия',
+        'loadingState': 'загрузка...',
+        'toFinishText': 'Закончить',
+        'todayText': 'Сегодня',
+        'waitText': 'Ожидайте',
+        'requestConsideration':
+            'Ваш запрос находится на рассмотрении. Мы вас уведомим о завершении проверки информации.',
+        'categoryText': 'Категория: ',
+        'priceText': 'Цена: ',
+        'colonQuantityGoods': 'Количество: ',
+        'colonCategories': 'Категория: ',
+        'deleteText': 'Удалить',
+        'wantFireEmployee': 'Вы уверены, что хотите уволить сотрудника?',
+        'wantHireWorker': 'Вы уверены, что хотите нанять рабочего?',
+        'dontWantHireWorker': 'Вы уверены, что не хотите нанимать рабочего?',
+        'yesText': 'Да',
+        'colonProductName': 'Название товара: ',
+        'calculateText': 'Рассчитать',
+        'cancelText': 'Отмена',
+        'saleNumberColon': 'Номер продажи: ',
+        'chequeColon': '№ Чека: ',
+        'amountColon': 'Сумма: ',
+        'justTitleName': 'Название',
+        'justTitlePrice': 'Цена',
       };
     } else if (languageCode == 'es') {
       return {
@@ -176,8 +221,8 @@ class AppLocalizations {
         'pieces': 'дана',
         'add': 'Қосу',
         'endText': 'Бітіру',
-        'totalAmount': 'Қорытынды сома:',
-        'noProductsAvailable': 'Қол жетімді өнім жоқ',
+        'totalAmount': 'Қорытынды сома: ',
+        'noProductsAvailable': 'Қосылған тауарлар жоқ',
         'registrationPage': 'Тіркеу',
         'errorNumberAndPassword':
             'Қате: Телефон нөмірі мен құпия сөзді енгізіңіз',
@@ -194,6 +239,30 @@ class AppLocalizations {
             "Құпия сөзді енгізу қатесі: 'Қате: Құпия сөзді енгізіңіз'.",
         'personFirstName': 'Аты',
         'personSecondName': 'Тегі',
+        'loadingState': 'жүктеу...',
+        'toFinishText': 'Аяқтау',
+        'todayText': 'Бүгін',
+        'waitText': 'Күте тұрыңыз',
+        'requestConsideration':
+            'Сіздің сұрауыңыз қаралуда. Біз сізге ақпараттың тексерілгенінен кейін хабарлама жібереміз.',
+        'categoryText': 'Санат: ',
+        'priceText': 'Бағасы: ',
+        'colonQuantityGoods': 'Cаны: ',
+        'colonCategories': 'Категория: ',
+        'deleteText': 'Жою',
+        'wantFireEmployee':
+            'Сіз қызметкерді жұмыстан шығарғыңыз келетінізге сенімдісіз бе?',
+        'wantHireWorker': 'Сіз жұмысшыны жалдағыңыз келетініне сенімдісіз бе?',
+        'dontWantHireWorker':
+            'Сіз жұмысшыны жалдағыңыз келмейтінізге сенімдісіз бе?',
+        'yesText': 'Иә',
+        'colonProductName': 'Тауардың атауы: ',
+        'calculateText': 'Есептеу',
+        'cancelText': 'Бас тарту',
+        'saleNumberColon': 'Сату нөмірі:',
+        'chequeColon': 'Чек №: ',
+        'amountColon': 'Атауы',
+        'justTitleName': 'Бағасы',
       };
     }
 
@@ -422,10 +491,98 @@ class AppLocalizations {
   }
 
   String? get personFirstName {
-    return _localizedValues['errorEnteringPassword'];
+    return _localizedValues['personFirstName'];
   }
 
   String? get personSecondName {
-    return _localizedValues['errorEnteringPassword'];
+    return _localizedValues['personSecondName'];
+  }
+
+  String? get loadingState {
+    return _localizedValues['loadingState'];
+  }
+
+  String? get toFinishText {
+    return _localizedValues['toFinishText'];
+  }
+
+  String? get todayText {
+    return _localizedValues['todayText'];
+  }
+
+  String? get waitText {
+    return _localizedValues['waitText'];
+  }
+
+  String? get requestConsideration {
+    return _localizedValues['requestConsideration'];
+  }
+
+  String? get categoryText {
+    return _localizedValues['categoryText'];
+  }
+
+  String? get priceText {
+    return _localizedValues['priceText'];
+  }
+
+  String? get colonQuantityGoods {
+    return _localizedValues['colonQuantityGoods'];
+  }
+
+  String? get colonCategories {
+    return _localizedValues['colonCategories'];
+  }
+
+  String? get deleteText {
+    return _localizedValues['deleteText'];
+  }
+
+  String? get wantFireEmployee {
+    return _localizedValues['wantFireEmployee'];
+  }
+
+  String? get wantHireWorker {
+    return _localizedValues['wantHireWorker'];
+  }
+
+  String? get dontWantHireWorker {
+    return _localizedValues['dontWantHireWorker'];
+  }
+
+  String? get yesText {
+    return _localizedValues['yesText'];
+  }
+
+  String? get colonProductName {
+    return _localizedValues['colonProductName'];
+  }
+
+  String? get calculateText {
+    return _localizedValues['calculateText'];
+  }
+
+  String? get cancelText {
+    return _localizedValues['cancelText'];
+  }
+
+  String? get saleNumberColon {
+    return _localizedValues['saleNumberColon'];
+  }
+
+  String? get chequeColon {
+    return _localizedValues['chequeColon'];
+  }
+
+  String? get amountColon {
+    return _localizedValues['amountColon'];
+  }
+
+  String? get justTitleName {
+    return _localizedValues['justTitleName'];
+  }
+
+  String? get justTitlePrice {
+    return _localizedValues['justTitlePrice'];
   }
 }

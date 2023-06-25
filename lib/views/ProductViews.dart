@@ -173,28 +173,32 @@ class _ProductViewsState extends State<ProductViews> {
                           });
                         },
                       ),
-                      DropdownButtonFormField<CategoryList>(
-                        value: selectedCategory,
-                        onChanged: (CategoryList? newValue) {
-                          setState(() {
-                            selectedCategory = newValue;
-                          });
-                          print(selectedCategory!.id);
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: localizations?.productCategory ?? '',
-                          // 'Категория товара',
-                        ),
-                        items:
-                            _categoryList?.map<DropdownMenuItem<CategoryList>>(
-                          (CategoryList value) {
-                            return DropdownMenuItem<CategoryList>(
-                              value: value,
-                              child: Text(value.name),
-                            );
+                      Container(
+                        child: DropdownButtonFormField<CategoryList>(
+                          value: selectedCategory,
+                          onChanged: (CategoryList? newValue) {
+                            setState(() {
+                              selectedCategory = newValue;
+                            });
+                            print(selectedCategory!.id);
                           },
-                        ).toList(),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: localizations?.productCategory ?? '',
+                            // 'Категория товара',
+                          ),
+                          items: _categoryList
+                              ?.map<DropdownMenuItem<CategoryList>>(
+                            (CategoryList value) {
+                              return DropdownMenuItem<CategoryList>(
+                                value: value,
+                                child: Text(value.name.length > 30
+                                    ? '${value.name.substring(0, 30)}...'
+                                    : value.name),
+                              );
+                            },
+                          ).toList(),
+                        ),
                       ),
                       SizedBox(height: 15),
                       TextField(

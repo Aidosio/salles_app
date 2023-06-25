@@ -102,52 +102,43 @@ class _SalesViewsState extends State<SalesViews> {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
 
-    bool _isOpened = true;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 15),
           child: Column(
             children: [
-              ExpansionTile(
-                initiallyExpanded: _isOpened,
-                key: Key('firstExpansionTile'),
-                title: Text('Продажи'),
-                trailing: Icon(Icons.arrow_drop_down_rounded),
+              Column(
                 children: [
-                  Column(
-                    children: [
-                      Visibility(
-                        visible: isLoaded,
-                        replacement: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics:
-                              NeverScrollableScrollPhysics(), // Отключена прокрутка ListView
-                          itemCount: _salesList?.length,
-                          itemBuilder: (context, index) {
-                            if (!_salesList!.isEmpty) {
-                              if (_salesList![index].status) {
-                                return SalesHistoryWidget(
-                                  checkNum: _salesList![index].id,
-                                  price: _salesList![index].price.toString(),
-                                );
-                              } else {
-                                return Container();
-                              }
-                            } else {
-                              return Container(
-                                child: Text('data'),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                    ],
+                  Visibility(
+                    visible: isLoaded,
+                    replacement: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics:
+                          NeverScrollableScrollPhysics(), // Отключена прокрутка ListView
+                      itemCount: _salesList?.length,
+                      itemBuilder: (context, index) {
+                        if (!_salesList!.isEmpty) {
+                          if (_salesList![index].status) {
+                            return SalesHistoryWidget(
+                              checkNum: _salesList![index].id,
+                              price: _salesList![index].price.toString(),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        } else {
+                          return Container(
+                            child: Text('data'),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),

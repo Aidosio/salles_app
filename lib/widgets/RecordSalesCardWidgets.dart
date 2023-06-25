@@ -55,7 +55,8 @@ class RecordSalesCardWidgets extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Номер продажи:',
+                        localizations?.saleNumberColon ?? '',
+                        // 'Номер продажи:',
                         style: TextStyle(
                             color: Colors.black87,
                             fontSize: typography.bodyMedium?.fontSize,

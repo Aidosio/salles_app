@@ -87,7 +87,6 @@ class _RegisterViewsState extends State<RegisterViews> {
         });
         return;
       }
-
       if (password.isEmpty) {
         print("Ошибка при вводе пароля: 'Ошибка: Введите пароль'.");
         setState(() {
@@ -113,7 +112,7 @@ class _RegisterViewsState extends State<RegisterViews> {
       if (lastname.isEmpty) {
         print("Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.");
         setState(() {
-          errorFirstname = "";
+          errorFirstname = '';
           errorLastname = localizations?.errorEnteringLastName ?? '';
           // "Ошибка при вводе фамилии: 'Ошибка: Введите фамилию'.";
           errorPhoneNumber = '';

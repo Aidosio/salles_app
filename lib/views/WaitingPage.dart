@@ -30,12 +30,14 @@ class _WaitingPageState extends State<WaitingPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset('men_on_oclok.svg'),
+              Image(image: AssetImage('men_on_oclok.png')),
+              // SvgPicture.asset('men_on_oclok.svg'),
               SizedBox(
                 height: 30,
               ),
               Text(
-                'Ожидайте',
+                localizations?.waitText ?? '',
+                // 'Ожидайте',
                 style: TextStyle(
                     fontSize: typography.titleLarge?.fontSize,
                     fontWeight: FontWeight.w600),
@@ -44,7 +46,8 @@ class _WaitingPageState extends State<WaitingPage> {
                 height: 15,
               ),
               Text(
-                'Ваш запрос находится на рассмотрении. Мы вас уведомим о завершении проверки информации.',
+                localizations?.requestConsideration ?? '',
+                // 'Ваш запрос находится на рассмотрении. Мы вас уведомим о завершении проверки информации.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: typography.bodyMedium?.fontSize,

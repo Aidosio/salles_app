@@ -44,7 +44,8 @@ class EmployeesConsiderationWidget extends StatelessWidget {
                   idYes: id,
                   idNo: 'idNo',
                   idCompany: companyId,
-                  alertTitle: 'Вы уверены, что хотите нанять рабочего?',
+                  alertTitle: localizations?.wantHireWorker ?? '',
+                  // 'Вы уверены, что хотите нанять рабочего?',
                   icon: Icon(
                     Icons.done,
                     color: Colors.white,
@@ -55,7 +56,8 @@ class EmployeesConsiderationWidget extends StatelessWidget {
                   idYes: id,
                   idNo: 'idNo1',
                   idCompany: companyId,
-                  alertTitle: 'Вы уверены, что не хотите нанимать рабочего?',
+                  alertTitle: localizations?.dontWantHireWorker ?? '',
+                  // 'Вы уверены, что не хотите нанимать рабочего?',
                   icon: Icon(Icons.delete_outline),
                   colorChoice: Colors.red.shade200)
             ]),

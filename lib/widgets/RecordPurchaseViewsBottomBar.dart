@@ -23,7 +23,8 @@ class RecordPurchaseViewsBottomBar extends StatelessWidget {
         child: FilledButton.tonal(
           onPressed: onPressed,
           child: Text(
-            'Рассчитать',
+            localizations?.calculateText ?? '',
+            // 'Рассчитать',
             style: TextStyle(
                 fontSize: typography.bodyMedium?.fontSize,
                 fontWeight: FontWeight.w600,
@@ -57,7 +58,8 @@ class RecordPurchaseViewsBottomBar extends StatelessWidget {
           onPressed: () async {
             String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
               '#ff6666',
-              'Отмена',
+              "${localizations?.cancelText ?? ''}",
+              // 'Отмена',
               true,
               ScanMode.BARCODE,
             );
@@ -68,7 +70,8 @@ class RecordPurchaseViewsBottomBar extends StatelessWidget {
             print('Результат сканирования: $barcodeScanRes');
           },
           child: Text(
-            'Добавить товар',
+            localizations?.addNewProduct ?? '',
+            // 'Добавить товар',
             style: TextStyle(
                 fontSize: typography.bodyMedium?.fontSize,
                 fontWeight: FontWeight.w600,

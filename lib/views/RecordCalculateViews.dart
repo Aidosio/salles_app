@@ -1,6 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../locale/AppLocalizations.dart';
 
 class RecordCalculateViews extends StatefulWidget {
@@ -27,8 +28,8 @@ class _RecordCalculateViewsState extends State<RecordCalculateViews> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // SvgPicture.asset('done_circle.svg'),
-              SizedBox(height: 0),
+              Image(image: AssetImage('assets/done_circle.png')),
+              SizedBox(height: 20),
               Text(
                 localizations?.totalAmount ?? '',
                 // 'Итоговая сумма:',

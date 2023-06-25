@@ -38,7 +38,8 @@ class SalesRefundWidgets extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Название товара:',
+                    localizations?.colonProductName ?? '',
+                    // 'Название товара:',
                     style: TextStyle(
                       fontSize: typography.bodyMedium?.fontSize,
                       fontWeight: FontWeight.w600,
@@ -55,7 +56,8 @@ class SalesRefundWidgets extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Цена:',
+                    localizations?.priceText ?? '',
+                    // 'Цена:',
                     style: TextStyle(
                       fontSize: typography.bodyMedium?.fontSize,
                       fontWeight: FontWeight.w600,
@@ -72,7 +74,8 @@ class SalesRefundWidgets extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Кол-во:',
+                    localizations?.colonQuantityGoods ?? '',
+                    // 'Кол-во:',
                     style: TextStyle(
                       fontSize: typography.bodyMedium?.fontSize,
                       fontWeight: FontWeight.w600,
@@ -80,7 +83,7 @@ class SalesRefundWidgets extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '1' + ' шт',
+                    '1 ${localizations?.colonQuantityGoods ?? ''}',
                     style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],

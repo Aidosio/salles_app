@@ -38,7 +38,8 @@ class SalesHistoryWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '№ Чека:',
+                      localizations?.chequeColon ?? '',
+                      // '№ Чека:',
                       style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w600,
@@ -46,7 +47,9 @@ class SalesHistoryWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      checkNum,
+                      checkNum.length > 20
+                          ? '${checkNum.substring(0, 20)}...'
+                          : checkNum,
                       style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                       ),
@@ -57,7 +60,8 @@ class SalesHistoryWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Сумма:',
+                      localizations?.amountColon ?? '',
+                      // 'Сумма: ',
                       style: TextStyle(
                         fontSize: typography.bodyMedium?.fontSize,
                         fontWeight: FontWeight.w600,
