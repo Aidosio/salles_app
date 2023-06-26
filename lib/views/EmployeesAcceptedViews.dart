@@ -143,7 +143,8 @@ class _EmployeesAcceptedViewsState extends State<EmployeesAcceptedViews> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: Text(
-                        'Нету активных сотрудников',
+                        localizations?.noActiveEmployees ?? '',
+                        // 'Нет активных сотрудников',
                         style: TextStyle(
                           fontSize: typography.bodyMedium?.fontSize,
                           fontWeight: FontWeight.bold,

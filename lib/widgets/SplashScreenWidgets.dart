@@ -10,16 +10,13 @@ class SplashScreenWidgets extends StatelessWidget {
       body: Stack(
         children: [
           Container(color: Colors.white),
-          // Container(
-          //   padding: EdgeInsets.all(40),
-          //   child: Center(
-          //     child: SvgPicture.asset(
-          //       'assets/Sales_Assistant.svg',
-          //       width: double.infinity,
-          //       height: double.infinity,
-          //     ),
-          //   ),
-          // ),
+          Center(
+            child: SvgPicture.asset(
+              'assets/logo.png',
+              width: double.infinity,
+              height: double.infinity,
+            ),
+          ),
         ],
       ),
     );

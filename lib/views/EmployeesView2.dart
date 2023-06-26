@@ -3,6 +3,7 @@ import 'package:salles_app/models/Company.dart';
 import 'package:salles_app/service/CompanyService.dart';
 import 'package:salles_app/views/EmployeesAcceptedViews.dart';
 import '../locale/AppLocalizations.dart';
+import '../widgets/SwipeRefresh.dart';
 import 'EmployeesConsiderationViews.dart';
 
 class EmployeesView2 extends StatefulWidget {
@@ -25,24 +26,23 @@ class _EmployeesViewState extends State<EmployeesView2> {
       initialIndex: 0,
       length: 2,
       child: Scaffold(
-        appBar: TabBar(
-          tabs: <Widget>[
-            Tab(
-              text: localizations?.underConsideration ?? '',
-              // text: "На рассмотрении",
-            ),
-            Tab(
-              text: localizations?.employees ?? '',
-              // text: "Сотрудники",
-            ),
-          ],
-        ),
-        resizeToAvoidBottomInset: false,
-        body: TabBarView(children: <Widget>[
-          EmployeesConsiderationViews(id: ids),
-          EmployeesAcceptedViews(id: ids),
-        ]),
-      ),
+          appBar: TabBar(
+            tabs: <Widget>[
+              Tab(
+                text: localizations?.underConsideration ?? '',
+                // text: "На рассмотрении",
+              ),
+              Tab(
+                text: localizations?.employees ?? '',
+                // text: "Сотрудники",
+              ),
+            ],
+          ),
+          resizeToAvoidBottomInset: false,
+          body: TabBarView(children: <Widget>[
+            EmployeesConsiderationViews(id: ids),
+            EmployeesAcceptedViews(id: ids),
+          ])),
     );
   }
 }

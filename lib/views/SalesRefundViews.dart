@@ -172,7 +172,8 @@ class _SalesRefundViewsState extends State<SalesRefundViews> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Возврат',
+                            localizations?.refundText ?? '',
+                            // 'Возврат',
                             style: TextStyle(
                                 fontSize: typography.bodyMedium?.fontSize,
                                 fontWeight: FontWeight.w600),
@@ -221,9 +222,11 @@ class _SalesRefundViewsState extends State<SalesRefundViews> {
             ),
           ),
           MyBarWidget(
-              totalPrice:
-                  _sales != null ? _sales!.price.toString() : 'загрузка...',
-              buttonTitle: 'Возврат',
+              totalPrice: _sales != null
+                  ? _sales!.price.toString()
+                  : '${localizations?.loadingState ?? ''}',
+              buttonTitle: localizations?.refundText ?? '',
+              // 'Возврат',
               id: _sales != null ? _sales!.id : '1',
               popBack: true,
               routeWay: '/sales-refund-accept',

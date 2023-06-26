@@ -30,11 +30,13 @@ class _WaitingPageState extends State<WaitingPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage('men_on_oclok.png')),
-              // SvgPicture.asset('men_on_oclok.svg'),
-              SizedBox(
-                height: 30,
-              ),
+              // Image(
+              //     width: 80,
+              //     height: 100,
+              //     image: AssetImage('men_on_oclok.png')),
+              // SizedBox(
+              //   height: 30,
+              // ),
               Text(
                 localizations?.waitText ?? '',
                 // 'Ожидайте',

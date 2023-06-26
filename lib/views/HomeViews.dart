@@ -103,13 +103,13 @@ class _HomeViewsState extends State<HomeViews> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
-    return SwipeRefresh(
-      onRefresh: () async {
-        _getLastProducts(_company!.id);
-      },
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SingleChildScrollView(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SwipeRefresh(
+        onRefresh: () async {
+          _getLastProducts(_company!.id);
+        },
+        child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(left: 15, right: 15, top: 8),
             child: Column(
@@ -207,8 +207,10 @@ class _HomeViewsState extends State<HomeViews> {
                                 },
                               )
                             : Container(
-                                child:
-                                    Text('У вас пока нету добавленых товаров'),
+                                child: Text(
+                                  localizations?.dontHaveAddedProducts ?? '',
+                                  // 'У вас пока нет добавленых товаров',
+                                ),
                               ),
                       ),
                     ],

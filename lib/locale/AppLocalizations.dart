@@ -92,6 +92,12 @@ class AppLocalizations {
         'amountColon': 'amountColon',
         'justTitleName': 'justTitleName',
         'justTitlePrice': 'justTitlePrice',
+        'noActiveEmployees': 'noActiveEmployees',
+        'dontHaveEmployeesConsideration': 'dontHaveEmployeesConsideration',
+        'dontHaveAddedProducts': 'dontHaveAddedProducts',
+        'dontHaveActiveSales': 'dontHaveActiveSales',
+        'refundText': 'refundText',
+        'choosingCompany': 'choosingCompany',
       };
     } else if (languageCode == 'ru') {
       return {
@@ -176,6 +182,13 @@ class AppLocalizations {
         'amountColon': 'Сумма: ',
         'justTitleName': 'Название',
         'justTitlePrice': 'Цена',
+        'noActiveEmployees': 'Нет активных сотрудников',
+        'dontHaveEmployeesConsideration':
+            'У вас нету сотрудников на рассмотрении',
+        'dontHaveAddedProducts': 'У вас пока нет добавленных товаров',
+        'dontHaveActiveSales': 'У вас нет активных продаж',
+        'refundText': 'Возврат',
+        'choosingCompany': 'Выбор компании',
       };
     } else if (languageCode == 'es') {
       return {
@@ -263,6 +276,12 @@ class AppLocalizations {
         'chequeColon': 'Чек №: ',
         'amountColon': 'Атауы',
         'justTitleName': 'Бағасы',
+        'noActiveEmployees': 'Қызметкерлер жоқ',
+        'dontHaveEmployeesConsideration': 'Сіздің қарауыңызда қызметкерлер жоқ',
+        'dontHaveAddedProducts': 'Сізде қосылған тауарлар жоқ',
+        'dontHaveActiveSales': 'Сізде сатылым жоқ',
+        'refundText': 'Қайтару',
+        'choosingCompany': 'Компанияны таңдау',
       };
     }
 
@@ -584,5 +603,29 @@ class AppLocalizations {
 
   String? get justTitlePrice {
     return _localizedValues['justTitlePrice'];
+  }
+
+  String? get noActiveEmployees {
+    return _localizedValues['noActiveEmployees'];
+  }
+
+  String? get dontHaveEmployeesConsideration {
+    return _localizedValues['dontHaveEmployeesConsideration'];
+  }
+
+  String? get dontHaveActiveSales {
+    return _localizedValues['dontHaveActiveSales'];
+  }
+
+  String? get refundText {
+    return _localizedValues['refundText'];
+  }
+
+  String? get dontHaveAddedProducts {
+    return _localizedValues['dontHaveAddedProducts'];
+  }
+
+  String? get choosingCompany {
+    return _localizedValues['choosingCompany'];
   }
 }

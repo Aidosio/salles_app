@@ -210,7 +210,11 @@ class _RecordViewsState extends State<RecordViews> {
                                     // Последний элемент и все предыдущие имеют status == true
                                     return Container(
                                       alignment: Alignment.center,
-                                      child: Text('У вас нету активных продаж'),
+                                      child: Text(
+                                        localizations?.dontHaveActiveSales ??
+                                            '',
+                                        // 'У вас нету активных продаж',
+                                      ),
                                     );
                                   } else {
                                     return Container();
@@ -218,8 +222,10 @@ class _RecordViewsState extends State<RecordViews> {
                                 },
                               )
                             : Container(
-                                alignment: Alignment.center,
-                                child: Text('У вас нету активных продаж'),
+                                child: Text(
+                                  localizations?.dontHaveActiveSales ?? '',
+                                  // 'У вас нету активных продаж',
+                                ),
                               ),
                       ),
                     ],
