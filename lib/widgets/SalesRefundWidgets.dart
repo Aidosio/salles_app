@@ -83,7 +83,7 @@ class SalesRefundWidgets extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '1 ${localizations?.colonQuantityGoods ?? ''}',
+                    '1 ${localizations?.pieces ?? ''}',
                     style: TextStyle(fontSize: typography.bodyMedium?.fontSize),
                   ),
                 ],

@@ -105,7 +105,8 @@ class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
                 onChanged: _onCompanySelectionChanged,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Категория товара',
+                  labelText: localizations?.choosingCompany ?? '',
+                  // 'Категория товара',
                 ),
                 items: companyOptions?.map<DropdownMenuItem<CompanyList>>(
                   (CompanyList company) {
@@ -125,7 +126,10 @@ class _ChoiseCompanyViewsState extends State<ChoiseCompanyViews> {
                     Navigator.pushNamed(context, '/waiting');
                   }
                 },
-                child: Text("Зарегистрироваться"),
+                child: Text(
+                  localizations?.registerTitle ?? '',
+                  // "Зарегистрироваться",
+                ),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(

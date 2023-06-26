@@ -21,24 +21,6 @@ class CategoryViews extends StatefulWidget {
 }
 
 class _CategoryViewsState extends State<CategoryViews> {
-  Future<void> _scanBarcode() async {
-    try {
-      String result = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666', // Цвет верхней панели сканера
-        'Отмена', // Текст кнопки отмены
-        true, // Использовать кнопку спуска затвора
-        ScanMode.BARCODE, // Режим сканирования (штрих-коды)
-      );
-      if (result != '-1') {
-        Navigator.pushNamed(context, '/product', arguments: result);
-      }
-    } catch (e) {
-      // Обработка исключения
-      print('Ошибка сканирования штрих-кода: $e');
-      // Дополнительный код для обработки ошибки
-    }
-  }
-
   List<CategoryList>? _categoryList;
   bool isLoaded = false;
   String _ids = '';
@@ -114,6 +96,24 @@ class _CategoryViewsState extends State<CategoryViews> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     TextTheme typography = Theme.of(context).textTheme;
+    Future<void> _scanBarcode() async {
+      try {
+        String result = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', // Цвет верхней панели сканера
+          '${localizations?.cancelText ?? ''}',
+          // 'Отмена', // Текст кнопки отмены
+          true, // Использовать кнопку спуска затвора
+          ScanMode.BARCODE, // Режим сканирования (штрих-коды)
+        );
+        if (result != '-1') {
+          Navigator.pushNamed(context, '/product', arguments: result);
+        }
+      } catch (e) {
+        // Обработка исключения
+        print('Ошибка сканирования штрих-кода: $e');
+        // Дополнительный код для обработки ошибки
+      }
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

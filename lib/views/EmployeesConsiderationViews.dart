@@ -97,7 +97,8 @@ class _EmployeesConsiderationViewsState
                         alignment: Alignment.center,
                         padding: EdgeInsets.symmetric(vertical: 16),
                         child: Text(
-                          'У вас нету сотрудников на расмотрений',
+                          localizations?.dontHaveEmployeesConsideration ?? '',
+                          // 'У вас нету сотрудников на расмотрений',
                           style: TextStyle(
                             fontSize: typography.bodyMedium?.fontSize,
                             fontWeight: FontWeight.bold,
