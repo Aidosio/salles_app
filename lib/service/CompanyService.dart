@@ -162,7 +162,7 @@ class CompanyService {
     return null;
   }
 
-  Future<void> deleteByCompanySaller(String companyId, String userId) async {
+  Future<int?> deleteByCompanySaller(String companyId, String userId) async {
     try {
       final token = await RegService.getToken();
       final uri = Uri.parse(
@@ -177,7 +177,9 @@ class CompanyService {
       print(userId);
       if (response.statusCode == 204) {
         print('user in company delete successfully');
-      } else {
+        return response.statusCode;
+      }
+      {
         print('Failed to delete company. Status code: ${response.statusCode}');
         print('Error response: ${response.body}');
       }

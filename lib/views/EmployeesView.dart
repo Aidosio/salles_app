@@ -157,6 +157,7 @@ class _EmployeesViewState extends State<EmployeesView> {
                         fullName: '${seller?.lastName} ${seller?.firstName}',
                         phoneNubmer: seller?.phone,
                         role: true,
+                        onPressed: () => print('object'),
                         id: seller?.id,
                       );
                     } else {

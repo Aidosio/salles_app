@@ -8,6 +8,7 @@ class EmployeesAcceptedWidget extends StatelessWidget {
   final String fullName;
   final String id;
   final bool role;
+  final VoidCallback onPressed;
 
   final String phoneNubmer;
   const EmployeesAcceptedWidget(
@@ -15,7 +16,8 @@ class EmployeesAcceptedWidget extends StatelessWidget {
       required this.fullName,
       required this.id,
       required this.phoneNubmer,
-      required this.role})
+      required this.role,
+      required this.onPressed})
       : super(key: key);
 
   @override
@@ -56,21 +58,23 @@ class EmployeesAcceptedWidget extends StatelessWidget {
           role
               ? Column(
                   children: [
-                    Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: IconButtonDialogWidgets(
-                            colorChoice: Colors.red.shade200,
-                            idYes: 'idYes',
-                            idNo: 'idNo',
-                            idCompany: '',
-                            alertTitle:
-                                'Вы уверены, что хотите уволить сотрудника?',
-                            icon: Icon(
-                              Icons.delete_outline,
-                              color: Colors.black87,
-                            ))),
+                    IconButton(
+                        onPressed: onPressed, icon: Icon(Icons.delete_outline))
+                    // Container(
+                    //     decoration: BoxDecoration(
+                    //       shape: BoxShape.rectangle,
+                    //     ),
+                    //     child: IconButtonDialogWidgets(
+                    //         colorChoice: Colors.red.shade200,
+                    //         idYes: 'idYes',
+                    //         idNo: 'idNo',
+                    //         idCompany: '',
+                    //         alertTitle:
+                    //             'Вы уверены, что хотите уволить сотрудника?',
+                    //         icon: Icon(
+                    //           Icons.delete_outline,
+                    //           color: Colors.black87,
+                    //         ))),
                   ],
                 )
               : Container()

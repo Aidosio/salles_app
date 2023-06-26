@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salles_app/service/User.dart';
 import 'package:salles_app/widgets/EmployeesAcceptedWidget.dart';
 
 import '../locale/AppLocalizations.dart';
@@ -71,6 +72,33 @@ class _EmployeesAcceptedViewsState extends State<EmployeesAcceptedViews> {
             [];
   }
 
+  // _deleteUser(String company, String id) async {
+  //     try {
+  //       await CompanyService().deleteByCompanySaller(company, id);
+  //       isLoaded = true;
+  //       if (isLoaded) {
+  //         Navigator.pop(context);
+  //       }
+  //       print('yes delete');
+  //     } catch (e) {
+  //       print('Error getting company by ID: $e');
+  //     }
+  //   }
+
+  _deleteUser(String company, String id) async {
+    try {
+      int? statusCode =
+          await CompanyService().deleteByCompanySaller(company, id);
+      if (statusCode == 204) {
+        setState(() {
+          _activeSellers.removeWhere((seller) => seller.id == id);
+        });
+      }
+    } catch (e) {
+      print('Error deleting user: $e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -105,6 +133,7 @@ class _EmployeesAcceptedViewsState extends State<EmployeesAcceptedViews> {
                         fullName: '${seller.lastName} ${seller.firstName}',
                         phoneNubmer: seller.phone,
                         role: roles!,
+                        onPressed: () => _deleteUser(_company!.id, seller.id),
                         id: seller.id,
                       );
                     },

@@ -218,11 +218,37 @@ class _RecordViewsState extends State<RecordViews> {
                                 },
                               )
                             : Container(
+                                alignment: Alignment.center,
                                 child: Text('У вас нету активных продаж'),
                               ),
                       ),
                     ],
                   ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                height: 45,
+                width: double.infinity,
+                child: FloatingActionButton.extended(
+                  onPressed: () {
+                    _createSales(_company!.id);
+                  },
+                  label: Text(
+                    localizations?.makeASale ?? '',
+                    style: TextStyle(
+                      fontSize: typography.bodyMedium?.fontSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
               ),
             ],

@@ -61,11 +61,11 @@ class User {
     return null;
   }
 
-  Future<int?> deleteUser(id) async {
+  Future<int?> deleteUser(String id) async {
     String? token = await Auth.getToken();
 
     var uri = Uri.parse('https://salles-app.onrender.com/api/v1/user/$id');
-    var response = await client.delete(
+    var response = await http.delete(
       uri,
       headers: {
         'Authorization': 'Bearer $token',
@@ -73,7 +73,7 @@ class User {
       },
     );
     if (response.statusCode == 200) {
-      print('Пользователь успешно активирован');
+      print('Пользователь успешно удален');
       return response.statusCode;
     }
     return null;
